@@ -49,7 +49,7 @@
                                 <a href="./">Home</a>
                             </li>
                             <li>
-                                <a href="#infos">About Us</a>
+                                <a href="{{ path('aboutUs') }}">About Us</a>
                             </li>
                             <li>
                                 <a href="#Events">Events</a>
@@ -405,7 +405,7 @@
                     <div class="col-xs-6 col-sm-offset-1 col-sm-4 col-md-offset-0 col-md-3">
                         <ul class="list">
                             <li><a href="" class="active">Home</a></li>
-                            <li><a href="#infos">About Us</a></li>
+                            <li><a href="{{ path('aboutUs') }}>About Us</a></li>
                             <li><a href="#Events">Events</a></li>
                             <li><a href="">Gallery</a></li>
                             <li><a href="#Contact">Contacts</a></li>
@@ -470,9 +470,15 @@
         'js/owl.carousel.min.js'
         'js/camera.js'
         'js/script.js'
-    'js/jquery.easyPaginate.js'
+        'js/jquery.easyPaginate.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
+    <script>
+$('#ull').easyPaginate({
+paginateElement: 'li',
+elementsPerPage: 3,
+effect: 'climb'
+});</script>
 </html>

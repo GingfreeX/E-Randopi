@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no"/>
+
+    {% stylesheets
+    'css/grid.css'
+    'css/style.css'
+    'css/camera.css'
+    'css/touch-touch.css'
+    'css/google-map.css'
+    'css/search.css'
+    'css/font-awesome.min.css'
+    'css/owl-carousel.css'
+        filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+        {% javascripts
+        output='js/compiled/'
+        'js/jquery.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+</head>
+<body>
+<div class="page">
+
+    <header>
+
+        <section class="bg-contrast-variant-1">
+            <div id="stuck_container" class="stuck_container border-bottom">
+                <div class="container">
+                    <div class="brand">
+                        <a href="./">
+                            <img src="{{ asset('images/logo.png') }}" alt="">
+                        </a>
+                        <h1 class="brand_name">
+                            <a href="./">
+                                E-Rando
+                            </a>
+                        </h1>
+                    </div>
+                    <nav class="nav">
+                        <ul class="sf-menu" data-type="navbar">
+                            <li>
+                                <a href="{{ path('home') }}">Home</a>
+                            </li>
+                            <li>
+                                <a href="#" class="active">About Us</a>
+                            </li>
+                            <li>
+                                <a href="">Events</a>
+                                <ul>
+                                    <li>
+                                        <a href="#">Camping</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Hunting</a>
+                                        <ul>
+                                            <li>
+                                                <a>Fishing</a>
+                                            </li>
+                                            <li>
+                                                <a>Bird Hunting</a>
+                                            </li>
+                                            <li>
+                                                <a>Forest Hunting</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">Mountaineering</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Caving</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Diving</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="">Gallery</a>
+                            </li>
+                            <li>
+                                <a href="">Contact Us</a>
+                            </li>
+                            <li>
+                                <a href="">Login/Register</a>
+                            </li>
+                        </ul>
+                        <a class="search-form_toggle" href="#"></a>
+                        <form class="search-form" action="" method="GET" accept-charset="utf-8">
+                            <label class="search-form_label">
+                                <input class="search-form_input" type="text" name="s" autocomplete="off" placeholder="Search"/>
+                                <span class="search-form_liveout"></span>
+                            </label>
+                            <button class="search-form_submit fa-search" type="submit"></button>
+                        </form>
+                    </nav>
+                </div>
+            </div>
+        </section>
+    </header>
+    <main>
+        <section class="well-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3 class="text-center">
+                            About Club
+                        </h3>
+                        <img class="center-block" src="{{ asset('images/page-2_img01.jpg') }}" alt=""/>
+                        <h4>Information about us</h4>
+                        <p>
+                            The Hiking and Camping Club  was founded in the late Fall of 2000, when Pickwick began scouring the Web for an outdoor club in the Atlanta area that was for all ages, was close to the city, and held events of all sorts (hiking, canoeing, biking, etc.)
+                            <br/>
+                            <br/>
+                            When the Web didn't seem to offer any answers, we decided to use her web development knowledge to form an online meeting and information place for a club.
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <h3 class="text-center">
+                            Our History
+                        </h3>
+                        <article>
+                            <div class="media">
+                                <div class="media-left">
+                                    <p class="h4">
+                                        2010 -
+                                    </p>
+                                </div>
+                                <div class="media-body">
+                                    <p>
+                                        It was the first time we saw social media being used in a substantial way to challenge us and ask questions.
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <div class="media">
+                                <div class="media-left">
+                                    <p class="h4">
+                                        2012 -
+                                    </p>
+                                </div>
+                                <div class="media-body">
+                                    <p>
+                                        We voluntarily submitted our policies and procedures to the Committee for independent review and became the first manufacturer.
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <div class="media">
+                                <div class="media-left">
+                                    <p class="h4">
+                                        2013 -
+                                    </p>
+                                </div>
+                                <div class="media-body">
+                                    <p>
+                                        Our club acquired several companies in a strategic move to enhance our position on the global market.
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <div class="media">
+                                <div class="media-left">
+                                    <p class="h4">
+                                        2014 -
+                                    </p>
+                                </div>
+                                <div class="media-body">
+                                    <p>
+                                        We acquired a US-based company with an innovative portfolio of products for use under supervision.
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <div class="media">
+                                <div class="media-left">
+                                    <p class="h4">
+                                        2015 -
+                                    </p>
+                                </div>
+                                <div class="media-body">
+                                    <p>
+                                        We extended our activities to include the field of specialized items meeting the world’s increasing needs.
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-md-4">
+                        <h3 class="text-center">
+                            Our mission
+                        </h3>
+                        <h4>
+                            Hiking and Camping Club mission:
+                        </h4>
+                        <p>
+                            The Club, as a business, is an extension of who we, the staff, are as people. Climbers. Backpackers. Kayakers. Yoga instructors. Adventurers. We share our love of special places reached through rigorous activity.
+                            <br/>
+                            <br/>
+                            We realize we are models for our clients behavior. We take minimal impact and Leave No Trace ethics seriously. We never use disposable plates or silverware for our trips, as an example. We strive to keep our group sizes relatively small when rock climbing to minimize our impact on other park users.
+                        </p>
+                        <ul class="marked-list">
+                            <li><a href="#">hiking</a></li>
+                            <li><a href="#">backpacking</a></li>
+                            <li><a href="#">camping</a></li>
+                            <li><a href="#">kayaking</a></li>
+                            <li><a href="#">cycling</a></li>
+                            <li><a href="#">mountaineering</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="well-3 bg-secondary-2">
+            <div class="container text-center">
+                <h3>Meet Our Team</h3>
+                <div class="row col-3_mod">
+                    <div class="col-md-3 col-sm-6">
+                        <figure><img src="{{ asset('images/page-2_img02.jpg') }}" alt=""/>
+                            <figcaption>
+                                <h6>Bradley Grosh</h6>
+
+                                <p class="small light">
+                                    Instructor
+                                </p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <figure><img src="{{ asset('images/page-2_img03.jpg') }}" alt=""/>
+                            <figcaption>
+                                <h6>Dayle Peters</h6>
+
+                                <p class="small light">
+                                    Instructor
+                                </p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <figure><img src="{{ asset('images/page-2_img04.jpg') }}" alt=""/>
+                            <figcaption>
+                                <h6>Mark Johnson</h6>
+
+                                <p class="small light">
+                                    Instructor
+                                </p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <figure><img src="{{ asset('images/page-2_img05.jpg') }}" alt=""/>
+                            <figcaption>
+                                <h6>Edna Barton</h6>
+
+                                <p class="small light">Instructor</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="well-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3 class="text-center">
+                            Our Advantages
+                        </h3>
+                        <ul class="index-list">
+                            <li>
+                                <h4>Security</h4>
+
+                                <p>Club has made significant investments to build a state-of-the-art security
+                                    platform.</p>
+                            </li>
+                            <li>
+                                <h4>Cost management</h4>
+
+                                <p>With our Company, you can be confident that your needs will be met.</p>
+                            </li>
+                            <li>
+                                <h4>Advanced technology</h4>
+
+                                <p>Club is one of the largest providers of a variety of services technology to governmental agencies.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h3 class="text-center">
+                            Advice
+                        </h3>
+                        <h4>
+                            Please read attentively
+                        </h4>
+                        <p>
+                            We gathered all recently asked questions, please read them attentively, especially if you have never hiked in your life:
+                        </p>
+                        <ul class="marked-list">
+                            <li><a href="#">Water Up!</a></li>
+                            <li><a href="#">Cheap Bottles</a></li>
+                            <li><a href="#">Lightweight Backpacking Food</a></li>
+                            <li><a href="#">Coaxing Reluctant Camp Fires</a></li>
+                            <li><a href="#">Pack Food Storage</a></li>
+                            <li><a href="#">FOOD: Try Meals Before Backpacking</a></li>
+                            <li><a href="#">10+ Essentials For Hiking</a></li>
+                            <li><a href="#">Fight Gravity's Drag</a></li>
+                            <li><a href="#">Fire Starters</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h3 class="text-center">Testimonials</h3>
+                        <blockquote>
+                            <q class="italic">
+                                <span class="h4">“</span>
+                                A great time and value. Set in a beautiful area of the park. An experience to remember for a lifetime for not only myself, but my kids and their cousins as well!
+                            </q>
+                            <p class="h4 offset-2">
+                                <cite>
+                                    Mark Johnson
+                                </cite>
+                            </p>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <!--========================================================
+                            FOOTER
+  =========================================================-->
+    <footer class="bg-contrast-variant-1">
+        <section class="well" id="Contact">
+            <div class="container text-center text-sm-left">
+                <div class="row">
+
+                    <div class="col-xs-6 col-sm-offset-1 col-sm-4 col-md-offset-0 col-md-3">
+                        <ul class="list">
+                            <li><a href="">Home</a></li>
+                            <li><a href="{{ path('aboutUs') }}" class="active">About Us</a></li>
+                            <li><a href="">Events</a></li>
+                            <li><a href="">Gallery</a></li>
+                            <li><a href="#Contact">Contacts</a></li>
+                        </ul>
+                    </div>
+
+
+                    <div class="col-xs-6 col-sm-offset-2 col-sm-4 col-md-offset-0 col-md-3 text-center text-md-left">
+                        <span class="icon icon-sm icon-secondary fa-map-marker offset-5"></span>
+                        <address>
+                            <a href="#">
+                                28 JACKSON BLVD<br>
+                                STE 151, CHICAGO<br>
+                                IL 60604-2340
+                            </a>
+                        </address>
+                        <span class="icon icon-sm icon-secondary fa-envelope-o offset-2"></span>
+                    </div>
+
+                    <div class="col-md-offset-1 col-md-5 text-center text-md-left">
+
+                        <ul class="inline-list offset-3">
+                            <li><a href="#" class="icon icon icon-md icon-primary fa-youtube"></a></li>
+                            <li><a href="#" class="icon icon icon-md icon-primary fa-tumblr"></a></li>
+                            <li><a href="#" class="icon icon icon-md icon-primary fa-twitter"></a></li>
+                            <li><a href="#" class="icon icon icon-md icon-primary fa-facebook"></a></li>
+                            <li><a href="#" class="icon icon icon-md icon-primary fa-instagram"></a></li>
+                        </ul>
+
+
+                        <div class="small light">
+                            Hiking and Camping Club © <span id="copyright-year" class="small"></span>.
+                            <br class="br-visible br-sm-none">
+                            <a href="" class="small">Privacy Policy</a>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+    </footer>
+</div>
+</body>
+{% block javascripts %}
+    {% javascripts
+    output='js/compiled/'
+    'js/jquery-migrate-1.2.1.js'
+    'js/device.min.js'
+        'js/jquery.ui.totop.js'
+        'js/tmstickup.js'
+        'js/superfish.js'
+        'js/jquery.easing.1.3.js'
+        'js/jquery.cookie.js'
+        'js/jquery.rd-navbar.js'
+        'js/jquery.rd-parallax.js'
+        'js/TMSearch.js'
+        'js/jquery.touch-touch.js'
+        'js/owl.carousel.min.js'
+        'js/camera.js'
+        'js/script.js'
+        'js/jquery.easyPaginate.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+    <script>
+$('#ull').easyPaginate({
+paginateElement: 'li',
+elementsPerPage: 3,
+effect: 'climb'
+});</script>
+</html>
