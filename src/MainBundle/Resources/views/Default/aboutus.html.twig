@@ -33,23 +33,26 @@
         <section class="bg-contrast-variant-1">
             <div id="stuck_container" class="stuck_container border-bottom">
                 <div class="container">
-                    <div class="brand">
-                        <a href="./">
-                            <img src="{{ asset('images/logo.png') }}" alt="">
-                        </a>
-                        <h1 class="brand_name">
-                            <a href="./">
-                                E-Rando
-                            </a>
-                        </h1>
-                    </div>
+
                     <nav class="nav">
                         <ul class="sf-menu" data-type="navbar">
                             <li>
-                                <a href="{{ path('home') }}">Home</a>
+                                <div class="brand">
+                                    <a href="./">
+                                        <img src="{{ asset('images/logo.png') }}" alt="">
+                                    </a>
+                                    <h1 class="brand_name">
+                                        <a href="./">
+                                            E-Rando
+                                        </a>
+                                    </h1>
+                                </div>
                             </li>
-                            <li>
-                                <a href="#" class="active">About Us</a>
+                            <li >
+                                <a href="./" style="margin-left:1cm; ">Home</a>
+                            </li>
+                            <li class="active">
+                                <a href="#" >About Us</a>
                             </li>
                             <li>
                                 <a href="">Events</a>
@@ -91,7 +94,7 @@
                             <li>
                                 <a href="">Login/Register</a>
                                 <ul>
-                                    <li><a href="">Register as a Member</a></li>
+                                    <li><a href="{{ path('fos_user_registration_register') }}">Register as a Member</a></li>
                                     <li><a>Register as a Guide</a></li>
                                     <li><a>Login</a></li>
                                 </ul>
