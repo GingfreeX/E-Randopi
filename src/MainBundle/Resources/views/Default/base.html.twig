@@ -14,6 +14,12 @@
     'css/search.css'
     'css/font-awesome.min.css'
     'css/owl-carousel.css'
+
+
+
+
+
+
         filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
@@ -26,6 +32,7 @@
         {% endjavascripts %}
 </head>
 <body>
+
 <div class="page">
 
     <header>
@@ -33,18 +40,21 @@
         <section class="bg-contrast-variant-1">
             <div id="stuck_container" class="stuck_container border-bottom">
                 <div class="container">
-                    <div class="brand">
-                        <a href="./">
-                            <img src="{{ asset('images/logo.png') }}" alt="">
-                        </a>
-                        <h1 class="brand_name">
-                            <a href="./">
-                                E-Rando
-                            </a>
-                        </h1>
-                    </div>
+
                     <nav class="nav">
                         <ul class="sf-menu" data-type="navbar">
+                            <li>
+                                <div class="brand">
+                                    <a href="./">
+                                        <img src="{{ asset('images/logo.png') }}" alt="">
+                                    </a>
+                                    <h1 class="brand_name">
+                                        <a href="./">
+                                            E-Rando
+                                        </a>
+                                    </h1>
+                                </div>
+                            </li>
                             <li>
                                 <a href="{{ path('home') }}">Home</a>
                             </li>
@@ -112,16 +122,23 @@
     </header>
     <main>
         <section class="well-3 bg-secondary-2">
+            </br>
+            </br>
+            </br>
             <div class="container text-center">
                 {% block body %}{% endblock %}
             </div>
         </section>
 
     </main>
+    </br>
+    </br>
+    </br>
+
     <!--========================================================
                             FOOTER
   =========================================================-->
-    <footer class="bg-contrast-variant-1">
+    <footer class="bg-contrast-variant-1" >
         <section class="well" id="Contact">
             <div class="container text-center text-sm-left">
                 <div class="row">

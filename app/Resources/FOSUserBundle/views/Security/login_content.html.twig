@@ -4,6 +4,12 @@
         color: #fff;
     }
 
+<style>
+    .top-content .text {
+        color: #fff;
+
+    }
+
     .top-content .text h1 { color: #fff; }
 
     .top-content .description {
@@ -180,50 +186,38 @@
     button.btn:focus { outline: 0; opacity: 0.6; background: #de995e; color: #fff; }
 
     button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; background: #de995e; color: #fff; }
-    .ill {
-        font-family: 'Roboto', sans-serif;
-        font-size: 16px;
-        font-weight: 300;
-        color: #888;
-        line-height: 30px;
-        text-align: center;
-        margin-left: -175px;
-    }
-
 </style>
-<div class="ill">
-<div class="top-content" style="background-image: url('{{ asset('images/bg.jpg') }}');width: 1600px;height: 800px;">
-<div class="inner-bg" style="padding-bottom: 500px;">
+
+<div class="top-content">
+<div class="inner-bg" style="">
 <div class="col-sm-6 col-sm-offset-3 form-box">
-    <div class="form-top">
-        <div class="form-top-left">
-            <h3 style="font-size: 22px;font-weight: 300;color: #555;line-height: 30px;">Login to our site</h3>
-            <p>Enter your username and password to log on:</p>
-        </div>
-        <div class="form-top-right">
-            <i class="fa fa-lock"></i>
-        </div>
-    </div>
+
     <div class="form-bottom">
+
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
         <form role="form" action="{{ path("fos_user_security_check") }}" method="post" class="login-form">
             {% if csrf_token %}
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
             {% endif %}
             <div class="form-group">
-                <label class="sr-only" for="form-username">Username</label>
-                <input type="text" placeholder="Username..." id="username"  class="form-username form-control" name="_username" value="{{ last_username }}" required="required">
+                <label class="sr-only" for="form-username">{{ 'security.login.username'|trans }}</label>
+                <input type="text"  name="_username" value="{{ last_username }}" required="required" placeholder="Username..." class="form-username form-control" id="form-username">
             </div>
             <div class="form-group">
-                <label class="sr-only" for="form-password">Password</label>
-                <input type="password" placeholder="Password..." class="form-password form-control" id="password" name="_password" required="required">
+
+                <label class="sr-only" for="form-password">{{ 'security.login.password'|trans }}</label>
+                <input type="password"name="_password" required="required" placeholder="Password..." class="form-password form-control" id="form-password">
             </div>
-            <button type="submit" id="_submit" name="_submit" class="btn" >{{ 'security.login.submit'|trans }}</button>
-            {% if error %}
-                <div xmlns="http://www.w3.org/1999/html">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
+            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+
+            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+
         </form>
     </div>
 </div>
     </div>
     </div>
-</div>
