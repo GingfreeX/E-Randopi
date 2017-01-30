@@ -1,0 +1,311 @@
+{% extends '@AdministrationAdmin/Admin/Layout/index.html.twig' %}
+{% block style %}
+    {{ parent() }}
+    <!-- ================== BEGIN PAGE LEVEL CSS STYLE ================== -->
+    <link href="{{asset('Admin/assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" />
+    <link href="{{asset('Admin/assets/plugins/bootstrap-calendar/css/bootstrap_calendar.css')}}" rel="stylesheet" />
+    <link href="{{asset('Admin/assets/plugins/gritter/css/jquery.gritter.css')}}" rel="stylesheet" />
+    <link href="{{asset('Admin/assets/plugins/morris/morris.css')}}" rel="stylesheet" />
+    <!-- ================== END PAGE LEVEL CSS STYLE ================== -->
+{% endblock %}
+{% block content %}
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+    <ol class="breadcrumb pull-right">
+        <li><a href="{{ path('administration_admin_homepage') }}">Acceuil</a></li>
+        <li class="active">Administration</li>
+    </ol>
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <h1 class="page-header">Administration</h1>
+    <!-- end page-header -->
+    <!-- begin row -->
+    <div class="row">
+        <!-- begin col-3 -->
+        <div class="col-md-3 col-sm-6">
+            <div class="widget widget-stats bg-green">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-title">Visites d'aujourd'hui</div>
+                <div class="stats-number">7,842,900</div>
+                <div class="stats-progress progress">
+                    <div class="progress-bar" style="width: 70.1%;"></div>
+                </div>
+            </div>
+        </div>
+        <!-- end col-3 -->
+        <!-- begin col-3 -->
+        <div class="col-md-3 col-sm-6">
+            <div class="widget widget-stats bg-blue">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-title">Visites de la semaine</div>
+                <div class="stats-number">180,200</div>
+                <div class="stats-progress progress">
+                    <div class="progress-bar" style="width: 40.5%;"></div>
+                </div>
+            </div>
+        </div>
+        <!-- end col-3 -->
+        <!-- begin col-3 -->
+        <div class="col-md-3 col-sm-6">
+            <div class="widget widget-stats bg-purple">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-user fa-fw"></i></div>
+                <div class="stats-title">Membres inscrits</div>
+                <div class="stats-number">38,900</div>
+                <div class="stats-progress progress">
+                    <div class="progress-bar" style="width: 76.3%;"></div>
+                </div>
+            </div>
+        </div>
+        <!-- end col-3 -->
+        <!-- begin col-3 -->
+        <div class="col-md-3 col-sm-6">
+            <div class="widget widget-stats bg-black">
+                <div class="stats-icon stats-icon-lg"><i class=" fa fa-flag "></i></div>
+                <div class="stats-title">Evenements organisés</div>
+                <div class="stats-number">3,988</div>
+                <div class="stats-progress progress">
+                    <div class="progress-bar" style="width: 54.9%;"></div>
+                </div>
+            </div>
+        </div>
+        <!-- end col-3 -->
+    </div>
+    <!-- end row -->
+
+    <!-- begin row -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="widget-chart with-sidebar bg-black">
+                <div class="widget-chart-content">
+                    <h4 class="chart-title">
+                        Statistiques des visiteurs
+                        <small>Origine de nos visiteurs</small>
+                    </h4>
+                    <div id="visitors-line-chart" class="morris-inverse" style="height: 260px;"></div>
+                </div>
+                <div class="widget-chart-sidebar bg-black-darker">
+                    <div class="chart-number">
+                        1,225,729
+                        <small>visiteurs</small>
+                    </div>
+                    <div id="visitors-donut-chart" style="height: 160px"></div>
+                    <ul class="chart-legend">
+                        <li><i class="fa fa-circle-o fa-fw text-success m-r-5"></i> 34.0% <span>Nouveau visiteurs</span></li>
+                        <li><i class="fa fa-circle-o fa-fw text-primary m-r-5"></i> 56.0% <span>Ancien visiteurs</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-inverse" data-sortable-id="index-1">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Origine des visiteurs
+                    </h4>
+                </div>
+                <div id="visitors-map" class="bg-black" style="height: 181px;"></div>
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-inverse text-ellipsis">
+                        <span class="badge badge-success">20.95%</span>
+                        1. United State
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-inverse text-ellipsis">
+                        <span class="badge badge-primary">16.12%</span>
+                        2. India
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-inverse text-ellipsis">
+                        <span class="badge badge-inverse">14.99%</span>
+                        3. South Korea
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+    <!-- begin row -->
+    <div class="row">
+        <!-- begin col-4 -->
+        <div class="col-md-4">
+            <!-- begin panel -->
+            <div class="panel panel-inverse" data-sortable-id="index-2">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Publications signalés <span class="label label-success pull-right">4 publications</span></h4>
+                </div>
+                <div class="panel-body bg-silver">
+                    <div data-scrollbar="true" data-height="225px">
+                        <ul class="chats">
+                            <li>
+
+                                <div class="recent-content">
+                                    <div class="recent-meta">Posted on 25/1/2120 by Ashok</div>
+                                    <div>Vivamus diam elit diam, consectetur fermentum sed dapibus eget, Vivamus consectetur dapibus adipiscing elit.
+                                    </div>
+
+                                    <button class="btn btn-xs btn-danger pull-right">Supprimer</button>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </li>
+
+                            <li>
+
+                                <div class="recent-content">
+                                    <div class="recent-meta">Posted on 25/1/2120 by Ashok</div>
+                                    <div>Vivamus diam elit diam, consectetur fermentum sed dapibus eget, Vivamus consectetur dapibus adipiscing elit.
+                                    </div>
+
+                                    <button class="btn btn-xs btn-danger pull-right">Supprimer</button>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="recent-content">
+                                    <div class="recent-meta">Posted on 25/1/2120 by Ashok</div>
+                                    <div>Vivamus diam elit diam, consectetur fermentum sed dapibus eget, Vivamus consectetur dapibus adipiscing elit.
+                                    </div>
+
+                                    <button class="btn btn-xs btn-danger pull-right">Supprimer</button>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recent-content">
+                                    <div class="recent-meta">Posted on 25/1/2120 by Ashok</div>
+                                    <div>Vivamus diam elit diam, consectetur fermentum sed dapibus eget, Vivamus consectetur dapibus adipiscing elit.
+                                    </div>
+
+                                    <button class="btn btn-xs btn-danger pull-right">Supprimer</button>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="widget-foot">
+                    <ul class="pagination pagination-sm pull-right">
+                        <li><a href="#">Prev</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">Next</a></li>
+                    </ul>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- end panel -->
+        </div>
+        <!-- end col-4 -->
+        <!-- begin col-4 -->
+        <div class="col-md-4">
+            <!-- begin panel -->
+            <div class="panel panel-inverse" data-sortable-id="index-3">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Calendrier</h4>
+                </div>
+                <div id="schedule-calendar" class="bootstrap-calendar"></div>
+                <div class="list-group">
+                    <a href="#" class="list-group-item text-ellipsis">
+                        <span class="badge badge-success">9:00 am</span> Excursion Ain drahem
+                    </a>
+                    <a href="#" class="list-group-item text-ellipsis">
+                        <span class="badge badge-primary">2:45 pm</span> Chasse
+                    </a>
+                </div>
+            </div>
+            <!-- end panel -->
+        </div>
+        <!-- end col-4 -->
+        <!-- begin col-4 -->
+        <div class="col-md-4">
+            <!-- begin panel -->
+            <div class="panel panel-inverse" data-sortable-id="index-4">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Nouveau membres <span class="pull-right label label-success">24 nouveaux</span></h4>
+                </div>
+                <ul class="registered-users-list clearfix">
+                    <li>
+                        <a href="javascript:;"><img src="{{ asset('Admin/assets/img/user-5.jpg') }}" alt="" /></a>
+                        <h4 class="username text-ellipsis">
+                            Savory Posh
+                            <small>Algerian</small>
+                        </h4>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><img src="{{ asset('Admin/assets/img/user-3.jpg') }}" alt="" /></a>
+                        <h4 class="username text-ellipsis">
+                            Ancient Caviar
+                            <small>Korean</small>
+                        </h4>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><img src="{{ asset('Admin/assets/img/user-5.jpg') }}" alt="" /></a>
+                        <h4 class="username text-ellipsis">
+                            Marble Lungs
+                            <small>Indian</small>
+                        </h4>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><img src="{{ asset('Admin/assets/img/user-8.jpg') }}" alt="" /></a>
+                        <h4 class="username text-ellipsis">
+                            Blank Bloke
+                            <small>Japanese</small>
+                        </h4>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><img src="{{ asset('Admin/assets/img/user-2.jpg') }}" alt="" /></a>
+                        <h4 class="username text-ellipsis">
+                            Hip Sculling
+                            <small>Cuban</small>
+                        </h4>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><img src="{{ asset('Admin/assets/img/user-6.jpg') }}" alt="" /></a>
+                        <h4 class="username text-ellipsis">
+                            Flat Moon
+                            <small>Nepalese</small>
+                        </h4>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><img src="{{ asset('Admin/assets/img/user-4.jpg') }}" alt="" /></a>
+                        <h4 class="username text-ellipsis">
+                            Packed Puffs
+                            <small>Malaysian></small>
+                        </h4>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><img src="{{ asset('Admin/assets/img/user-9.jpg') }}" alt="" /></a>
+                        <h4 class="username text-ellipsis">
+                            Clay Hike
+                            <small>Swedish</small>
+                        </h4>
+                    </li>
+                </ul>
+                <div class="panel-footer text-center">
+                    <a href="javascript:;" class="text-inverse">View All</a>
+                </div>
+            </div>
+            <!-- end panel -->
+        </div>
+        <!-- end col-4 -->
+    </div>
+    <!-- end row -->
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function() {
+            App.init();
+            DashboardV2.init();
+        });
+    </script>
+{% endblock %}

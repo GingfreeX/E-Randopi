@@ -1,0 +1,32 @@
+administration_admin_homepage:
+    path:     /
+    defaults: { _controller: AdministrationAdminBundle:Default:index }
+
+administration_admin_boite-reception:
+    path:     /email
+    defaults: { _controller: AdministrationAdminBundle:Default:boiteReception }
+
+administration_admin_calendrier:
+    path:     /calendrier
+    defaults: { _controller: AdministrationAdminBundle:Default:calendrier }
+
+administration_admin_liste_demande:
+    path:     /listedemande
+    defaults: { _controller: AdministrationAdminBundle:Default:listedemande }
+
+administration_admin_liste_guide:
+    path:     /listeguide
+    defaults: { _controller: AdministrationAdminBundle:Default:listeguide }
+
+administration_admin_liste_membre:
+    path:     /listemembre
+    defaults: { _controller: AdministrationAdminBundle:Default:listemembre }
+
+administration_admin_liste_publication:
+    path:     /listepub
+    defaults: { _controller: AdministrationAdminBundle:Default:listpubl }
+
+
+administration_admin_stat:
+    path:     /stat
+    defaults: { _controller: AdministrationAdminBundle:Default:stat}
