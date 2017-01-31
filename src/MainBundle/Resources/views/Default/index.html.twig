@@ -32,88 +32,153 @@
 
     <header>
 
-        <section class="bg-contrast-variant-1">
-            <div id="stuck_container" class="stuck_container border-bottom">
-                <div class="container">
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <section class="bg-contrast-variant-1">
+                <div id="stuck_container" class="stuck_container border-bottom">
+                    <div class="container">
 
-                    <nav class="nav">
-                        <ul class="sf-menu" data-type="navbar">
-                            <li>
-                                <div class="brand">
-                                    <a href="./">
-                                        <img src="{{ asset('images/logo.png') }}" alt="">
-                                    </a>
-                                    <h1 class="brand_name">
+                        <nav class="nav">
+                            <ul class="sf-menu" data-type="navbar">
+                                <li>
+                                    <div class="brand">
                                         <a href="./">
-                                            E-Rando
+                                            <img src="{{ asset('images/logo.png') }}" alt="">
                                         </a>
-                                    </h1>
-                                </div>
-                            </li>
-                            <li class="active">
-                                <a href="./" style="margin-left:1cm; ">Home</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('aboutUs') }}">About Us</a>
-                            </li>
-                            <li>
-                                <a href="#Events">Events</a>
-                                <ul>
-                                    <li>
-                                        <a href="#">Camping</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Hunting</a>
-                                        <ul>
-                                            <li>
-                                                <a>Fishing</a>
-                                            </li>
-                                            <li>
-                                                <a>Bird Hunting</a>
-                                            </li>
-                                            <li>
-                                                <a>Forest Hunting</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Mountaineering</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Caving</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Diving</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="">Gallery</a>
-                            </li>
-                            <li>
-                                <a href="#Contact">Contact Us</a>
-                            </li>
-                            <li>
-                                <a>Login/Register</a>
-                                <ul>
-                                    <li><a href="{{ path('fos_user_registration_register') }}">Register as a Member</a></li>
-                                    <li><a>Register as a Guide</a></li>
-                                    <li><a>Login</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <a class="search-form_toggle" href="#"></a>
-                        <form class="search-form" action="" method="GET" accept-charset="utf-8">
-                            <label class="search-form_label">
-                                <input class="search-form_input" type="text" name="s" autocomplete="off" placeholder="Search"/>
-                                <span class="search-form_liveout"></span>
-                            </label>
-                            <button class="search-form_submit fa-search" type="submit"></button>
-                        </form>
-                    </nav>
+                                        <h1 class="brand_name">
+                                            <a href="./">
+                                                E-Rando
+                                            </a>
+                                        </h1>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="">Accueil</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('aboutUs') }}">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="">Events</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Camping</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Hunting</a>
+                                            <ul>
+                                                <li>
+                                                    <a>Fishing</a>
+                                                </li>
+                                                <li>
+                                                    <a>Bird Hunting</a>
+                                                </li>
+                                                <li>
+                                                    <a>Forest Hunting</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Mountaineering</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Caving</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Diving</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="">Gallery</a>
+                                </li>
+                                <li>
+                                    <a href="">Contact Us</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        {% else %}
+            <section class="bg-contrast-variant-1">
+                <div id="stuck_container" class="stuck_container border-bottom">
+                    <div class="container">
+
+                        <nav class="nav">
+                            <ul class="sf-menu" data-type="navbar">
+                                <li>
+                                    <div class="brand">
+                                        <a href="./">
+                                            <img src="{{ asset('images/logo.png') }}" alt="">
+                                        </a>
+                                        <h1 class="brand_name">
+                                            <a href="./">
+                                                E-Rando
+                                            </a>
+                                        </h1>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="{{ path('home') }}">Home</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('aboutUs') }}">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="">Events</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Camping</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Hunting</a>
+                                            <ul>
+                                                <li>
+                                                    <a>Fishing</a>
+                                                </li>
+                                                <li>
+                                                    <a>Bird Hunting</a>
+                                                </li>
+                                                <li>
+                                                    <a>Forest Hunting</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Mountaineering</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Caving</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Diving</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="">Gallery</a>
+                                </li>
+                                <li>
+                                    <a href="">Contact Us</a>
+                                </li>
+                                <li>
+                                    <a href="">Login/Register</a>
+                                    <ul>
+                                        <li><a href="{{ path('fos_user_registration_register') }}">Register as a Member</a></li>
+                                        <li><a>Register as a Guide</a></li>
+                                        <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+
         <section class="text-center">
             <div class="camera_container">
                 <div id="camera" class="camera_wrap">
