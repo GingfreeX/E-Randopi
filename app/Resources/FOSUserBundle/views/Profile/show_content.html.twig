@@ -1,6 +1,289 @@
 {% trans_default_domain 'FOSUserBundle' %}
+<style>
+    .profile {
+        width: 1000px;
+        position: relative;
+        background: #FFF;
+        border: 1px solid #D5D5D5;
+        padding-bottom: 5px;
+        margin-bottom: 20px;
+    }
 
-<div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+    .profile .cover {
+        display: block;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        text-align: center;
+        border: 5px solid #FFF;
+        width: 100%;
+    }
+
+    .profile .user {
+        position: relative;
+        padding: 0px 5px 5px;
+    }
+
+    .profile .user .avatar {
+        position: absolute;
+        left: 20px;
+        top: -85px;
+        z-index: 2;
+    }
+
+    .profile .user h2 {
+        font-size: 16px;
+        line-height: 20px;
+        display: block;
+        float: left;
+        margin: 4px 0px 0px 135px;
+        font-weight: bold;
+    }
+
+    .profile .user .actions {
+        float: right;
+    }
+
+    .profile .user .actions .btn {
+        margin-bottom: 0px;
+    }
+
+    .profile .info {
+        float: left;
+        margin-left: 20px;
+        margin-top: -30px;
+    }
+
+    .img-profile{
+        height:100px;
+        width:100px;
+    }
+
+    .img-cover{
+        width:800px;
+        height:300px;
+    }
+
+    @media (max-width: 768px) {
+        .btn-responsive {
+            padding:2px 4px;
+            font-size:80%;
+            line-height: 1;
+            border-radius:3px;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 992px) {
+        .btn-responsive {
+            padding:4px 9px;
+            font-size:90%;
+            line-height: 1.2;
+        }
+    }
+    .btn {display:inline-block;padding:6px 12px;margin-bottom:0;font-size:14px;font-weight:400;line-height:1.42857143;text-align:center;white-space:nowrap;vertical-align:middle;-ms-touch-action:manipulation;touch-action:manipulation;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-image:none;border:1px solid transparent;border-radius:4px}
+    .btn-group{
+        display:inline-block;
+    }
+
+    .btn-group button{
+        width:auto;
+        height:40px;
+        border:none;
+        background-color:#4444ee;
+        color:#fff;
+    }
+    button.btn {
+        height: 50px;
+        margin: 0;
+        padding: 0 20px;
+        vertical-align: middle;
+        background: #de995e;
+        border: 0;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 50px;
+        color: #fff;
+        -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+        text-shadow: none;
+        -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+        -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+    }
+    .btn-sm{padding:5px 10px;font-size:12px;line-height:1.5;border-radius:3px}
+    button.btn:hover { opacity: 0.6; color: #fff; }
+
+    button.btn:active { outline: 0; opacity: 0.6; color: #fff; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
+
+    button.btn:focus { outline: 0; opacity: 0.6; background: #de995e; color: #fff; }
+
+    button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; background: #de995e; color: #fff; }
+    .col-md-8{position:relative;min-height:1px;padding-right:15px;padding-left:15px}
+    @media (min-width:992px){.col-md-8{float:left}.col-md-8{width:66.66666667%}}
+    .clearfix:after,.clearfix:before{display:table;content:" "}
+    .clearfix:after{clear:both}
+    abbr[title]{border-bottom:1px dotted}b,strong{font-weight:700}
+    .img-thumbnail{display:inline-block;max-width:100%;height:auto;padding:4px;line-height:1.42857143;background-color:#fff;border:1px solid #ddd;border-radius:4px;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;transition:all .2s ease-in-out}
+    .glyphicon-globe:before{content:"\e135"}
+    .glyphicon-gift:before{content:"\e102"}
+    img{border:0}
+    @font-face{font-family:'Glyphicons Halflings';src:url({{ asset('fonts/glyphicons-halflings-regular.eot')  }});src:url({{ asset('fonts/glyphicons-halflings-regular.eot?#iefix')  }}) format('embedded-opentype'),url({{ asset('fonts/glyphicons-halflings-regular.woff2')  }}) format('woff2'),url({{ asset('fonts/glyphicons-halflings-regular.woff')  }}) format('woff'),url({{ asset('fonts/glyphicons-halflings-regular.ttf')  }}) format('truetype'),url({{ asset('fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular')  }}) format('svg')}.glyphicon{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:400;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    img{page-break-inside:avoid}
+    img{max-width:100%!important}
+    .glyphicon{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:400;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    .btn-primary{color:#fff;background-color:#337ab7;border-color:#2e6da4}.btn-primary.active,.btn-primary.focus,.btn-primary:active,.btn-primary:focus,.btn-primary:hover,.open>.dropdown-toggle.btn-primary{color:#fff;background-color:#286090;border-color:#204d74}.btn-primary.active,.btn-primary:active,.open>.dropdown-toggle.btn-primary{background-image:none}.btn-primary.disabled,.btn-primary.disabled.active,.btn-primary.disabled.focus,.btn-primary.disabled:active,.btn-primary.disabled:focus,.btn-primary.disabled:hover,.btn-primary[disabled],.btn-primary[disabled].active,.btn-primary[disabled].focus,.btn-primary[disabled]:active,.btn-primary[disabled]:focus,.btn-primary[disabled]:hover,fieldset[disabled] .btn-primary,fieldset[disabled] .btn-primary.active,fieldset[disabled] .btn-primary.focus,fieldset[disabled] .btn-primary:active,fieldset[disabled] .btn-primary:focus,fieldset[disabled] .btn-primary:hover{background-color:#337ab7;border-color:#2e6da4}.btn-primary .badge{color:#337ab7;background-color:#fff}
+    .form-control{display:block;width:100%;height:34px;padding:6px 12px;font-size:14px;line-height:1.42857143;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);box-shadow:inset 0 1px 1px rgba(0,0,0,.075);-webkit-transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;-o-transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}
+    .img-sm {
+        width: 46px;
+        height: 46px;
+    }
+    .panel {
+        box-shadow: 0 2px 0 rgba(0,0,0,0.075);
+        border-radius: 0;
+        border: 0;
+        margin-bottom: 15px;
+        width: 800px;
+        margin-left: 20%;
+    }
+
+    .panel .panel-footer, .panel>:last-child {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .panel .panel-heading, .panel>:first-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .panel-body {
+        padding: 25px 20px;
+    }
+    .btn-trans {
+        background-color: transparent;
+        border-color: transparent;
+        color: #929292;
+    }
+
+    .btn-icon {
+        padding-left: 9px;
+        padding-right: 9px;
+    }
+    .btn-link{font-weight:400;color:#337ab7;border-radius:0}.btn-link,.btn-link.active,.btn-link:active,.btn-link[disabled],fieldset[disabled] .btn-link{background-color:transparent;-webkit-box-shadow:none;box-shadow:none}.btn-link,.btn-link:active,.btn-link:focus,.btn-link:hover{border-color:transparent}.btn-link:focus,.btn-link:hover{color:#23527c;text-decoration:underline;background-color:transparent}.btn-link[disabled]:focus,.btn-link[disabled]:hover,fieldset[disabled] .btn-link:focus,fieldset[disabled] .btn-link:hover{color:#777;text-decoration:none}
+    .img-circle{
+        border-radius:100%;
+        margin-left: 130%;
+        margin-top: 6%;
+        width: 50px;}
+    .btn-sm, .btn-group-sm>.btn, .btn-icon.btn-sm {
+        padding: 5px 10px !important;
+    }
+
+    .mar-top {
+        margin-top: 15px;
+    }
+    .thumbnail {
+        border-radius: 0;
+        border-color: #e9e9e9
+    }
+
+    .media-block .media-left {
+        display: block;
+        float: left
+    }
+
+    .media-block .media-right {
+        float: right
+    }
+
+    .media-block .media-body {
+        display: block;
+        overflow: hidden;
+        width: auto
+    }
+
+    .middle .media-left,
+    .middle .media-right,
+    .middle .media-body {
+        vertical-align: middle
+    }
+    .text-muted, a.text-muted:hover, a.text-muted:focus {
+        color: #acacac;
+    }
+    .text-sm {
+        font-size: 0.9em;
+    }
+    .text-5x, .text-4x, .text-5x, .text-2x, .text-lg, .text-sm, .text-xs {
+        line-height: 1.25;
+    }
+    .tag.tag-sm, .btn-group-sm>.tag {
+        padding: 5px 10px;
+    }
+
+    .tag:not(.label) {
+        background-color: #fff;
+        padding: 6px 12px;
+        border-radius: 2px;
+        border: 1px solid #cdd6e1;
+        font-size: 12px;
+        line-height: 1.42857;
+        vertical-align: middle;
+        -webkit-transition: all .15s;
+        transition: all .15s;
+    }
+</style>
+<div class="col-md-8">
+    <div class="profile clearfix">
+        <div class="cover">
+            <img src="{{ asset('images/cover.jpg') }}" class="img-cover">
+        </div>
+        <div class="user clearfix">
+            <div class="avatar">
+                <img src="{{ asset('images/ging.jpg') }}" class="img-thumbnail img-profile">
+            </div>
+            <h2>{{ user.username }}</h2>
+            <div class="actions">
+                <div class="btn-group">
+                    <button class="btn btn-default btn-sm tip btn-responsive" title="" data-original-title="Add to friends"><span class="glyphicon glyphicon-plus glyphicon glyphicon-white"></span> Friends</button>
+                    <button class="btn btn-default btn-sm tip btn-responsive" title="" data-original-title="Send message"><span class="glyphicon glyphicon-envelope glyphicon glyphicon-white"></span> Message</button>
+                    <button class="btn btn-default btn-sm tip btn-responsive" title="" data-original-title="Recommend"><span class="glyphicon glyphicon-share-alt glyphicon glyphicon-white"></span> Recommend</button>
+                </div>
+            </div>
+        </div>
+        <div class="info">
+            <p><span class="glyphicon glyphicon-globe"></span> <span class="title">Email:</span>{{ user.email }}</p>
+            <p><span class="glyphicon glyphicon-gift"></span> <span class="title">Date of birth:</span> 14.02.1989</p>
+        </div>
+    </div>
+    <div class="col-md-8 bootstrap snippets">
+        <div class="panel">
+            <div class="panel-body">
+                <textarea class="form-control" rows="2" placeholder="What are you thinking?"></textarea>
+                <div class="mar-top clearfix">
+                    <button class="btn btn-sm btn-primary pull-right" type="submit"><i class="fa fa-pencil fa-fw"></i> Share</button>
+                    <a class="btn btn-trans btn-icon fa fa-video-camera add-tooltip" href="#"></a>
+                    <a class="btn btn-trans btn-icon fa fa-camera add-tooltip" href="#"></a>
+                    <a class="btn btn-trans btn-icon fa fa-file add-tooltip" href="#"></a>
+                </div>
+                <br>
+                <div class="media-block">
+                    <a class="media-left" href="#"><img class="img-circle img-sm" alt="Profile Picture" src="{{ asset('images/ging.jpg')}}"></a>
+                    <div class="media-body">
+                        <div class="mar-btm">
+                            <a href="#" class="btn-link text-semibold media-heading box-inline">Lisa D.</a>
+                            <p class="text-muted text-sm"><i class="fa fa-mobile fa-lg"></i> - From Mobile - 11 min ago</p>
+                        </div>
+                        <p>consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+                        <div class="pad-ver">
+                            <div class="btn-group">
+                                <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a>
+                                <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a>
+                            </div>
+                            <a class="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
 </div>
