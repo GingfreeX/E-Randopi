@@ -1,0 +1,146 @@
+{% extends '@AdministrationAdmin/Admin/Layout/index.html.twig' %}
+{% block content %}
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+    <ol class="breadcrumb pull-right">
+        <li><a href="{{ path('administration_admin_homepage') }}">Acceuil</a></li>
+        <li class="active">Statistique</li>
+    </ol>
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <h1 class="page-header">Statistique</h1>
+    <!-- end page-header -->
+
+    <!-- begin row -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-inverse" data-sortable-id="chart-js-1">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Line Chart</h4>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        A line chart is a way of plotting data points on a line.
+                        Often, it is used to show trend data, and the comparison of two data sets.
+                    </p>
+                    <div>
+                        <canvas id="line-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-inverse" data-sortable-id="chart-js-2">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Bar Chart</h4>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        A bar chart is a way of showing data as bars.
+                        It is sometimes used to show trend data, and the comparison of multiple data sets side by side.
+                    </p>
+                    <div>
+                        <canvas id="bar-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+
+    <!-- begin row -->
+    <div class="row">
+        <!-- begin col-6 -->
+        <div class="col-md-6">
+            <div class="panel panel-inverse" data-sortable-id="flot-chart-3">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Radar Chart</h4>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        A radar chart is a way of showing multiple data points and the variation between them.
+                        They are often useful for comparing the points of two or more different data sets.
+                    </p>
+                    <div>
+                        <canvas id="radar-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end col-6 -->
+        <!-- begin col-6 -->
+        <div class="col-md-6">
+            <div class="panel panel-inverse" data-sortable-id="chart-js-4">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Polar Area Chart</h4>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment
+                        differs depending on the value.
+                    </p>
+                    <div>
+                        <canvas id="polar-area-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end col-6 -->
+    </div>
+    <!-- end row -->
+
+    <!-- begin row -->
+    <div class="row">
+        <!-- begin col-6 -->
+        <div class="col-md-6">
+            <div class="panel panel-inverse" data-sortable-id="flot-chart-5">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Pie Chart</h4>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Pie and doughnut charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows the proportional value of each piece of data.
+                    </p>
+                    <div>
+                        <canvas id="pie-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end col-6 -->
+        <!-- begin col-6 -->
+        <div class="col-md-6">
+            <div class="panel panel-inverse" data-sortable-id="chart-js-6">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Doughnut Chart</h4>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Pie and doughnut charts are registered under two aliases in the Chart core. Other than their different default value, and different alias, they are exactly the same.
+                    </p>
+                    <div>
+                        <canvas id="doughnut-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end col-6 -->
+    </div>
+    <!-- end row -->
+</div>
+{% endblock %}
+{% block javascripts %}
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="{{ asset('Admin/assets/js/apps.min.js') }}"></script>
+    <script src="{{ asset('Admin/assets/js/chart-js.demo.min.js') }}"></script>
+    <script src="{{ asset('Admin/assets/js/apps.min.js') }}"></script>
+
+    <!-- ================== END PAGE LEVEL JS ================== -->
+
+    <script>
+        $(document).ready(function() {
+            App.init();
+            ChartJs.init();
+        });
+    </script>
+{% endblock %}

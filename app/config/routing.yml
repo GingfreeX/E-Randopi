@@ -1,3 +1,7 @@
+administration_admin:
+    resource: "@AdministrationAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
 main:
     resource: "@MainBundle/Controller/"
     type:     annotation

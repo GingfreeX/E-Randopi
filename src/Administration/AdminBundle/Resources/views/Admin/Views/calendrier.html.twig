@@ -1,0 +1,50 @@
+{% extends '@AdministrationAdmin/Admin/Layout/index.html.twig' %}
+{% block style %}
+    {{ parent() }}
+    <link href="{{ asset('Admin/assets/plugins/fullcalendar/fullcalendar/fullcalendar.css') }}"rel="stylesheet" />
+
+{% endblock %}
+{% block content %}
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+    <ol class="breadcrumb pull-right">
+        <li><a href="{{ path('administration_admin_homepage') }}">Acceuil</a></li>
+        <li class="active">Calendrier</li>
+    </ol>
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <h1 class="page-header">Calendrier</h1>
+    <!-- end page-header -->
+    <!-- begin panel -->
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <h4 class="panel-title">Calendrier des évènements</h4>
+        </div>
+        <div class="panel-body p-0">
+            <div class="vertical-box">
+
+                <div id="calendar" class="vertical-box-column p-15 calendar"></div>
+            </div>
+        </div>
+    </div>
+    <!-- end panel -->
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('Admin/assets/plugins/fullcalendar/fullcalendar/fullcalendar.js') }}"></script>
+    <script src="{{ asset('Admin/assets/js/calendar.demo.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            App.init();
+            Calendar.init();
+        });
+    </script>
+{% endblock %}
+
+
+
+
