@@ -6,6 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
+    public function loginAction()
+    {
+        return $this->render('AdministrationAdminBundle:Admin/Layout:login.html.twig');
+    }
     public function indexAction()
     {
         return $this->render('AdministrationAdminBundle:Admin/Views:acceuil.html.twig');

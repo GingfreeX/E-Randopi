@@ -1,32 +1,35 @@
+administration_admin_login:
+    path:     /cp
+    defaults: { _controller: AdministrationAdminBundle:Default:login }
 administration_admin_homepage:
-    path:     /
+    path:     /cp/
     defaults: { _controller: AdministrationAdminBundle:Default:index }
 
 administration_admin_boite-reception:
-    path:     /email
+    path:     /cp/email
     defaults: { _controller: AdministrationAdminBundle:Default:boiteReception }
 
 administration_admin_calendrier:
-    path:     /calendrier
+    path:     /cp/calendrier
     defaults: { _controller: AdministrationAdminBundle:Default:calendrier }
 
 administration_admin_liste_demande:
-    path:     /listedemande
+    path:     /cp/listedemande
     defaults: { _controller: AdministrationAdminBundle:Default:listedemande }
 
 administration_admin_liste_guide:
-    path:     /listeguide
+    path:     /cp/listeguide
     defaults: { _controller: AdministrationAdminBundle:Default:listeguide }
 
 administration_admin_liste_membre:
-    path:     /listemembre
+    path:     /cp/listemembre
     defaults: { _controller: AdministrationAdminBundle:Default:listemembre }
 
 administration_admin_liste_publication:
-    path:     /listepub
+    path:     /cp/listepub
     defaults: { _controller: AdministrationAdminBundle:Default:listpubl }
 
 
 administration_admin_stat:
-    path:     /stat
+    path:     /cp/stat
     defaults: { _controller: AdministrationAdminBundle:Default:stat}
