@@ -1,289 +1,860 @@
 {% trans_default_domain 'FOSUserBundle' %}
-<style>
-    .profile {
-        width: 1000px;
-        position: relative;
-        background: #FFF;
-        border: 1px solid #D5D5D5;
-        padding-bottom: 5px;
-        margin-bottom: 20px;
-    }
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+{% stylesheets
+'css/profile.css'
+filter='cssrewrite' %}
+<link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+<script src="{{ asset('jquery.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<div id="user-profile-2" class="user-profile">
+    <div class="tabbable">
+        <ul class="nav nav-tabs padding-18">
+            <li class="active">
+                <a data-toggle="tab" href="#home">
+                    <i class="green ace-icon fa fa-user bigger-120"></i>
+                    Profile
+                </a>
+            </li>
 
-    .profile .cover {
-        display: block;
-        position: relative;
-        z-index: 1;
-        overflow: hidden;
-        text-align: center;
-        border: 5px solid #FFF;
-        width: 100%;
-    }
+            <li>
+                <a data-toggle="tab" href="#feed">
+                    <i class="orange ace-icon fa fa-rss bigger-120"></i>
+                    Activity Feed
+                </a>
+            </li>
 
-    .profile .user {
-        position: relative;
-        padding: 0px 5px 5px;
-    }
+            <li>
+                <a data-toggle="tab" href="#friends">
+                    <i class="blue ace-icon fa fa-users bigger-120"></i>
+                    Friends
+                </a>
+            </li>
 
-    .profile .user .avatar {
-        position: absolute;
-        left: 20px;
-        top: -85px;
-        z-index: 2;
-    }
+            <li>
+                <a data-toggle="tab" href="#pictures">
+                    <i class="pink ace-icon fa fa-picture-o bigger-120"></i>
+                    Pictures
+                </a>
+            </li>
+        </ul>
 
-    .profile .user h2 {
-        font-size: 16px;
-        line-height: 20px;
-        display: block;
-        float: left;
-        margin: 4px 0px 0px 135px;
-        font-weight: bold;
-    }
+        <div class="tab-content no-border padding-24">
+            <div id="home" class="tab-pane in active">
+                <div class="row">
+                    <br>
+                    <div class="fb-timeline-img">
+                        <img src="{{ asset('images/cover.jpg') }}" alt="">
+                    </div>
+                    <div class="col-xs-12 col-sm-3 center">
+							<span class="profile-picture">
+								<img class="editable img-responsive" alt=" Avatar" id="avatar2" src="http://bootdey.com/img/Content/avatar/avatar6.png">
+							</span>
 
-    .profile .user .actions {
-        float: right;
-    }
+                        <div class="space space-4"></div>
 
-    .profile .user .actions .btn {
-        margin-bottom: 0px;
-    }
+                        <a href="#" class="btn btn-sm btn-block btn-success">
+                            <i class="ace-icon fa fa-plus-circle bigger-120"></i>
+                            <span class="bigger-110">Add as a friend</span>
+                        </a>
 
-    .profile .info {
-        float: left;
-        margin-left: 20px;
-        margin-top: -30px;
-    }
-
-    .img-profile{
-        height:100px;
-        width:100px;
-    }
-
-    .img-cover{
-        width:800px;
-        height:300px;
-    }
-
-    @media (max-width: 768px) {
-        .btn-responsive {
-            padding:2px 4px;
-            font-size:80%;
-            line-height: 1;
-            border-radius:3px;
-        }
-    }
-
-    @media (min-width: 769px) and (max-width: 992px) {
-        .btn-responsive {
-            padding:4px 9px;
-            font-size:90%;
-            line-height: 1.2;
-        }
-    }
-    .btn {display:inline-block;padding:6px 12px;margin-bottom:0;font-size:14px;font-weight:400;line-height:1.42857143;text-align:center;white-space:nowrap;vertical-align:middle;-ms-touch-action:manipulation;touch-action:manipulation;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-image:none;border:1px solid transparent;border-radius:4px}
-    .btn-group{
-        display:inline-block;
-    }
-
-    .btn-group button{
-        width:auto;
-        height:40px;
-        border:none;
-        background-color:#4444ee;
-        color:#fff;
-    }
-    button.btn {
-        height: 50px;
-        margin: 0;
-        padding: 0 20px;
-        vertical-align: middle;
-        background: #de995e;
-        border: 0;
-        font-family: 'Roboto', sans-serif;
-        font-size: 16px;
-        font-weight: 300;
-        line-height: 50px;
-        color: #fff;
-        -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
-        text-shadow: none;
-        -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
-        -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
-    }
-    .btn-sm{padding:5px 10px;font-size:12px;line-height:1.5;border-radius:3px}
-    button.btn:hover { opacity: 0.6; color: #fff; }
-
-    button.btn:active { outline: 0; opacity: 0.6; color: #fff; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
-
-    button.btn:focus { outline: 0; opacity: 0.6; background: #de995e; color: #fff; }
-
-    button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; background: #de995e; color: #fff; }
-    .col-md-8{position:relative;min-height:1px;padding-right:15px;padding-left:15px}
-    @media (min-width:992px){.col-md-8{float:left}.col-md-8{width:66.66666667%}}
-    .clearfix:after,.clearfix:before{display:table;content:" "}
-    .clearfix:after{clear:both}
-    abbr[title]{border-bottom:1px dotted}b,strong{font-weight:700}
-    .img-thumbnail{display:inline-block;max-width:100%;height:auto;padding:4px;line-height:1.42857143;background-color:#fff;border:1px solid #ddd;border-radius:4px;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;transition:all .2s ease-in-out}
-    .glyphicon-globe:before{content:"\e135"}
-    .glyphicon-gift:before{content:"\e102"}
-    img{border:0}
-    @font-face{font-family:'Glyphicons Halflings';src:url({{ asset('fonts/glyphicons-halflings-regular.eot')  }});src:url({{ asset('fonts/glyphicons-halflings-regular.eot?#iefix')  }}) format('embedded-opentype'),url({{ asset('fonts/glyphicons-halflings-regular.woff2')  }}) format('woff2'),url({{ asset('fonts/glyphicons-halflings-regular.woff')  }}) format('woff'),url({{ asset('fonts/glyphicons-halflings-regular.ttf')  }}) format('truetype'),url({{ asset('fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular')  }}) format('svg')}.glyphicon{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:400;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-    img{page-break-inside:avoid}
-    img{max-width:100%!important}
-    .glyphicon{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:400;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-    .btn-primary{color:#fff;background-color:#337ab7;border-color:#2e6da4}.btn-primary.active,.btn-primary.focus,.btn-primary:active,.btn-primary:focus,.btn-primary:hover,.open>.dropdown-toggle.btn-primary{color:#fff;background-color:#286090;border-color:#204d74}.btn-primary.active,.btn-primary:active,.open>.dropdown-toggle.btn-primary{background-image:none}.btn-primary.disabled,.btn-primary.disabled.active,.btn-primary.disabled.focus,.btn-primary.disabled:active,.btn-primary.disabled:focus,.btn-primary.disabled:hover,.btn-primary[disabled],.btn-primary[disabled].active,.btn-primary[disabled].focus,.btn-primary[disabled]:active,.btn-primary[disabled]:focus,.btn-primary[disabled]:hover,fieldset[disabled] .btn-primary,fieldset[disabled] .btn-primary.active,fieldset[disabled] .btn-primary.focus,fieldset[disabled] .btn-primary:active,fieldset[disabled] .btn-primary:focus,fieldset[disabled] .btn-primary:hover{background-color:#337ab7;border-color:#2e6da4}.btn-primary .badge{color:#337ab7;background-color:#fff}
-    .form-control{display:block;width:100%;height:34px;padding:6px 12px;font-size:14px;line-height:1.42857143;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);box-shadow:inset 0 1px 1px rgba(0,0,0,.075);-webkit-transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;-o-transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}
-    .img-sm {
-        width: 46px;
-        height: 46px;
-    }
-    .panel {
-        box-shadow: 0 2px 0 rgba(0,0,0,0.075);
-        border-radius: 0;
-        border: 0;
-        margin-bottom: 15px;
-        width: 800px;
-        margin-left: 20%;
-    }
-
-    .panel .panel-footer, .panel>:last-child {
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-
-    .panel .panel-heading, .panel>:first-child {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
-
-    .panel-body {
-        padding: 25px 20px;
-    }
-    .btn-trans {
-        background-color: transparent;
-        border-color: transparent;
-        color: #929292;
-    }
-
-    .btn-icon {
-        padding-left: 9px;
-        padding-right: 9px;
-    }
-    .btn-link{font-weight:400;color:#337ab7;border-radius:0}.btn-link,.btn-link.active,.btn-link:active,.btn-link[disabled],fieldset[disabled] .btn-link{background-color:transparent;-webkit-box-shadow:none;box-shadow:none}.btn-link,.btn-link:active,.btn-link:focus,.btn-link:hover{border-color:transparent}.btn-link:focus,.btn-link:hover{color:#23527c;text-decoration:underline;background-color:transparent}.btn-link[disabled]:focus,.btn-link[disabled]:hover,fieldset[disabled] .btn-link:focus,fieldset[disabled] .btn-link:hover{color:#777;text-decoration:none}
-    .img-circle{
-        border-radius:100%;
-        margin-left: 130%;
-        margin-top: 6%;
-        width: 50px;}
-    .btn-sm, .btn-group-sm>.btn, .btn-icon.btn-sm {
-        padding: 5px 10px !important;
-    }
-
-    .mar-top {
-        margin-top: 15px;
-    }
-    .thumbnail {
-        border-radius: 0;
-        border-color: #e9e9e9
-    }
-
-    .media-block .media-left {
-        display: block;
-        float: left
-    }
-
-    .media-block .media-right {
-        float: right
-    }
-
-    .media-block .media-body {
-        display: block;
-        overflow: hidden;
-        width: auto
-    }
-
-    .middle .media-left,
-    .middle .media-right,
-    .middle .media-body {
-        vertical-align: middle
-    }
-    .text-muted, a.text-muted:hover, a.text-muted:focus {
-        color: #acacac;
-    }
-    .text-sm {
-        font-size: 0.9em;
-    }
-    .text-5x, .text-4x, .text-5x, .text-2x, .text-lg, .text-sm, .text-xs {
-        line-height: 1.25;
-    }
-    .tag.tag-sm, .btn-group-sm>.tag {
-        padding: 5px 10px;
-    }
-
-    .tag:not(.label) {
-        background-color: #fff;
-        padding: 6px 12px;
-        border-radius: 2px;
-        border: 1px solid #cdd6e1;
-        font-size: 12px;
-        line-height: 1.42857;
-        vertical-align: middle;
-        -webkit-transition: all .15s;
-        transition: all .15s;
-    }
-</style>
-<div class="col-md-8">
-    <div class="profile clearfix">
-        <div class="cover">
-            <img src="{{ asset('images/cover.jpg') }}" class="img-cover">
-        </div>
-        <div class="user clearfix">
-            <div class="avatar">
-                <img src="{{ asset('images/ging.jpg') }}" class="img-thumbnail img-profile">
-            </div>
-            <h2>{{ user.username }}</h2>
-            <div class="actions">
-                <div class="btn-group">
-                    <button class="btn btn-default btn-sm tip btn-responsive" title="" data-original-title="Add to friends"><span class="glyphicon glyphicon-plus glyphicon glyphicon-white"></span> Friends</button>
-                    <button class="btn btn-default btn-sm tip btn-responsive" title="" data-original-title="Send message"><span class="glyphicon glyphicon-envelope glyphicon glyphicon-white"></span> Message</button>
-                    <button class="btn btn-default btn-sm tip btn-responsive" title="" data-original-title="Recommend"><span class="glyphicon glyphicon-share-alt glyphicon glyphicon-white"></span> Recommend</button>
-                </div>
-            </div>
-        </div>
-        <div class="info">
-            <p><span class="glyphicon glyphicon-globe"></span> <span class="title">Email:</span>{{ user.email }}</p>
-            <p><span class="glyphicon glyphicon-gift"></span> <span class="title">Date of birth:</span> 14.02.1989</p>
-        </div>
-    </div>
-    <div class="col-md-8 bootstrap snippets">
-        <div class="panel">
-            <div class="panel-body">
-                <textarea class="form-control" rows="2" placeholder="What are you thinking?"></textarea>
-                <div class="mar-top clearfix">
-                    <button class="btn btn-sm btn-primary pull-right" type="submit"><i class="fa fa-pencil fa-fw"></i> Share</button>
-                    <a class="btn btn-trans btn-icon fa fa-video-camera add-tooltip" href="#"></a>
-                    <a class="btn btn-trans btn-icon fa fa-camera add-tooltip" href="#"></a>
-                    <a class="btn btn-trans btn-icon fa fa-file add-tooltip" href="#"></a>
-                </div>
-                <br>
-                <div class="media-block">
-                    <a class="media-left" href="#"><img class="img-circle img-sm" alt="Profile Picture" src="{{ asset('images/ging.jpg')}}"></a>
-                    <div class="media-body">
-                        <div class="mar-btm">
-                            <a href="#" class="btn-link text-semibold media-heading box-inline">Lisa D.</a>
-                            <p class="text-muted text-sm"><i class="fa fa-mobile fa-lg"></i> - From Mobile - 11 min ago</p>
-                        </div>
-                        <p>consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
-                        <div class="pad-ver">
-                            <div class="btn-group">
-                                <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a>
-                                <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a>
+                        <a href="#" class="btn btn-sm btn-block btn-primary">
+                            <i class="ace-icon fa fa-envelope-o bigger-110"></i>
+                            <span class="bigger-110">Send a message</span>
+                        </a>
+                        <div class="widget-box transparent">
+                            <div class="widget-header widget-header-small">
+                                <h4 class="widget-title smaller">
+                                    <i class="ace-icon fa fa-check-square-o bigger-110"></i>
+                                    Little About Me
+                                </h4>
                             </div>
-                            <a class="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a>
+                            <form id="form" name="form">
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <input type="hidden" name="id" id="id" value="{{ user.id }}">
+                                    <textarea name="description" style="width:250px;height:150px;border: none" id="description" readonly>{{ user.description }}</textarea>
+                                </div>
+                            </div>
                         </div>
-                        <hr>
+                    </div><!-- /.col -->
+
+                    <div class="col-xs-12 col-sm-9">
+                        <h4 class="blue">
+                            <span class="label label-purple arrowed-in-right">
+									<i class="ace-icon fa fa-circle smaller-80 align-middle"></i>
+									online
+								</span>
+                        </h4>
+                        <div class="profile-user-info">
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> UserName </div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" value="{{ user.username }}" name="username" id="username" readonly>
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Nom </div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" value="{{ user.nom }}" name="nom" id="nom" readonly>
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Prenom </div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" value="{{ user.prenom }}" name="prenom" id="prenom" readonly>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Location </div>
+
+                                <div class="profile-info-value">
+                                    <i class="fa fa-map-marker light-orange bigger-110"></i>
+                                    <input type="text" value="{{ user.location }}" name="location" id="location" readonly>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Age </div>
+
+                                <div class="profile-info-value">
+                                    <input type="number" value="{{ user.age }}" name="age" id="age" readonly min="1">
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Joined </div>
+
+                                <div class="profile-info-value">
+                                    <input type="datetime" value="{{ user.joined }}" name="joined" id="joined" readonly>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Nombre d'amis </div>
+
+                                <div class="profile-info-value">
+                                    <input type="number" value="{{ user.nbr_amis }}" name="nbr_amis" id="nbr_amis" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hr hr-8 dotted"></div>
+
+                        <div class="profile-user-info">
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Email </div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" value="{{ user.email }}" name="email" id="email" readonly>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">
+                                    <i class="middle ace-icon fa fa-facebook-square bigger-150 blue"></i>
+                                </div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" value="{{ user.facebook }}" name="facebook" id="facebook" readonly>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">
+                                    <i class="middle ace-icon fa fa-twitter-square bigger-150 light-blue"></i>
+                                </div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" value="{{ user.twitter }}" name="twitter" id="twitter" readonly>
+                                </div>
+                            </div>
+                        </div>
+                            <button type="button" class="btn-danger" onclick="do_change(); return false ;">Modifier</button>
+                            <button type="button" class="btn-success" id="btn2" style="display: none;" onclick="senddate()">Done</button>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+                </form>
+
+                <div class="space-20"></div>
+
+            </div><!-- /#home -->
+
+            <div id="feed" class="tab-pane">
+
+            </div><!-- /#feed -->
+
+            <div id="friends" class="tab-pane">
+                <div class="profile-users clearfix">
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="http://bootdey.com/img/Content/avatar/avatar6.png" alt="Bob Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-online"></span>
+                                        Bob Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">Content Editor</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
+                                        <span class="green"> 20 mins ago </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Rose Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-offline"></span>
+                                        Rose Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">Graphic Designer</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
+                                        <span class="grey"> 30 min ago </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="http://bootdey.com/img/Content/avatar/avatar2.png" alt="Jim Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-busy"></span>
+                                        Jim Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">SEO &amp; Advertising</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 red"></i>
+                                        <span class="grey"> 1 hour ago </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="http://bootdey.com/img/Content/avatar/avatar3.png" alt="Alex Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-idle"></span>
+                                        Alex Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">Marketing</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
+                                        <span class=""> 40 minutes idle </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="http://bootdey.com/img/Content/avatar/avatar4.png" alt="Phil Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-online"></span>
+                                        Phil Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">Public Relations</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
+                                        <span class="green"> 2 hours ago </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="http://bootdey.com/img/Content/avatar/avatar6.png" alt="Susan Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-online"></span>
+                                        Susan Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">HR Management</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
+                                        <span class="green"> 20 mins ago </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Jennifer Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-offline"></span>
+                                        Jennifer Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">Graphic Designer</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
+                                        <span class="grey"> 2 hours ago </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="http://bootdey.com/img/Content/avatar/avatar2.png" alt="Alexa Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-offline"></span>
+                                        Alexa Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">Accounting</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
+                                        <span class="grey"> 4 hours ago </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                </div>
-            </div>
+
+                <div class="hr hr10 hr-double"></div>
+
+                <ul class="pager pull-right">
+                    <li class="previous disabled">
+                        <a href="#">← Prev</a>
+                    </li>
+
+                    <li class="next">
+                        <a href="#">Next →</a>
+                    </li>
+                </ul>
+            </div><!-- /#friends -->
+
+            <div id="pictures" class="tab-pane">
+                <ul class="ace-thumbnails">
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/1/">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/2/">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/3/">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/4/">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/5/">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/6/">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/7/">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/1/">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- /#pictures -->
         </div>
+    </div>
 </div>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function do_change(){
+        document.getElementById("btn2").style.display = "";
+        $("#username").prop('readonly', false);
+        $("#nom").prop('readonly', false);
+        $("#prenom").prop('readonly', false);
+        $("#age").prop('readonly', false);
+        $("#location").prop('readonly', false);
+        $("#email").prop('readonly', false);
+        $("#facebook").prop('readonly', false);
+        $("#twitter").prop('readonly', false);
+        $("#description").prop('readonly', false);
+    }
+    function disableinputs() {
+        document.getElementById("btn2").style.display = "none";
+        $("#username").prop('readonly', true);
+        $("#nom").prop('readonly', true);
+        $("#prenom").prop('readonly', true);
+        $("#age").prop('readonly', true);
+        $("#location").prop('readonly', true);
+        $("#email").prop('readonly', true);
+        $("#facebook").prop('readonly', true);
+        $("#twitter").prop('readonly', true);
+        $("#description").prop('readonly', true);
+    }
+    function senddate() {
+        var username = document.getElementById("username").value;
+        var nom = document.getElementById("nom").value;
+        var prenom = document.getElementById("prenom").value;
+        var age = document.getElementById("age").value;
+        var location = document.getElementById("location").value;
+        var email = document.getElementById("email").value;
+        var facebook = document.getElementById("facebook").value;
+        var twitter = document.getElementById("twitter").value;
+        var description = document.getElementById("description").value;
+        var id = document.getElementById("id").value;
+        console.log("ajax sending data (edit form)..");
+        $.ajax({
+            url: "{{ path('fos_user_profile_x') }}",
+            method: "post",
+            data: {id: id,username: username,nom: nom,prenom: prenom,age: age,location: location,email: email,facebook: facebook,twitter: twitter,description: description}
+        }).done(function () {
+            disableinputs();
+        });
+    }
+</script>
