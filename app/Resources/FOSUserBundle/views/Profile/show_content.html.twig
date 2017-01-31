@@ -848,13 +848,30 @@ filter='cssrewrite' %}
         var twitter = document.getElementById("twitter").value;
         var description = document.getElementById("description").value;
         var id = document.getElementById("id").value;
-        console.log("ajax sending data (edit form)..");
-        $.ajax({
-            url: "{{ path('fos_user_profile_x') }}",
-            method: "post",
-            data: {id: id,username: username,nom: nom,prenom: prenom,age: age,location: location,email: email,facebook: facebook,twitter: twitter,description: description}
-        }).done(function () {
-            disableinputs();
-        });
+            console.log("ajax sending data (edit form)..");
+            $.ajax({
+                url: "{{ path('fos_user_profile_x') }}",
+                method: "post",
+                data: {
+                    id: id,
+                    username: username,
+                    nom: nom,
+                    prenom: prenom,
+                    age: age,
+                    location: location,
+                    email: email,
+                    facebook: facebook,
+                    twitter: twitter,
+                    description: description
+                }
+            }).done(function () {
+                disableinputs();
+            });
     }
+    $("#age").blur(function(){
+        if($(this).val() == ''){
+            $(this).css("border", "1px solid red");
+        }
+        else $(this).css("border", "");
+    });
 </script>
