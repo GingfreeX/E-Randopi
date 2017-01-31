@@ -222,7 +222,8 @@
             <button type="submit" id="_submit" name="_submit" class="btn" >{{ 'security.login.submit'|trans }}</button>
             {% if error %}
                 <div xmlns="http://www.w3.org/1999/html">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
+            {% endif %}</br>
+            <a href="{{ path('fos_user_resetting_request') }}">Mot de passe oublier ?</a>
         </form>
     </div>
 </div>

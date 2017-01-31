@@ -1,10 +1,28 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends '@Main/Default/base.html.twig' %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-    {% endif %}
-{% endblock fos_user_content %}
+     {% block body %}
+
+         <div class="alert alert-success" style="background-image: url('{{ asset('images/bg.jpg') }}');width: 1600px;height:600px;margin-left:-3cm;
+                 ">
+             <div style="padding-top:6cm;">
+                 <div style="padding: 20px;
+                  background-color: #449d44;
+                  color: white;
+                  width:40% ;
+                  margin-bottom: 15px;
+                  margin-left:12cm;opacity:0.7;  ">
+                     <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+                     {% if targetUrl %}
+                         <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+                     {% endif %}
+                 </div>
+
+
+
+             </div>
+         </div>
+
+
+     {% endblock  %}
