@@ -30,6 +30,7 @@ class Member extends BaseUser
         parent::__construct();
         // your own logic
     }
+
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -210,7 +211,7 @@ class Member extends BaseUser
     /**
      * @return mixed
      */
-    public function getNbrAmis()
+    public function getnbr_amis()
     {
         return $this->nbr_amis;
     }
@@ -218,7 +219,7 @@ class Member extends BaseUser
     /**
      * @param mixed $nbr_amis
      */
-    public function setNbrAmis($nbr_amis)
+    public function setnbr_amis($nbr_amis)
     {
         $this->nbr_amis = $nbr_amis;
     }
