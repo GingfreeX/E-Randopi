@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new ShopBundle\ShopBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
+            new Ob\HighchartsBundle\ObHighchartsBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
