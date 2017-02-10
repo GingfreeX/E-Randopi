@@ -19,6 +19,9 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Administration\AdminBundle\AdministrationAdminBundle(),
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new ShopBundle\ShopBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

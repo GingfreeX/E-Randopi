@@ -1,30 +1,29 @@
 {% trans_default_domain 'FOSUserBundle' %}
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="" rel="stylesheet">
 {% stylesheets
 'css/profile.css'
 filter='cssrewrite' %}
 <link rel="stylesheet" href="{{ asset_url }}" />
 {% endstylesheets %}
+{% javascripts
+output='js/compiled/'
+'Shop/js/modal.js'
+%}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
 <script src="{{ asset('jquery.js') }}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
 <div id="user-profile-2" class="user-profile">
     <div class="tabbable">
         <ul class="nav nav-tabs padding-18">
-            <li class="active">
-                <a data-toggle="tab" href="#home">
-                    <i class="green ace-icon fa fa-user bigger-120"></i>
-                    Profile
-                </a>
-            </li>
-
             <li>
-                <a data-toggle="tab" href="#feed">
-                    <i class="orange ace-icon fa fa-rss bigger-120"></i>
-                    Activity Feed
+                <a data-toggle="tab" href="#home">
+                    <i class="blue ace-icon fa fa-info bigger-120"></i>
+                    Infos
                 </a>
             </li>
-
             <li>
                 <a data-toggle="tab" href="#friends">
                     <i class="blue ace-icon fa fa-users bigger-120"></i>
@@ -63,6 +62,11 @@ filter='cssrewrite' %}
                             <i class="ace-icon fa fa-envelope-o bigger-110"></i>
                             <span class="bigger-110">Send a message</span>
                         </a>
+                        <a href="#" class="btn btn-sm btn-block btn-primary">
+                            <i class="ace-icon fa fa-envelope-o bigger-110"></i>
+                            <span class="bigger-110" data-toggle="modal" data-target="#groupeModal">Add Item for Sale</span>
+                        </a>
+
                         <div class="widget-box transparent">
                             <div class="widget-header widget-header-small">
                                 <h4 class="widget-title smaller">
@@ -184,10 +188,6 @@ filter='cssrewrite' %}
                 <div class="space-20"></div>
 
             </div><!-- /#home -->
-
-            <div id="feed" class="tab-pane">
-
-            </div><!-- /#feed -->
 
             <div id="friends" class="tab-pane">
                 <div class="profile-users clearfix">
@@ -811,7 +811,44 @@ filter='cssrewrite' %}
         </div>
     </div>
 </div>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- modal start -->
+<div class="modal fade" id="groupeModal" tabindex="-1" role="dialog"
+     aria-labelledby="groupeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header"
+                 style="text-align: left;background: #f6f7f9;border-bottom: 1px solid #999;">
+                <h5 class="modal-title" id="exampleModalLabel"
+                    style="font-weight: bold;font-size: 18px;">Add Item</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close" style="margin-top: -22px;;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ form(formm) }}
+                <div class="form-group">
+                    {{ form_row(formm.titre) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(formm.prix) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(formm.description) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(formm.imageFile) }}
+                </div>
+                <div class="modal-footer">
+                    {{ form_widget(formm.Add) }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="{{ asset('css/bootstrap.min.css') }}"></script>
 <script type="text/javascript">
     function do_change(){
         document.getElementById("btn2").style.display = "";
@@ -874,4 +911,5 @@ filter='cssrewrite' %}
         }
         else $(this).css("border", "");
     });
+
 </script>

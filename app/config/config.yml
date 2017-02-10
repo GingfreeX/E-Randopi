@@ -3,12 +3,13 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@MainBundle/Resources/config/services.yml" }
+    - { resource: "@ShopBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
-
+    images_directory: '%kernel.root_dir%/../web/uploads'
 framework:
     #esi:             ~
     translator:      ~
@@ -78,17 +79,27 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: MainBundle\Entity\Member
-    registration:
-        confirmation:
-            enabled:    true
-
-            from_email:
-                address:        erandopi14@gmail.com
-                sender_name:    Welcome E-Rando
-    resetting:
-        email:
-            from_email:
-                address:        erandopi14@gmail.com
-                sender_name:    Password Resetting
-    service:
-        mailer: fos_user.mailer.twig_swift
+hwi_oauth:
+    connect:
+        confirmation: true
+        registration_form: fos_user.registration.form.factory
+    firewall_names: [main]
+    fosub:
+        username_iterations: 30
+        properties:
+            facebook: facebookID
+    resource_owners:
+        #facebook Access
+        facebook:
+            type: facebook
+            client_id: 1822296591373106
+            client_secret: fa533b0ba4212428ffb832058614f3bd
+            scopre: "email"
+vich_uploader:
+    db_driver: orm
+    mappings:
+        product_image:
+            uri_prefix:         /uploads
+            upload_destination: '%kernel.root_dir%/../web/uploads'
+            inject_on_load:     false
+            delete_on_remove:   true
