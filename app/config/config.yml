@@ -81,7 +81,10 @@ fos_user:
     registration:
         confirmation:
             enabled:    true
-            template:   FOSUserBundle:Registration:email.txt.twig
+
+            from_email:
+                address:        erandopi14@gmail.com
+                sender_name:    Welcome E-Rando
     resetting:
         email:
             from_email:
