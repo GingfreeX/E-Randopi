@@ -1,9 +1,29 @@
-{% extends "@FOSUser/layout.html.twig" %}
+
+
+{% extends '@Main/Default/base.html.twig' %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block fos_user_content %}
-<p>
-{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
-</p>
-{% endblock %}
+     {% block body %}
+
+         <div class="alert alert-success" style="background-image: url('{{ asset('images/bg.jpg') }}');width: 1600px;height:600px;margin-left:-3cm;
+                 ">
+             <div style="padding-top:4cm;">
+                 <div style="padding: 20px;
+                  background-color: #449d44;
+                  color: white;
+                  width:60% ;
+                  margin-bottom: 15px;
+                  margin-left:8cm;opacity:0.7;  ">
+                     <p>
+                         {{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+                     </p>
+                 </div>
+
+
+
+             </div>
+         </div>
+
+
+     {% endblock  %}
