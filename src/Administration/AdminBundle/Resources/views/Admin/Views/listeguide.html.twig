@@ -27,89 +27,37 @@
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table id="data-table" class="table table-striped table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>Nom</th>
-                                    <th>Email</th>
-                                    <th>Cv</th>
-                                    <th>Statut</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
                                 <tbody>
-                                <tr class="odd gradeX">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 4.0</td>
-                                    <td>Win 95+</td>
+                                <table id="data-table" class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Prenom</th>
+                                        <th>Email</th>
+                                        <th>Cv</th>
+                                        <th>Statut</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    {% for i in guides %}
+                                        <tr class="odd gradeX">
+                                    <td>{{ i.nom }}</td>
+                                    <td>{{ i.prenom }}</td>
+                                    <td>{{ i.email }}</td>
+                                    <td>{{ i.Cv }}</td>
                                     <td>
                                         <span class="label label-success">Actif</span>
                                     </td>
                                     <td>
                                         <div class="btn-group">
                                             <button class="btn btn-xs btn-success"><i class="fa fa-envelope"></i> </button>
-                                            <button class="btn btn-xs btn-danger"><i class="fa fa-times"></i> </button>
+                                            <button class="btn btn-xs btn-danger"><a href="{{ path('supprimer_guide',{'idguide':i.idguide}) }}"><i class="fa fa-times"></i> </a></button>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd gradeX">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 4.0</td>
-                                    <td>Win 95+</td>
-                                    <td>
-                                        <span class="label label-success">Actif</span>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button class="btn btn-xs btn-success"><i class="fa fa-envelope"></i> </button>
-                                            <button class="btn btn-xs btn-danger"><i class="fa fa-times"></i> </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="odd gradeX">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 4.0</td>
-                                    <td>Win 95+</td>
-                                    <td>
-                                        <span class="label label-success">Actif</span>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button class="btn btn-xs btn-success"><i class="fa fa-envelope"></i> </button>
-                                            <button class="btn btn-xs btn-danger"><i class="fa fa-times"></i> </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="odd gradeX">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 4.0</td>
-                                    <td>Win 95+</td>
-                                    <td>
-                                        <span class="label label-success">Actif</span>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button class="btn btn-xs btn-success"><i class="fa fa-envelope"></i> </button>
-                                            <button class="btn btn-xs btn-danger"><i class="fa fa-times"></i> </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="odd gradeX">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 4.0</td>
-                                    <td>Win 95+</td>
-                                    <td>
-                                        <span class="label label-success">Actif</span>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button class="btn btn-xs btn-success"><i class="fa fa-envelope"></i> </button>
-                                            <button class="btn btn-xs btn-danger"><i class="fa fa-times"></i> </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {% endfor %}
+                                </table>
                                 </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
