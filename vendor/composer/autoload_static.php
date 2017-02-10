@@ -21,6 +21,7 @@ class ComposerStaticInita9ebf4cd6ac51e24c79678c175ac20c4
     public static $prefixLengthsPsr4 = array (
         'Z' => 
         array (
+            'Zend\\Json\\' => 10,
             'Zend\\EventManager\\' => 18,
             'Zend\\Code\\' => 10,
         ),
@@ -58,6 +59,10 @@ class ComposerStaticInita9ebf4cd6ac51e24c79678c175ac20c4
             'Psr\\Log\\' => 8,
             'Psr\\Cache\\' => 10,
         ),
+        'O' => 
+        array (
+            'Ob\\HighchartsBundle\\' => 20,
+        ),
         'M' => 
         array (
             'Monolog\\' => 8,
@@ -85,6 +90,10 @@ class ComposerStaticInita9ebf4cd6ac51e24c79678c175ac20c4
     );
 
     public static $prefixDirsPsr4 = array (
+        'Zend\\Json\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-json/src',
+        ),
         'Zend\\EventManager\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-eventmanager/src',
@@ -180,6 +189,10 @@ class ComposerStaticInita9ebf4cd6ac51e24c79678c175ac20c4
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'Ob\\HighchartsBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ob/highcharts-bundle',
         ),
         'Monolog\\' => 
         array (
