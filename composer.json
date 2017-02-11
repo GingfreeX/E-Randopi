@@ -24,7 +24,15 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "symfony/assetic-bundle": "^2.8",
         "friendsofsymfony/user-bundle": "dev-master",
-        "ob/highcharts-bundle": "^1.5"
+        "ob/highcharts-bundle": "^1.5",
+        "hwi/oauth-bundle": "^0.5.3",
+        "vich/uploader-bundle":"^1.4",
+        "ocramius/proxy-manager": "^1.0.2",
+        "zendframework/zend-code": "^2.6.3",
+        "zendframework/zend-eventmanager": "^3.0.1",
+        "jms/metadata": "^1.6.0",
+        "kriswallsmith/buzz": "^0.15",
+        "excelwebzone/recaptcha-bundle": "^1.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
