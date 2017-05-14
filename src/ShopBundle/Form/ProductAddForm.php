@@ -3,6 +3,7 @@
 namespace ShopBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -16,11 +17,12 @@ class ProductAddForm extends AbstractType
     {
         $builder
             ->add('titre',TextType::class,array('label' => 'Titre de Produit', 'attr' => array('class' => 'form-control','style' =>"border: 1px solid #cccccc;border-radius: 4px;")))
-            ->add('prix',IntegerType::class,array('label' => 'prix de produit', 'attr' => array('class' => 'form-control','style' =>"border: 1px solid #cccccc;border-radius: 4px;")))
-            ->add('description',TextareaType::class,array('label' => 'Description', 'attr' => array('class' => 'form-control','style' =>"border: 1px solid #cccccc;border-radius: 4px;")))
-            ->add('imageFile',VichImageType::class,array('label' => 'Image', 'attr' => array('class' => 'form-control','style' =>"border: 1px solid #cccccc;border-radius: 4px;")))
+            ->add('prix',IntegerType::class,array('label' => 'prix de produit', 'attr' => array('class' => 'form-control','style' =>"border: 1px solid #cccccc;border-radius: 4px;",'min' =>"1")))
+            ->add('description',TextareaType::class,array('label' => 'Description', 'attr' => array('class' => 'form-control','style' =>"border: 1px solid #cccccc;border-radius: 4px;",'maxlength' =>"500")))
+            ->add('imageFile',FileType::class,array('attr' => array('class' => 'form-control','style' =>"border: 1px solid #cccccc;border-radius: 4px;")))
             ->add('Add',SubmitType::class,array('attr' => array('class' => 'btn btn-success','style' =>"margin-top: 20px;")))
         ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

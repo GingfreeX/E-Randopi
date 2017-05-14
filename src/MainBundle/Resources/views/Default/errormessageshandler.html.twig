@@ -1,0 +1,17 @@
+{% extends '@Main/Default/base.html.twig' %}
+{% block body %}
+<div class="alert alert-success" style="background-image: url('{{ asset('images/bg.jpg') }}');width: 1600px;height:600px;margin-left:-3cm;
+        ">
+    <div style="padding-top:6cm;">
+        <div style="padding: 20px;
+                  background-color: #449d44;
+                  color: white;
+                  width:40% ;
+                  margin-bottom: 15px;
+                  margin-left:12cm;opacity:0.7;  ">
+            {{ message }}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

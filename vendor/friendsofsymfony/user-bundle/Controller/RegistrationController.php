@@ -69,11 +69,22 @@ class RegistrationController extends Controller
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
                 $userManager->updateUser($user);
+                $roles  = $form->get('roles')->getData();
+                foreach ($roles as $role){
+                    if($role=="ROLE_GUIDE"){
+                        $user->setStatusguide(0);
+                        $manipulator=$this->get('fos_user.util.user_manipulator');
+                        $manipulator->deactivate($user);
+
+                        return $this->redirectToRoute('fos_user_security_login');
+                    }
+                }
 
                 if (null === $response = $event->getResponse()) {
                     $url = $this->generateUrl('fos_user_registration_confirmed');
                     $response = new RedirectResponse($url);
                 }
+
 
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
@@ -140,6 +151,7 @@ class RegistrationController extends Controller
 
         $user->setConfirmationToken(null);
         $user->setEnabled(true);
+
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRM, $event);

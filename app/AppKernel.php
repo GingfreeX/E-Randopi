@@ -24,6 +24,17 @@ class AppKernel extends Kernel
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
             new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
+            new Mgilet\NotificationBundle\MgiletNotificationBundle(),
+            new belousovr\belousovChatBundle\belousovChatBundle(),
+            new Group\GroupBundle\GroupGroupBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\CommentBundle\FOSCommentBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new Guide\GuideBundle\GuideGuideBundle(),
+            new Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle(),
+
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

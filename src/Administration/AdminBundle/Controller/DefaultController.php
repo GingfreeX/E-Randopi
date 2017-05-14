@@ -30,9 +30,23 @@ class DefaultController extends Controller
     }
     public function listeguideAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $Guide = $em->getRepository("AdministrationAdminBundle:Guide")->findAll();
+        $em = $this->getDoctrine()->getEntityManager();
+        $Guide = $em->getRepository("MainBundle:Member")->createQueryBuilder('u')
+            ->select('u')->where('u.roles LIKE :p')
+            ->setParameter('p','%ROLE_GUIDE%')
+            ->getQuery()->getResult();
+
+
+
         return $this->render("AdministrationAdminBundle:Admin/Views:listeguide.html.twig",array("guides" => $Guide));
+    }
+    public  function  ApprouverGuideAction($id){
+      $em = $this->getDoctrine()->getManager();
+        $guide = $em->getRepository('MainBundle:Member')->find($id);
+        $guide->setEnabled(true);
+        $em->persist($guide);
+        $em->flush();
+        return $this->redirectToRoute('administration_admin_liste_guide');
     }
     public function listemembreAction()
     {
@@ -50,12 +64,30 @@ class DefaultController extends Controller
         return $this->redirectToRoute("administration_admin_liste_guide");
     }
     public function bannirMembreAction($id){
-        return $this->render("@AdministrationAdmin/Admin/Views/listemembre.html.twig");
+        $em = $this->getDoctrine()->getManager();
+        $user =$em->getRepository('MainBundle:Member')->find($id);
+        $user->setEnabled(false);
+        $em->persist($user);
+        $em->flush();
+        return $this->redirectToRoute('administration_admin_liste_membre');
     }
 
     public function listpublAction()
     {
-        return $this->render('AdministrationAdminBundle:Admin/Views:listepub.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $pub = $em->getRepository('ShopBundle:Produit')->findAll();
+
+        return $this->render('AdministrationAdminBundle:Admin/Views:listepub.html.twig',array('pub'=>$pub));
+    }
+    public function deletepubAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $pub = $em->getRepository('ShopBundle:Produit')->find($id);
+        $em->remove($pub);
+
+        $em->flush();
+
+        return $this->redirectToRoute("administration_admin_liste_publication");
     }
 
     public function statAction()

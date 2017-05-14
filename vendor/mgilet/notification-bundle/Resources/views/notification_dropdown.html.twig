@@ -1,0 +1,74 @@
+{% if mgilet_unseen_notification_count() > 0 %}
+<li class="btn-warning active">
+    {% else %}
+<li>
+    {% endif %}
+    <a href="#!" id="notificationDropdown" data-toggle="collapse" data-target="#notification-menu"
+       aria-haspopup="true"><span id="notificationCount" >
+
+             <i class="blue ace-icon fa fa-globe bigger-120"></i>
+                    Notification
+
+           <span class="badge" id="counttag">{{ mgilet_unseen_notification_count() }}</span> </span></a>
+    <div id="notification-menu" class="notification-menu collapse" aria-labelledby="notificationDropdown">
+        <ul class="well no-padding list-unstyled">
+            <li style="padding: 10px;"><b
+                        class="text-muted">{{ 'notifications'|trans({},'MgiletNotificationBundle') }}</b>
+                <a id="notification-MarkAllAsSeen" href="{{ path('notification_mark_all_as_seen') }}" class="no-margin btn btn-xs pull-right">{{ 'mark_all_as_seen'|trans({},'MgiletNotificationBundle') }}</a>
+            </li>
+            <hr class="no-margin">
+            <div class="scrollable-menu">
+                <div class="list-group no-margin">
+                    {% for notification in notifications %}
+                        <li class="list-group-item notification">
+                            {% if notification.seen %}
+                            <div class="row-content seen">
+                            {% else %}
+                            <div class="row-content">
+                                <a href="{{ path('notification_mark_as_seen', {'notification': notification.id}) }}" class="ajax-notification action-secondary text-muted btn btn-xs">x</a>
+                            {% endif %}
+                            <a href="{{ notification.link }}">
+                                <table>
+                                    <tr>
+
+                                        <td>
+                                            <ul>
+                                                <li>
+                                                    <h4><b>{{ notification.subject }}</b></h4>
+                                                </li>
+                                                <li>
+                                                    <p class="list-group-item-text">{{ notification.message }}</p>
+                                                    <small class="list-group-item-text">{{ notification.date|date('H:i:s - d/m/Y') }}</small>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+ </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </div>
+                {% if notifications|length < 1 %}
+                    <div class="well-lg text-muted text-center">
+                        <b>{{ 'no_new_notification'|trans({},'MgiletNotificationBundle') }}</b></div>
+                {% endif %}
+            </div>
+
+        </ul>
+    </div>
+</li>
+<link rel="stylesheet" href="{{ asset('bundles/mgiletnotification/css/mgilet_notification.css') }}">
+<script type="application/javascript" src="{{ asset('bundles/mgiletnotification/js/ajax-notification.js') }}"></script>
+<script>
+    $(document).ready(function(){
+
+
+        $("#notificationDropdown").click(function () {
+            $("#notification-menu").slideToggle();
+
+        });
+
+    });
+
+</script>

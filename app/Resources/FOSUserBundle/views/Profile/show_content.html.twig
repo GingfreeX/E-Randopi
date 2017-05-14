@@ -1,42 +1,123 @@
 {% trans_default_domain 'FOSUserBundle' %}
-<link href="" rel="stylesheet">
-{% stylesheets
-'css/profile.css'
-filter='cssrewrite' %}
-<link rel="stylesheet" href="{{ asset_url }}" />
-{% endstylesheets %}
-{% javascripts
-output='js/compiled/'
-'Shop/js/modal.js'
-%}
-<script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
-<script src="{{ asset('jquery.js') }}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    {% stylesheets
+    'css/profile.css'
+
+    filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="{{asset('Admin/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('Admin/assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('Admin/assets/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" />
+    <link href="{{ asset('gridlistcss/stylecss.css') }}">
+    <link href="{{asset('css/style.min.css')}}" rel="stylesheet" />
+
+
+    <link href="{{ asset('bundles/font-awesome.css') }}">
+    <script src="{{ asset('jquery.js') }}"></script>
+    <script src="{{ asset('jquer') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('chatstyle/css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ asset('chatstyle/css/style.css') }}">
+    <script src="{{ asset('bundles/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+</head>
+<div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">changer l aphoto de profil </h4>
+            </div>
+            <div class="modal-body">
+               {{ form_start(form5) }}
+                {{ form_widget(form5) }}
+                {{ form_end(form5) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <div id="user-profile-2" class="user-profile">
     <div class="tabbable">
         <ul class="nav nav-tabs padding-18">
-            <li>
+            <li class="active">
                 <a data-toggle="tab" href="#home">
-                    <i class="blue ace-icon fa fa-info bigger-120"></i>
-                    Infos
+                    <i class="green ace-icon fa fa-user bigger-120"></i>
+                    Profile
                 </a>
             </li>
+
+
+
             <li>
                 <a data-toggle="tab" href="#friends">
                     <i class="blue ace-icon fa fa-users bigger-120"></i>
-                    Friends
+                    amis
+                </a>
+            </li>
+
+
+            <li>
+                <a data-toggle="tab" href="#sugg">
+                    <i class="pink ace-icon fa fa-picture-o bigger-120"></i>
+                    Suggesstion d'amis
                 </a>
             </li>
 
             <li>
-                <a data-toggle="tab" href="#pictures">
+                <a data-toggle="tab" href="#invitation">
                     <i class="pink ace-icon fa fa-picture-o bigger-120"></i>
-                    Pictures
+                    invitations
                 </a>
             </li>
+            <li>
+                <a data-toggle="tab" href="#groupes">
+                    <i class="pink ace-icon fa fa-picture-o bigger-120"></i>
+                   Mes groupes
+                </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#boitemessage">
+                    <i class="pink ace-icon fa fa-picture-o bigger-120"></i>
+                    messagerie
+                </a>
+            </li>
+
+
+            <li>
+                <a data-toggle="tab" href="#postes">
+                    <i class="pink ace-icon fa fa-picture-o bigger-120"></i>
+                    mes postes
+                </a>
+            </li>
+            <li>
+
+
+                {{ mgilet_notification_render({ 'display': 'dropdown', 'seen': true }) }}
+
+            </li>
+
+
+
         </ul>
 
         <div class="tab-content no-border padding-24">
@@ -47,26 +128,29 @@ output='js/compiled/'
                         <img src="{{ asset('images/cover.jpg') }}" alt="">
                     </div>
                     <div class="col-xs-12 col-sm-3 center">
-							<span class="profile-picture">
-								<img class="editable img-responsive" alt=" Avatar" id="avatar2" src="http://bootdey.com/img/Content/avatar/avatar6.png">
+						<span class="profile-picture">
+								<img class="editable img-responsive" alt=" Avatar" id="avatar2" src="{{ asset('photoprofil/' ~ user.profilepic) }}">
 							</span>
 
                         <div class="space space-4"></div>
 
-                        <a href="#" class="btn btn-sm btn-block btn-success">
+                        <a href="#" class="btn btn-sm btn-block btn-success" data-toggle="modal" data-target="#myModal" >
                             <i class="ace-icon fa fa-plus-circle bigger-120"></i>
-                            <span class="bigger-110">Add as a friend</span>
+                            <span class="bigger-110" >Publier un article </span>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-block btn-success" data-toggle="modal" data-target="#groupeModal" >
+                            <i class="ace-icon fa fa-plus-circle bigger-120"></i>
+                            <span class="bigger-110" >Creer un groupe </span>
                         </a>
 
-                        <a href="#" class="btn btn-sm btn-block btn-primary">
+                        <a href="#" class="btn btn-sm btn-block btn-primary"  data-toggle="modal" data-target="#myModal2">
                             <i class="ace-icon fa fa-envelope-o bigger-110"></i>
-                            <span class="bigger-110">Send a message</span>
+                            <span class="bigger-110">changer la photo de profil </span>
                         </a>
                         <a href="#" class="btn btn-sm btn-block btn-primary">
                             <i class="ace-icon fa fa-envelope-o bigger-110"></i>
-                            <span class="bigger-110" data-toggle="modal" data-target="#groupeModal">Add Item for Sale</span>
+                            <span class="bigger-110" data-toggle="modal" data-target="#sale">Add Item for Sale</span>
                         </a>
-
                         <div class="widget-box transparent">
                             <div class="widget-header widget-header-small">
                                 <h4 class="widget-title smaller">
@@ -75,12 +159,12 @@ output='js/compiled/'
                                 </h4>
                             </div>
                             <form id="form" name="form">
-                            <div class="widget-body">
-                                <div class="widget-main">
-                                    <input type="hidden" name="id" id="id" value="{{ user.id }}">
-                                    <textarea name="description" style="width:250px;height:150px;border: none" id="description" readonly>{{ user.description }}</textarea>
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <input type="hidden" name="id" id="id" value="{{ user.id }}">
+                                        <textarea name="description" style="width:250px;height:150px;border: none" id="description" readonly>{{ user.description }}</textarea>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                     </div><!-- /.col -->
 
@@ -179,8 +263,8 @@ output='js/compiled/'
                                 </div>
                             </div>
                         </div>
-                            <button type="button" class="btn-danger" onclick="do_change(); return false ;">Modifier</button>
-                            <button type="button" class="btn-success" id="btn2" style="display: none;" onclick="senddate()">Done</button>
+                        <button type="button" class="btn-danger" onclick="do_change(); return false ;">Modifier</button>
+                        <button type="button" class="btn-success" id="btn2" style="display: none;" onclick="senddate()">Done</button>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
                 </form>
@@ -189,391 +273,62 @@ output='js/compiled/'
 
             </div><!-- /#home -->
 
+
+
             <div id="friends" class="tab-pane">
                 <div class="profile-users clearfix">
-                    <div class="itemdiv memberdiv">
-                        <div class="inline pos-rel">
-                            <div class="user">
-                                <a href="#">
-                                    <img src="http://bootdey.com/img/Content/avatar/avatar6.png" alt="Bob Doe's avatar">
-                                </a>
-                            </div>
 
-                            <div class="body">
-                                <div class="name">
+                    {% for amis in listamis %}
+                        <div class="itemdiv memberdiv">
+                            <div class="inline pos-rel">
+                                <div class="user">
                                     <a href="#">
-                                        <span class="user-status status-online"></span>
-                                        Bob Doe
+                                        <img src="{{ asset('photoprofil/' ~ amis.profilepic) }}" alt="Alexa Doe's avatar">
                                     </a>
                                 </div>
-                            </div>
 
-                            <div class="popover">
-                                <div class="arrow"></div>
-
-                                <div class="popover-content">
-                                    <div class="bolder">Content Editor</div>
-
-                                    <div class="time">
-                                        <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
-                                        <span class="green"> 20 mins ago </span>
+                                <div class="body">
+                                    <div class="name">
+                                        <a href="#">
+                                            <span class="user-status status-offline"></span>
+                                            {{ amis.username }}
+                                        </a>
                                     </div>
+                                </div>
+                                <a class="btn btn-danger" href="{{ path('suppamisgui',{'id':amis.id}) }}">Supprimer &nbsp;&nbsp;   <i class="fa fa-trash"></i> </a>
 
-                                    <div class="hr dotted hr-8"></div>
 
-                                    <div class="tools action-buttons">
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-                                        </a>
+                                <div class="popover">
+                                    <div class="arrow"></div>
 
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-                                        </a>
+                                    <div class="popover-content">
+                                        <div class="bolder">Accounting</div>
 
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-                                        </a>
+                                        <div class="time">
+                                            <i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
+                                            <span class="grey"> 4 hours ago </span>
+                                        </div>
+
+                                        <div class="hr dotted hr-8"></div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="itemdiv memberdiv">
-                        <div class="inline pos-rel">
-                            <div class="user">
-                                <a href="#">
-                                    <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Rose Doe's avatar">
-                                </a>
-                            </div>
-
-                            <div class="body">
-                                <div class="name">
-                                    <a href="#">
-                                        <span class="user-status status-offline"></span>
-                                        Rose Doe
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="popover">
-                                <div class="arrow"></div>
-
-                                <div class="popover-content">
-                                    <div class="bolder">Graphic Designer</div>
-
-                                    <div class="time">
-                                        <i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
-                                        <span class="grey"> 30 min ago </span>
-                                    </div>
-
-                                    <div class="hr dotted hr-8"></div>
-
-                                    <div class="tools action-buttons">
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="itemdiv memberdiv">
-                        <div class="inline pos-rel">
-                            <div class="user">
-                                <a href="#">
-                                    <img src="http://bootdey.com/img/Content/avatar/avatar2.png" alt="Jim Doe's avatar">
-                                </a>
-                            </div>
-
-                            <div class="body">
-                                <div class="name">
-                                    <a href="#">
-                                        <span class="user-status status-busy"></span>
-                                        Jim Doe
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="popover">
-                                <div class="arrow"></div>
-
-                                <div class="popover-content">
-                                    <div class="bolder">SEO &amp; Advertising</div>
-
-                                    <div class="time">
-                                        <i class="ace-icon fa fa-clock-o middle bigger-120 red"></i>
-                                        <span class="grey"> 1 hour ago </span>
-                                    </div>
-
-                                    <div class="hr dotted hr-8"></div>
-
-                                    <div class="tools action-buttons">
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="itemdiv memberdiv">
-                        <div class="inline pos-rel">
-                            <div class="user">
-                                <a href="#">
-                                    <img src="http://bootdey.com/img/Content/avatar/avatar3.png" alt="Alex Doe's avatar">
-                                </a>
-                            </div>
-
-                            <div class="body">
-                                <div class="name">
-                                    <a href="#">
-                                        <span class="user-status status-idle"></span>
-                                        Alex Doe
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="popover">
-                                <div class="arrow"></div>
-
-                                <div class="popover-content">
-                                    <div class="bolder">Marketing</div>
-
-                                    <div class="time">
-                                        <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
-                                        <span class=""> 40 minutes idle </span>
-                                    </div>
-
-                                    <div class="hr dotted hr-8"></div>
-
-                                    <div class="tools action-buttons">
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="itemdiv memberdiv">
-                        <div class="inline pos-rel">
-                            <div class="user">
-                                <a href="#">
-                                    <img src="http://bootdey.com/img/Content/avatar/avatar4.png" alt="Phil Doe's avatar">
-                                </a>
-                            </div>
-
-                            <div class="body">
-                                <div class="name">
-                                    <a href="#">
-                                        <span class="user-status status-online"></span>
-                                        Phil Doe
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="popover">
-                                <div class="arrow"></div>
-
-                                <div class="popover-content">
-                                    <div class="bolder">Public Relations</div>
-
-                                    <div class="time">
-                                        <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
-                                        <span class="green"> 2 hours ago </span>
-                                    </div>
-
-                                    <div class="hr dotted hr-8"></div>
-
-                                    <div class="tools action-buttons">
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="itemdiv memberdiv">
-                        <div class="inline pos-rel">
-                            <div class="user">
-                                <a href="#">
-                                    <img src="http://bootdey.com/img/Content/avatar/avatar6.png" alt="Susan Doe's avatar">
-                                </a>
-                            </div>
-
-                            <div class="body">
-                                <div class="name">
-                                    <a href="#">
-                                        <span class="user-status status-online"></span>
-                                        Susan Doe
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="popover">
-                                <div class="arrow"></div>
-
-                                <div class="popover-content">
-                                    <div class="bolder">HR Management</div>
-
-                                    <div class="time">
-                                        <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
-                                        <span class="green"> 20 mins ago </span>
-                                    </div>
-
-                                    <div class="hr dotted hr-8"></div>
-
-                                    <div class="tools action-buttons">
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="itemdiv memberdiv">
-                        <div class="inline pos-rel">
-                            <div class="user">
-                                <a href="#">
-                                    <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Jennifer Doe's avatar">
-                                </a>
-                            </div>
-
-                            <div class="body">
-                                <div class="name">
-                                    <a href="#">
-                                        <span class="user-status status-offline"></span>
-                                        Jennifer Doe
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="popover">
-                                <div class="arrow"></div>
-
-                                <div class="popover-content">
-                                    <div class="bolder">Graphic Designer</div>
-
-                                    <div class="time">
-                                        <i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
-                                        <span class="grey"> 2 hours ago </span>
-                                    </div>
-
-                                    <div class="hr dotted hr-8"></div>
-
-                                    <div class="tools action-buttons">
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="itemdiv memberdiv">
-                        <div class="inline pos-rel">
-                            <div class="user">
-                                <a href="#">
-                                    <img src="http://bootdey.com/img/Content/avatar/avatar2.png" alt="Alexa Doe's avatar">
-                                </a>
-                            </div>
-
-                            <div class="body">
-                                <div class="name">
-                                    <a href="#">
-                                        <span class="user-status status-offline"></span>
-                                        Alexa Doe
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="popover">
-                                <div class="arrow"></div>
-
-                                <div class="popover-content">
-                                    <div class="bolder">Accounting</div>
-
-                                    <div class="time">
-                                        <i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
-                                        <span class="grey"> 4 hours ago </span>
-                                    </div>
-
-                                    <div class="hr dotted hr-8"></div>
-
-                                    <div class="tools action-buttons">
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
 
                 <div class="hr hr10 hr-double"></div>
@@ -588,230 +343,270 @@ output='js/compiled/'
                     </li>
                 </ul>
             </div><!-- /#friends -->
+            <div id="invitation" class="tab-pane">
 
-            <div id="pictures" class="tab-pane">
-                <ul class="ace-thumbnails">
-                    <li>
-                        <a href="#" data-rel="colorbox">
-                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/1/">
-                            <div class="text">
-                                <div class="inner">Sample Caption on Hover</div>
+                <div id="products" class="row list-group">
+                    {%  for k in listinvi  %}
+                        <div class="item  col-xs-3 col-lg-3">
+                            <div class="thumbnail">
+                                <img class="group list-group-image" src="{{ asset('photoprofil/' ~ k.profilepic) }}" alt="" />
+                                <div class="caption">
+                                    <h4 class="group inner list-group-item-heading">
+                                        {{ k.username }}</h4>
+                                    <p class="group inner list-group-item-text">
+
+                                        {{ k.email  }}
+                                    </p>
+                                    <div class="row">
+
+                                        <div class="col-xs-12 col-md-6" >
+                                            <a class="btn btn-success" href="{{ path('approuverguide',{'id':k.id}) }}">Approuver l'invitation</a>
+                                            <a class="btn btn-danger" href="{{ path('annulerinvigui',{'id':k.id}) }}">Anunler invitation</a>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
                             </div>
-                        </a>
-
-                        <div class="tools tools-bottom">
-                            <a href="#">
-                                <i class="ace-icon fa fa-link"></i>
-                            </a>
-
-                            <a href="#">
-                                <i class="ace-icon fa fa-paperclip"></i>
-                            </a>
-
-                            <a href="#">
-                                <i class="ace-icon fa fa-pencil"></i>
-                            </a>
-
-                            <a href="#">
-                                <i class="ace-icon fa fa-times red"></i>
-                            </a>
                         </div>
-                    </li>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="boitemessage" class="tab-pane">
+                {% if currentUser %}
+                    <div id="belousovChat" data-author="{{ currentUser.id }}" data-addressee="" data-action="{{ getMessageUrl }}" >
+                        <div id="belousovMessageZone">
 
-                    <li>
-                        <a href="#" data-rel="colorbox">
-                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/2/">
-                            <div class="text">
-                                <div class="inner">Sample Caption on Hover</div>
+                        </div>
+                        <div id="belousovFormZone">
+                            {{ form_start(chatForm) }}
+
+                            {{ form_widget(chatForm.messageText) }}
+
+                            {{ form_errors(chatForm) }}
+
+                            {{ form_end(chatForm) }}
+                        </div>
+                    </div>
+
+                    <div id="selectUser" style="margin-left:21cm;overflow: scroll;width:20%;height:300px;margin-top:-8cm; ">
+
+                        <ul>
+                            {% for user in users %}
+                                {% if user.id != currentUser.id %}
+
+                                    <li>
+                                        <div class="profile-users clearfix"  >
+
+
+
+                                            <div class="itemdiv memberdiv">
+                                                <div class="inline pos-rel">
+                                                    <div class="user">
+
+                                                        <a href="" onclick="return false;" data-number="{{ user.id }}" class="changeUser" >
+                                                            <table>
+                                                                <tr>
+                                                                    <td> {{user.username }}</td>
+                                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                                    <td>
+                                                                        <img src="{{ asset('photoprofil/' ~ user.profilepic) }}" width="100px">
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+
+
+
+                                                        </a>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </li>
+
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+
+                {% else %}
+                    <p>Войдите на сайт, для доступа к чату</p>
+                {% endif %}
+                <style>
+
+                    #belousovChat {
+                        width:70%;
+                        height:300px;
+                        border:1px solid #ccc;
+                        padding:0;
+                    }
+                    #belousovMessageZone {
+                        height:200px;
+                        padding:0;
+                        margin:auto;
+                        width:100%;
+                        border-bottom:1px solid #ccc;
+                        overflow-y: auto;
+                    }
+                    #belousovMessageZone p {
+                        padding:5px;
+                        margin:auto;
+                        width:90%;
+                    }
+                    #belousovMessageZone .mainUser {
+                        text-align:left;
+                    }
+                    #belousovMessageZone .secondUser {
+                        text-align:right;
+                    }
+                    #belousovFormZone {
+                        height:95px;
+                        margin:auto;
+                        padding:0;
+                        width:100%;
+                    }
+                    #belousovFormZone form {
+                        margin:10px;
+                    }
+                    #belousovFormZone form textarea {
+                        width:90%;
+                    }</style>
+
+            </div><!-- /#chat -->
+            <div id="sugg" class="tab-pane in active">
+                <div id="products" class="row list-group">
+                    {% for mem in all %}
+                        <div class="item  col-xs-3 col-lg-3" style="margin-bottom:2cm;">
+                            <div class="thumbnail">
+                                <img class="group list-group-image" src="{{ asset('photoprofil/' ~ mem.profilepic) }}" alt="" />
+                                <div class="caption">
+                                    <h4 class="group inner list-group-item-heading">
+                                        {{ mem.username }}</h4>
+                                    <p class="group inner list-group-item-text">
+
+                                        {{ mem.email  }}
+                                    </p>
+                                    <div class="row">
+
+                                        <div class="col-xs-12 col-md-6" >
+                                            <a class="btn btn-success" href="{{ path('envoyerinvi',{'id':mem.id}) }}">Ajouter comme amis</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </a>
-
-                        <div class="tools tools-bottom">
-                            <a href="#">
-                                <i class="ace-icon fa fa-link"></i>
-                            </a>
-
-                            <a href="#">
-                                <i class="ace-icon fa fa-paperclip"></i>
-                            </a>
-
-                            <a href="#">
-                                <i class="ace-icon fa fa-pencil"></i>
-                            </a>
-
-                            <a href="#">
-                                <i class="ace-icon fa fa-times red"></i>
-                            </a>
                         </div>
-                    </li>
+                    {% endfor %}
+                </div>
 
-                    <li>
-                        <a href="#" data-rel="colorbox">
-                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/3/">
-                            <div class="text">
-                                <div class="inner">Sample Caption on Hover</div>
+
+
+            </div>
+
+            <div id="groupes"  class="tab-pane">
+                <div id="products" class="row list-group">
+                    {%  for k in groupes  %}
+                        <div class="item  col-xs-3 col-lg-3">
+                            <div class="thumbnail">
+                                <div class="caption">
+                                    <h4 class="group inner list-group-item-heading">
+                                        {{ k.nom }}</h4>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6" >
+                                            <a class="btn btn-success" href="{{ path('group_new',{'id':k.id}) }}">Accéder au groupe</a></br>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </a>
-
-                        <div class="tools tools-bottom">
-                            <a href="#">
-                                <i class="ace-icon fa fa-link"></i>
-                            </a>
-
-                            <a href="#">
-                                <i class="ace-icon fa fa-paperclip"></i>
-                            </a>
-
-                            <a href="#">
-                                <i class="ace-icon fa fa-pencil"></i>
-                            </a>
-
-                            <a href="#">
-                                <i class="ace-icon fa fa-times red"></i>
-                            </a>
                         </div>
-                    </li>
+                    {% endfor %}
+                </div>
 
-                    <li>
-                        <a href="#" data-rel="colorbox">
-                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/4/">
-                            <div class="text">
-                                <div class="inner">Sample Caption on Hover</div>
-                            </div>
-                        </a>
 
-                        <div class="tools tools-bottom">
-                            <a href="#">
-                                <i class="ace-icon fa fa-link"></i>
-                            </a>
 
-                            <a href="#">
-                                <i class="ace-icon fa fa-paperclip"></i>
-                            </a>
 
-                            <a href="#">
-                                <i class="ace-icon fa fa-pencil"></i>
-                            </a>
+            </div>
+            <div id="postes" class="tab-pane">
 
-                            <a href="#">
-                                <i class="ace-icon fa fa-times red"></i>
-                            </a>
-                        </div>
-                    </li>
 
-                    <li>
-                        <a href="#" data-rel="colorbox">
-                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/5/">
-                            <div class="text">
-                                <div class="inner">Sample Caption on Hover</div>
-                            </div>
-                        </a>
+                <table id="tab"  class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>description</th>
+                        <th>supprimer</th>
+                        <th>modifier</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for ran in  pub %}
+                    <tr>
 
-                        <div class="tools tools-bottom">
-                            <a href="#">
-                                <i class="ace-icon fa fa-link"></i>
-                            </a>
+                        <td>{{ ran.description }}</td>
 
-                            <a href="#">
-                                <i class="ace-icon fa fa-paperclip"></i>
-                            </a>
+                        <td><a href="{{ path('supprimerpublication',{'id':ran.id}) }}" class="btn btn-danger">supprimer</a></td>
+                        <td><a href="{{ path('modifpublication',{'id':ran.id}) }}" class="btn btn-success">modifier</a></td>
 
-                            <a href="#">
-                                <i class="ace-icon fa fa-pencil"></i>
-                            </a>
 
-                            <a href="#">
-                                <i class="ace-icon fa fa-times red"></i>
-                            </a>
-                        </div>
-                    </li>
 
-                    <li>
-                        <a href="#" data-rel="colorbox">
-                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/6/">
-                            <div class="text">
-                                <div class="inner">Sample Caption on Hover</div>
-                            </div>
-                        </a>
 
-                        <div class="tools tools-bottom">
-                            <a href="#">
-                                <i class="ace-icon fa fa-link"></i>
-                            </a>
+                    </tr>
+                    </tbody>
+                    {% endfor %}
 
-                            <a href="#">
-                                <i class="ace-icon fa fa-paperclip"></i>
-                            </a>
 
-                            <a href="#">
-                                <i class="ace-icon fa fa-pencil"></i>
-                            </a>
+                </table>
 
-                            <a href="#">
-                                <i class="ace-icon fa fa-times red"></i>
-                            </a>
-                        </div>
-                    </li>
+            </div>
+            <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 
-                    <li>
-                        <a href="#" data-rel="colorbox">
-                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/7/">
-                            <div class="text">
-                                <div class="inner">Sample Caption on Hover</div>
-                            </div>
-                        </a>
 
-                        <div class="tools tools-bottom">
-                            <a href="#">
-                                <i class="ace-icon fa fa-link"></i>
-                            </a>
 
-                            <a href="#">
-                                <i class="ace-icon fa fa-paperclip"></i>
-                            </a>
 
-                            <a href="#">
-                                <i class="ace-icon fa fa-pencil"></i>
-                            </a>
+            </div>
 
-                            <a href="#">
-                                <i class="ace-icon fa fa-times red"></i>
-                            </a>
-                        </div>
-                    </li>
 
-                    <li>
-                        <a href="#" data-rel="colorbox">
-                            <img alt="150x150" src="http://lorempixel.com/200/200/nature/1/">
-                            <div class="text">
-                                <div class="inner">Sample Caption on Hover</div>
-                            </div>
-                        </a>
 
-                        <div class="tools tools-bottom">
-                            <a href="#">
-                                <i class="ace-icon fa fa-link"></i>
-                            </a>
+    <script>
+    function search(){
 
-                            <a href="#">
-                                <i class="ace-icon fa fa-paperclip"></i>
-                            </a>
+            $(document).ready(function() {
 
-                            <a href="#">
-                                <i class="ace-icon fa fa-pencil"></i>
-                            </a>
 
-                            <a href="#">
-                                <i class="ace-icon fa fa-times red"></i>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- /#pictures -->
-        </div>
-    </div>
+
+                var search =$("#search").val();
+
+                $.ajax({
+                    url: '{{ path('rech') }}' ,
+                    type: "POST",
+                    data:{search:search},
+                    success: function(data) {
+
+                        console.log(data);
+                        document.querySelector("#ret").innerHTML = data;
+
+
+
+                    }
+                    //return false; //
+                });
+
+
+
+
+        });
+    }
+</script>
 </div>
-<!-- modal start -->
+    </div>
+
 <div class="modal fade" id="groupeModal" tabindex="-1" role="dialog"
      aria-labelledby="groupeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -819,14 +614,92 @@ output='js/compiled/'
             <div class="modal-header"
                  style="text-align: left;background: #f6f7f9;border-bottom: 1px solid #999;">
                 <h5 class="modal-title" id="exampleModalLabel"
-                    style="font-weight: bold;font-size: 18px;">Add Item</h5>
+                    style="font-weight: bold;font-size: 18px;">CREER UN
+                    GROUPE</h5>
                 <button type="button" class="close" data-dismiss="modal"
                         aria-label="Close" style="margin-top: -22px;;">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                {{ form(formm) }}
+
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               style="font-family: inherit;float: left;margin-bottom: 10px;">Nom
+                            de votre groupe :</label>
+                        <input type="text" class="form-control"
+                               id="groupnom"
+                               style="border: 1px solid #cccccc;border-radius: 4px;"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               style="margin-bottom: 10px;float: left;">Description
+                            de votre groupe :</label>
+                                                                    <textarea class="form-control" id="groupdes"
+                                                                              required></textarea>
+                    </div>
+                    <img src="{{ asset('Groupe/img/loadingimg.svg') }}"
+                         id="loadingimg">
+                <div id="res"></div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnCreate"
+                                class="btn btn-primary"
+                                style="margin-top: 20px;">Créer
+                        </button>
+                        <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">Fermer
+                        </button>
+                    </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Publier un article</h4>
+            </div>
+            <div class="modal-body">
+                {{ form_start(form3) }}
+
+                <div style="margin-left:-13cm; ">{{ form_label(form3.description) }}</div> :</br>
+                {{ form_widget(form3.description,{'attr':{'class':'form-control'}}) }}</br>
+                <div style="margin-left:-13cm; ">{{ form_label(form3.imageFile) }}</div>  :</br>
+                {{ form_widget(form3.imageFile) }}</br>
+                <div style="margin-left:-13cm; ">{{ form_label(form3.Section) }}</div>  :</br>
+                {{ form_widget(form3.Section,{'attr':{'class':'form-control'}}) }}</br></br>
+                {{ form_widget(form3.Publier,{'attr':{'class':'btn btn-default'}}) }}
+                {{ form_end(form3) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="sale" tabindex="-1" role="dialog"
+     aria-labelledby="groupeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header"
+                 style="text-align: left;background: #f6f7f9;border-bottom: 1px solid #999;">
+                <h5 class="modal-title" id="exampleModalLabel"
+                    style="font-weight: bold;font-size: 18px;">Poster un article a vendre</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close" style="margin-top: -22px;;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ form_start(formm) }}
                 <div class="form-group">
                     {{ form_row(formm.titre) }}
                 </div>
@@ -840,15 +713,115 @@ output='js/compiled/'
                     {{ form_row(formm.imageFile) }}
                 </div>
                 <div class="modal-footer">
-                    {{ form_widget(formm.Add) }}
+                    {{ form_row(formm.Add) }}
                 </div>
+                {{ form_end(formm) }}
             </div>
 
         </div>
     </div>
 </div>
 
-<script src="{{ asset('css/bootstrap.min.css') }}"></script>
+<script>
+    $(document).ready(function(){
+        setInterval(function() {
+            if (ajax) { ajax.abort(); }
+            getMessage();
+        },30000);
+        var ajax;
+        $('.belousovSendMessage').click(function () {
+            var message = $('.belousovMessageText');
+            var addressee = $('#belousovChat').attr('data-addressee');
+            var url = $('form[name=chat]').attr('action');
+            if (addressee == "" || message == "") {
+                alert('change dialog');
+            }
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {'messageText': message.val(), 'addressee' : addressee},
+                cache: "false",
+                dataType: "json",
+                success: function (response) {
+                    if (response.error === undefined){
+                        message.val('');
+                    }
+                }
+            });
+        });
+        function getMessage(){
+            var chat = $('#belousovChat');
+            var user_id = chat.attr('data-author');
+            var addressee = chat.attr('data-addressee');
+            var url = chat.attr('data-action');
+            ajax = $.ajax({
+                type:'POST',
+                url:url,
+                data:{'user_id' : user_id, 'addressee_id' : addressee},
+                dataType:'json',
+                success:function(resp){
+                    if (resp.error === undefined){
+                        var html;
+                        resp.forEach(function (item) {
+                            if (item.author.id == user_id){
+                                html = '<h4 class="mainUser" style="color: #f44336;" >'+ item.messageText +'</h4>';
+                                $('#belousovMessageZone').append(html);
+                            }
+                            if (item.addressee.id == user_id){
+                                html = '<h4 class="secondUser"  style="color:#449d44;">'+ item.messageText +'</h4>';
+                                $('#belousovMessageZone').append(html);
+                            }
+                        });
+                        $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: {'user_id': user_id, 'addressee_id': addressee, 'update' : true},
+                            dataType: 'json',
+                            success: function (resp) {
+                            }
+                        });
+                    }
+                    setTimeout(function(){
+                        getMessage()
+                    },1000)
+                }
+            });
+        }
+        $('.changeUser').click(function () {
+            var addressee = $(this).attr('data-number');
+            var chat = $('#belousovChat');
+            var url = chat.attr('data-action');
+            var user_id = chat.attr('data-author');
+            chat.attr('data-addressee', addressee);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {'changeUser' : true, 'user_id' : addressee},
+                cache: "false",
+                dataType: "json",
+                success: function (response) {
+                    var html;
+                    $('#belousovMessageZone').html('');
+                    if (ajax) { ajax.abort(); }
+                    getMessage();
+                    if (response) {
+                        response.forEach(function (item) {
+                            if (item.author.id == user_id){
+                                html = '<p class="mainUser">'+ item.messageText +'</p>';
+                                $('#belousovMessageZone').append(html);
+                            }
+                            if (item.addressee.id == user_id){
+                                html = '<p class="secondUser">'+ item.messageText +'</p>';
+                                $('#belousovMessageZone').append(html);
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     function do_change(){
         document.getElementById("btn2").style.display = "";
@@ -885,31 +858,60 @@ output='js/compiled/'
         var twitter = document.getElementById("twitter").value;
         var description = document.getElementById("description").value;
         var id = document.getElementById("id").value;
-            console.log("ajax sending data (edit form)..");
-            $.ajax({
-                url: "{{ path('fos_user_profile_x') }}",
-                method: "post",
-                data: {
-                    id: id,
-                    username: username,
-                    nom: nom,
-                    prenom: prenom,
-                    age: age,
-                    location: location,
-                    email: email,
-                    facebook: facebook,
-                    twitter: twitter,
-                    description: description
-                }
-            }).done(function () {
-                disableinputs();
-            });
+        console.log("ajax sending data (edit form)..");
+        $.ajax({
+            url: "{{ path('fos_user_profile_x') }}",
+            method: "post",
+            data: {
+                id: id,
+                username: username,
+                nom: nom,
+                prenom: prenom,
+                age: age,
+                location: location,
+                email: email,
+                facebook: facebook,
+                twitter: twitter,
+                description: description
+            }
+        }).done(function () {
+            disableinputs();
+        });
     }
     $("#age").blur(function(){
         if($(this).val() == ''){
             $(this).css("border", "1px solid red");
         }
         else $(this).css("border", "");
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $("#btnCreate").click(function () {
+            if ($('#groupnom').val() == "" || $("#groupdes").val() == "") {
+
+                alert('Vous devez remplir tous les champs');
+
+            }
+            else if ($('#groupnom').val() != "" || $("#groupdes").val() != "") {
+
+                $('#loadingimg').show();
+                var nomgrp = $("#groupnom").val();
+                var desgrp = $("#groupdes").val();
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost/pi/web/app_dev.php/group/groupeadd',
+                    data: {nom: nomgrp, des: desgrp},
+                    success: function (response) {
+                      console.log(response);
+                      $("#res").html(response);
+                    }
+
+
+                })
+            }
+
+        });
     });
 
 </script>

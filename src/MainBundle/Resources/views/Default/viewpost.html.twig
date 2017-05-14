@@ -1,0 +1,24 @@
+{% for c in comment %}
+    <div class="row" >
+        <div class="col-sm-8">
+            <div class="panel panel-white post panel-shadow">
+                <div class="post-heading">
+                    <div class="pull-left image">
+                        <img src="{{ asset('photoprofil/' ~ c.user.profilepic) }}" class="img-circle avatar" alt="user profile image">
+                    </div>
+                    <div class="pull-left meta">
+                        <div class="title h5">
+                            <a href="#"><b>{{ c.user.Username }}</b></a>
+
+                        </div>
+                        <h6 class="text-muted time">{{ c.datepub|date('y-m-d H:i:s') }}</h6>
+                    </div>
+                </div>
+                <div class="post-description">
+                    <p> {{ c.content }}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

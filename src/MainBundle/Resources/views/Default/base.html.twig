@@ -37,6 +37,7 @@
 
     <header>
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {% if is_granted("ROLE_GUIDE") %}
             <section class="bg-contrast-variant-1">
                 <div id="stuck_container" class="stuck_container border-bottom">
                     <div class="container">
@@ -55,40 +56,39 @@
                                         </h1>
                                     </div>
                                 </li>
+
                                 <li>
-                                    <a href="">Accueil</a>
+                                    <a href="{{ path('guide_homepage') }}">mon profil</a>
                                 </li>
-                                <li>
-                                    <a href="{{ path('aboutUs') }}">About Us</a>
-                                </li>
+
+
+
                                 <li>
                                     <a href="">Events</a>
                                     <ul>
                                         <li>
-                                            <a href="#">Camping</a>
+                                            <a href="{{ path('showallevents',{'type':'camping'}) }}">Camping</a>
                                         </li>
                                         <li>
                                             <a href="#">Hunting</a>
                                             <ul>
                                                 <li>
-                                                    <a>Fishing</a>
+                                                    <a  href="{{ path('showallevents',{'type':'pêche'}) }}">peche</a>
                                                 </li>
+
                                                 <li>
-                                                    <a>Bird Hunting</a>
-                                                </li>
-                                                <li>
-                                                    <a>Forest Hunting</a>
+                                                    <a href="{{ path('showallevents',{'type':'chasse'}) }}">Chasse</a>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="#">Mountaineering</a>
+                                            <a href="{{ path('showallevents',{'type':'Alpinisme'}) }}">Alpinisme</a>
                                         </li>
                                         <li>
-                                            <a href="#">Caving</a>
+                                            <a href="{{ path('showallevents',{'type':'plongée'}) }}">plonge</a>
                                         </li>
                                         <li>
-                                            <a href="#">Diving</a>
+                                            <a href="{{ path('showallevents',{'type':'escalade' }) }}">escalade</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -106,7 +106,80 @@
                     </div>
                 </div>
             </section>
+            {% else %}
+
+                <section class="bg-contrast-variant-1">
+                    <div id="stuck_container" class="stuck_container border-bottom">
+                        <div class="container">
+
+                            <nav class="nav">
+                                <ul class="sf-menu" data-type="navbar">
+                                    <li>
+                                        <div class="brand">
+                                            <a href="./">
+                                                <img src="{{ asset('images/logo.png') }}" alt="">
+                                            </a>
+                                            <h1 class="brand_name">
+                                                <a href="./">
+                                                    E-Rando
+                                                </a>
+                                            </h1>
+                                        </div>
+                                    </li>
+
+
+
+                                    <li>
+                                        <a href="{{ path('fos_user_profile_show') }}">mon profil</a>
+                                    </li>
+
+
+                                    <li>
+                                        <a href="#" id="drop"> Activités/Evénements</a>
+                                        <ul>
+                                            <li>
+                                                <a href="{{ path('showallevent',{'type':'camping'}) }}">Camping</a>
+                                            </li>
+
+
+                                                    <li>
+                                                        <a  href="{{ path('showallevent',{'type':'pêche'}) }}">peche</a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="{{ path('showallevent',{'type':'chasse'}) }}">Chasse</a>
+                                                    </li>
+
+
+                                            <li>
+                                                <a href="{{ path('showallevent',{'type':'Alpinisme'}) }}">Alpinisme</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('showallevent',{'type':'plongée'}) }}">plonge</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('showallevent',{'type':'escalade' }) }}">escalade</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('shopindex') }}"> Boutique </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ path('fos_user_security_logout') }}">Se deconnecter</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </section>
+
+
+            {% endif %}
+
         {% else %}
+
             <section class="bg-contrast-variant-1">
                 <div id="stuck_container" class="stuck_container border-bottom">
                     <div class="container">
@@ -125,55 +198,22 @@
                                         </h1>
                                     </div>
                                 </li>
+
                                 <li>
                                     <a href="{{ path('home') }}">Home</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('aboutUs') }}">About Us</a>
+                                    <a> A propos de E-Rando</a>
                                 </li>
-                                <li>
-                                    <a href="">Events</a>
+
+
+
+                                <li style="margin-left:7cm; ">
+                                    <a href="">se connecter /s'inscrire</a>
                                     <ul>
-                                        <li>
-                                            <a href="#">Camping</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Hunting</a>
-                                            <ul>
-                                                <li>
-                                                    <a>Fishing</a>
-                                                </li>
-                                                <li>
-                                                    <a>Bird Hunting</a>
-                                                </li>
-                                                <li>
-                                                    <a>Forest Hunting</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">Mountaineering</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Caving</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Diving</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="">Gallery</a>
-                                </li>
-                                <li>
-                                    <a href="">Contact Us</a>
-                                </li>
-                                <li>
-                                    <a href="">Login/Register</a>
-                                    <ul>
-                                        <li><a href="{{ path('fos_user_registration_register') }}">Register as a Member</a></li>
-                                        <li><a>Register as a Guide</a></li>
-                                        <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+                                        <li><a href="{{ path('fos_user_registration_register') }}">s'inscrire</a></li>
+
+                                        <li><a href="{{ path('fos_user_security_login') }}">Se connecter</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -181,6 +221,7 @@
                     </div>
                 </div>
             </section>
+
         {% endif %}
 
     </header>
@@ -254,6 +295,7 @@
     </footer>
 </div>
 </body>
+
 {% block javascripts %}
     {% javascripts
     output='js/compiled/'
@@ -276,6 +318,14 @@
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
+<script>
+    $(document).ready(function(){
+        $("#drop").click(function(){
+           $("#drop2").slideToggle();
+
+        });
+    });
+</script>
     <script>
 $('#ull').easyPaginate({
 paginateElement: 'li',

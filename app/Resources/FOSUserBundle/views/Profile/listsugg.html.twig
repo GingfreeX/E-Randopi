@@ -1,0 +1,23 @@
+<div id="products" class="row list-group">
+{% for mem in all %}
+    <div class="item  col-xs-3 col-lg-3" style="margin-bottom:2cm;">
+        <div class="thumbnail">
+            <img class="group list-group-image" src="{{ asset('images/ging.jpg') }}" alt="" />
+            <div class="caption">
+                <h4 class="group inner list-group-item-heading">
+                    {{ mem.username }}</h4>
+                <p class="group inner list-group-item-text">
+
+                    {{ mem.email  }}
+                </p>
+                <div class="row">
+
+                    <div class="col-xs-12 col-md-6" >
+                        <a class="btn btn-success" href="{{ path('envoyerinvi',{'id':mem.id}) }}">Ajouter comme amis</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+    </div>

@@ -1,7 +1,7 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/service_container.html
 parameters:
-#    parameter_name: value
+    belousov.chat.user_class: MainBundle\Entity\Member
 
 services:
 #    service_name:
@@ -12,3 +12,10 @@ services:
         arguments:
             - '@fos_user.user_manager'
             - ['pass properties as array']
+    belousov.mapping.listener:
+        class: belousovr\belousovChatBundle\EventListener\DynamicRelationSubscriber
+        tags:
+            - { name: doctrine.event_listener, event: loadClassMetadata }
+        arguments:
+            - %belousov.chat.user_class%
+

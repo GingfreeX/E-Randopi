@@ -1,0 +1,137 @@
+{% extends '@Main/Default/base.html.twig' %}
+{% block body %}
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
+
+    <!-- Optional theme -->
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js" ></script>
+
+    <section  data-url="{{ asset('images/parallax1.jpg') }}" data-speed="1" data-mobile="true" id="Events" style="width: 1600px;
+            margin-left: -200px ;background-image: url('{{ asset('images/page-1_img01.png') }}')">
+        <div class="container text-center text-md-left">
+            <h3>{{ type }} Events</h3>
+            <div class="row offset-1 flow-offset-2" style="background-color:#e6ffe6">
+                {% for e in events %}
+                    <div class="col-xs-6 col-md-4">
+                        <div class="event-post">
+                            <h1><time>{{ e.date |date("m/d")}}</time></h1>
+
+                            <h6>{{ e.titre }}</h6>
+                            <p>{{ e.destination }}</p>
+
+                            <a href="{{ path('par',{'id':e.id}  ) }}"  class="btn btn-sm btn-success">Participer</a>
+                            <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#{{ e.id }}">Learn More</a>
+                        </div>
+
+
+
+                        <div class="modal fade" id="{{ e.id }}" role="dialog" >
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">{{ e.titre }}</h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <p>description :{{ e.description }}</p>
+                                        <p>prix : {{ e.prix }} DT</p>
+                                        <p>date : {{ e.date |date("m/d/Y")}}</p>
+                                        <p>point de départ : {{ e.pointDepart }}</p>
+                                        <p>déstination : {{ e.destination  }}</p>
+                                        <p>moyen de transport:{{ e.moyenTransport  }}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+
+
+    </section>
+    <div class="container">
+        {% for i in pub |reverse(true)%}
+            <div class="row" >
+                <div class="span12">
+                    <div class="row">
+                        <div class="span8">
+                            <h4><strong><a href="#"></a></strong></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span2">
+                            <a href="#" class="thumbnail">
+                                <img src="{{app.request.basepath}}/publication/{{ i.image }}" alt="" width="260px" height="180px">
+                            </a>
+                        </div>
+                        <div class="span10">
+                            <p>
+                                {{ i.description }}
+                            </p>
+                            <p><a class="btn" href="{{ path('post',{'id':i.id}) }}">voir plus </a></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span8">
+                            <p></p>
+                            <p>
+                                <i class="icon-user"></i>publier par <a href="#">{{ i.user.Username }}</a>
+                                | <i class="icon-calendar"></i> {{ i.datepub|date('y-m-d H:i:s') }}
+                                | <i class="icon-comment"></i> <a href="#">3 Comments</a>
+
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+        {% endfor %}
+    </div>
+    {% block javascripts %}
+        {% javascripts
+        output='js/compiled/'
+        'js/jquery-migrate-1.2.1.js'
+        'js/device.min.js'
+        'js/jquery.ui.totop.js'
+        'js/tmstickup.js'
+        'js/superfish.js'
+        'js/jquery.easing.1.3.js'
+        'js/jquery.cookie.js'
+        'js/jquery.rd-navbar.js'
+        'js/jquery.rd-parallax.js'
+        'js/TMSearch.js'
+        'js/jquery.touch-touch.js'
+        'js/owl.carousel.min.js'
+        'js/camera.js'
+        'js/script.js'
+        'js/jquery.easyPaginate.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $('.carousel').carousel({
+            interval: 5000 //changes the speed
+        })
+    </script>
+{% endblock body %}

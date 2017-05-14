@@ -1,0 +1,68 @@
+{% extends '@Main/Default/base.html.twig' %}
+
+{% block body %}
+    {% stylesheets
+    'Groupe/css/*'
+    'css/bootstrap.min.css'
+
+    filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+
+
+    <div class="container bootstrap snippets">
+
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-8">
+
+
+                <div class="profile-cover" style="width: 102%;margin-left: -10px;">
+                    {% block groupbar %}
+                    {% endblock %}
+                     </div><!-- /.profile-cover -->
+                <div class="divider"></div>
+
+                {% block panel %}
+                {% endblock %}
+            </div>
+{% block sidebar %}
+{% endblock %}
+        </div>
+    </div>
+
+    <script>
+        $("#btnCreate").click(function () {
+            if ($('#groupnom').val() == "" || $("#groupdes").val() == "") {
+
+                alert('Vous devez remplir tous les champs');
+
+            }
+            else if ($('#groupnom').val() != "" || $("#groupdes").val() != "") {
+
+                $('#loadingimg').show();
+                var nomgrp = $("#groupnom").val();
+                var desgrp = $("#groupdes").val();
+                $.ajax({
+                    type: 'POST',
+                    data: {nom: nomgrp, des: desgrp}
+
+                })
+            }
+
+        });
+    </script>
+    {% javascripts
+    output='js/compiled/'
+    'Groupe/js/modal.js'
+        'Groupe/js/comments.js'
+        'js/jquery.js'
+    %}
+
+
+
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+
+{% endblock %}
+

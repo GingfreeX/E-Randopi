@@ -1,0 +1,33 @@
+<table class="table-responsive" width="80%">
+    <tr>
+        <td>nom de l'evenement:{{ rando.titre }}</td>
+    </tr>
+    <tr>
+        <td>point de depart:{{ rando.pointDepart }}</td>
+    </tr>
+    <tr>
+        <td>point d'arriver:{{ rando.destination }}</td>
+    </tr>
+    <tr>
+        <td>moyenTransport:{{ rando.moyenTransport }}</td>
+    </tr>
+    <tr>
+        <td>Type de randonnée:{{ rando.type }}</td>
+    </tr>
+    <tr>
+        <td>
+            list des participant:
+
+            <ul>
+                {% for p in listpar %}
+                    <li>Nom:{{ p.Username }}</li>
+                    <li>Email:{{ p.email }}</li>
+                    <li><a href="{{ path('sendmailtopar',{'id':p.id,'idr':rando.id}) }}">envoyer un mail</a></li>
+                {% endfor %}
+            </ul>
+        </td>
+
+    </tr>
+
+
+</table>

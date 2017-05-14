@@ -1,0 +1,77 @@
+{% extends '@Main/Default/base.html.twig' %}
+{% block body %}
+    {% stylesheets
+    'Shop/js/style.css'
+    'Shop/colors/default.css'
+    'Shop/js/jquery.fancybox.css'
+    filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    <script src="{{ asset('Shop/js/modernizr.js') }}" type="text/javascript"></script>
+    <div id="page">
+        <section id="main">
+            <div class="wrap group">
+                <div id="box-container">
+                    <div id="entry-listing" class="group">
+                        {% for i in item %}
+                        <article id="post-215" class="post-215 category-people category-photography category-pretty-girls entry box format-image" style="padding-top: 50px;">
+                            <div class="entry-content-cnt">
+                                <div class="entry-content">
+                                    <a href="{{ path('itemshow', {'id': i.id,'iduser': i.idMembre}) }}" class="thumb" data-lightbox="fancybox[215]" title=""><img src="{{app.request.basepath}}/uploads/{{ i.imageName }}" class="attachment-ci_listing_thumb" alt="Item x" title="Item x"></a>
+                                </div>
+                            </div>
+
+                            <div class="entry-desc">
+                                <h1><a href="{{ path('itemshow', {'id': i.id,'iduser': i.idMembre}) }}"> {{ i.titre }}</a></h1>
+
+                                <div class="entry-meta group">
+                                    <a class="comments-no" href="#">4</a> <a data-post-id="215" class="heart-this loved" href="#" title="You love this."><span class="heart-no">{{ i.rating }}</span></a> <a href="" class="btn-danger">Delete</a>
+                                </div>
+                            </div>
+                        </article>
+                        {% endfor %}
+                    </div><!-- #entry-listing -->
+
+                    <div class="n">
+                        <a id="nextpage" href="">Next Page</a>
+                    </div>
+                </div>
+            </div><!-- .wrap < #main -->
+        </section><!--  #main -->
+    </div><!-- #page -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="{{ asset('Shop/js/superfish.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('Shop/js/jquery.isotope.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('Shop/js/jquery.fitvids.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('Shop/js/jquery.fancybox.pack.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('Shop/js/jquery.flexslider-min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('Shop/js/jquery.formLabels1.0.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('Shop/js/jquery.jplayer.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('Shop/js/jquery.ias.min.js') }}" type="text/javascript"></script>
+    <script defer src="{{ asset('Shop/js/scripts.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery.ias({
+            container   : "#entry-listing",
+            item        : ".entry",
+            pagination  : ".n",
+            next        : "#nextpage",
+            loader  : "ajax-loader.gif",
+            onRenderComplete: function(items) {
+                var $newElems = jQuery(items).addClass("newItem");
+
+                $newElems.hide().imagesLoaded(function(){
+                    if( jQuery(".flexslider").length > 0) {
+                        jQuery(".flexslider").flexslider({
+                            'controlNav': true,
+                            'directionNav': true
+                        });
+                    }
+                    jQuery(this).show();
+                    jQuery('#infscr-loading').fadeOut('normal');
+                    jQuery("#entry-listing").isotope('appended', $newElems );
+                    loadAudioPlayer();
+                });
+            }
+        });
+    </script>
+{% endblock %}

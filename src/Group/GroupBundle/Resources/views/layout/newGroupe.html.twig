@@ -1,0 +1,644 @@
+{% extends '@GroupGroup/Group/groupe_mur_base.html.twig' %}
+{% block groupbar %}
+    <div class="cover rounded shadow no-overflow">
+        <div class="inner-cover">
+            <!-- Start offcanvas btn group menu: This menu will take position at the top of profile cover (mobile only). -->
+            <div class="btn-group cover-menu-mobile hidden-lg hidden-md">
+                <button type="button" class="btn btn-theme btn-sm dropdown-toggle"
+                        data-toggle="dropdown">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            <img src="{{ app.request.basepath }}/group/{{ coverpic }}"
+                 class="img-responsive full-width" alt="cover" style="max-height:300px;">
+        </div>
+
+        <ul class="dropdown-menu pull-right no-border" role="menu">
+            <a href="#" data-toggle="modal"
+               data-target="#photocoverModal">
+                <i class="fa fa-upload fa-2x"
+                   style="color: whitesmoke;float: right;margin-right: 8px;margin-top: 4px;font-size: larger;">
+                </i>
+            </a>
+
+            <li class="active">
+
+            <li class="active">
+                <a href="{{ path('group_new',{'id':id}) }}"><i class="fa fa-pencil" style="margin-top: 10px;"></i>
+                    <span>Publication</span>
+                </a>
+            </li>
+            <li><a href="{{ path('group_group_membres',{'id':id}) }}"><i
+                            class="fa fa-fw fa-users" style="margin-top: 10px" ;></i><span> Membres </span>
+                    <small></small>
+                </a></li>
+            <li><a href="{{ path('group_group_photos',{'id':id}) }}"><i class="fa fa-fw fa-photo"
+                                                                        style="margin-top: 10px;"></i>
+                    <span>Photos</span>
+                    <small></small>
+                </a></li>
+
+            <li><a href="#"><i class="fa fa-fw fa-wechat" style="margin-top: 10px;"></i> <span>Discussion</span></a>
+            </li>
+
+        </ul>
+
+
+    </div>
+    <div class="cover rounded shadow no-overflow">
+        <ul class="list-unstyled no-padding hidden-sm hidden-xs cover-menu">
+            <a href="#" data-toggle="modal"
+               data-target="#photocoverModal">
+                <i class="fa fa-upload fa-2x"
+                   style="color: whitesmoke;float: right;margin-right: 8px;margin-top: 4px;font-size: larger;">
+                </i>
+            </a>
+            <li class="active">
+                <a href="{{ path('group_new',{'id':id}) }}"><i class="fa fa-pencil" style="margin-top: 10px;"></i>
+                    <span>Publication</span>
+                </a>
+            </li>
+            <li><a href="{{ path('group_group_membres',{'id':id}) }}"><i
+                            class="fa fa-fw fa-users" style="margin-top: 10px;"></i><span> Membres </span>
+                    <small></small>
+                </a></li>
+            <li><a href="{{ path('group_group_photos',{'id':id}) }}"><i class="fa fa-fw fa-photo"
+                                                                        style="margin-top: 10px;"></i>
+                    <span>Photos</span>
+                    <small></small>
+                </a></li>
+
+            <li><a href="#"><i class="fa fa-fw fa-wechat" style="margin-top: 10px;"></i> <span>Discussion</span></a>
+            </li>
+        </ul>
+    </div><!-- /.cover -->
+
+    <!-- modal start -->
+    <div class="modal fade" id="photocoverModal" tabindex="-1" role="dialog"
+         aria-labelledby="photocoverModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header"
+                     style="text-align: left;background: #f6f7f9;border-bottom: 1px solid #999;">
+                    <h5 class="modal-title" id="exampleModalLabel"
+                        style="font-weight: bold;font-size: 18px;">Changer La photo de couverture</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close" style="margin-top: -22px;;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(coverform) }}
+                    {{ form_widget(coverform.imageFile) }}
+                    {{ form_widget(coverform.Changer,{'attr':{'style':'margin-top:22px;'}}) }}
+                    <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">Fermer
+                    </button>
+                    {{ form_end(coverform) }}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- modal end -->
+{% endblock %}
+{% block panel %}
+    <script src="{{ asset('Groupe/js/comments.js') }}"></script>
+    <div class="">
+        {{ form_start(form,{'attr':{'style':'max-width:97%;margin-left: 15px;margin-right: 15px;background: gainsboro;'}}) }}
+        {{ form_widget(form.description,{'attr':{'class':'form-control input-lg','rows':'2','width':'50px',' placeholder':'What are you doing?...'}}) }}
+        {{ form_widget(form.photo,{'attr':{'style':'margin-top:10px;margin-left:4px;'}}) }}
+        {{ form_widget(form.publier,{'attr':{'style':'margin-top:-40px;margin-left:85%;','class':'btn btn-success'}}) }}
+        {{ form_end(form) }}
+
+        <div class="col-md-12" id="publication">
+            {% for p in pub|reverse(true) %}
+                {% if p.photo == "\"\"" %}
+                    <div class="panel panel-success rounded shadow">
+                        <div class="panel-heading no-border">
+                            <div class="pull-left half">
+                                <div class="media" style="text-align: left;">
+                                    <div class="media-object pull-left" style="margin-top: 59px;">
+                                        <img src="{{ asset('Groupe/img/' ~ p.user.profilePic) }}" alt="..."
+                                             class="img-circle img-post" style="border-radius: 0;">
+                                    </div>
+                                    <div class="media-body">
+                                        <a href="#" class="media-heading block mb-0 h4 text-white">{{ p.user }}</a>
+                                    <span class="text-white h6"
+                                          style="display: list-item; color: black;">{{ p.datepub|date('y-m-d H:i') }}</span>
+                                        <div class="dropdown">
+                                            <button onclick="" class="dropbtn">Dropdown</button>
+                                            <div id="myDropdown" class="dropdown-content">
+                                                <a href="#home">Home</a>
+                                                <a href="#about">About</a>
+                                                <a href="#contact">Contact</a>
+                                            </div>
+
+                                        </div>
+                                        <a href="{{ path('pub_delete',{'idpub':p.id,"id":id}) }}">
+                                            <i class="fa fa-remove fa-1x"
+                                               style="color: brown;float: right;margin-top: -46px"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="media" style="text-align: left;margin-bottom: 10px;">
+
+                                    <div class="media-body" style="overflow: hidden;max-width: 200px;" id="pub">
+                                        <form action="{{ path('pub_update',{'idpub':p.id,'id':id}) }}">
+                                        <span style="color: black;margin-bottom: 10px;word-break: break-all"
+                                              id="txt">{{ p.description }} </span>
+                                        </form>
+
+
+                                    </div>
+
+                                </div>
+                            </div><!-- /.pull-left -->
+                            <hr style="border: 1px solid #B0BED9">
+                            <a href="" style="color: black;font-family: Times New Roman, Times, serif;float: left">
+                                <i class="fa  fa-thumbs-up" style="color: green"></i>
+                                J'aime
+                            </a>
+                            <a href=""
+                               style="color: black;font-family: Times New Roman, Times, serif;margin-left: 10px;float: left">
+                                <i class="fa  fa-comment" style="color: #1b6d85"></i>
+                                Commenter
+                            </a>
+                            <form method="post" action="{{ path('add_comment',{'idpub':p.id,'id':id}) }}">
+
+                                <div class="panel-body no-padding">
+                                    <div id="commentdiv" style="margin-top: 15px;display: -webkit-box;">
+                                        <img src="{{ asset('Groupe/img/' ~ user) }}" width="35" height="35"
+                                             style="margin-top: 0px">
+                                        <input type="text" name="txt" class="form-control"
+                                               placeholder="Votre commentaire ..."
+                                               style="background-color: white;height: 35px; width: 50%;">
+                                    </div>
+                                </div>
+                            </form>
+                            <details>
+                                <summary style="width: 50%;">Voir Les Commentaires</summary>
+                                {% for c in comment %}
+                                    {% if p.id == c.idPub.id %}
+                                        <div>
+                                            <img src="{{ asset('Groupe/img/' ~ c.idUser.profilePic) }}" width="35"
+                                                 height="35" style="margin-top: 0px">
+                                            <span>{{ c.text }}</span>
+                                        </div>
+                                    {% endif %}
+
+                                {% endfor %}
+                            </details>
+
+
+                            <!-- /.panel-body -->
+
+                            <div class="clearfix">
+
+                            </div>
+                        </div><!-- /.panel-heading -->
+                    </div>
+                {% else %}
+                    {% if p.description == "\"\"" %}
+                        <div class="panel panel-success rounded shadow">
+                            <div class="panel-heading no-border">
+                                <div class="pull-left half">
+                                    <div class="media" style="text-align: left;">
+                                        <div class="media-object pull-left" style="margin-top: 59px;">
+                                            <img src="{{ asset('Groupe/img/' ~ p.user.profilePic) }}"
+                                                 class="img-circle img-post" style="border-radius: 0;">
+                                        </div>
+                                        <div class="media-body">
+                                            <a href="#" class="media-heading block mb-0 h4 text-white">{{ p.user }}</a>
+                                    <span class="text-white h6"
+                                          style="display: list-item; color: black;">{{ p.datepub|date('y-m-d H:i') }}</span>
+                                            <a href="{{ path('pub_delete',{'idpub':p.id,"id":id}) }}">
+                                                <i class="fa fa-remove fa-1x"
+                                                   style="color: brown;float: right;margin-top: -46px"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="media" style="text-align: left;margin-bottom: 10px;">
+
+                                        <div class="media-body" style="overflow: hidden;max-width: 200px;" id="pub">
+                                            <form action="{{ path('pub_update',{'idpub':p.id,'id':id}) }}">
+                                        <span style="color: black;margin-bottom: 10px;word-break: break-all;display: none;"
+                                              id="txtup">{{ p.description }}
+                                        </span>
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+                                </div><!-- /.pull-left -->
+                                <img src="{{ asset('Groupe/img/' ~ p.photo) }}" width="700" height="400"
+                                     style="margin-top: -35px;margin-left: -81px;">
+
+                                <hr style="border: 1px solid #B0BED9">
+                                <a href="" style="color: black;font-family: Times New Roman, Times, serif;float: left">
+                                    <i class="fa  fa-thumbs-up" style="color: green"></i>
+                                    J'aime
+                                </a>
+                                <a href=""
+                                   style="color: black;font-family: Times New Roman, Times, serif;margin-left: 10px;float: left">
+                                    <i class="fa  fa-comment" style="color: #1b6d85"></i>
+                                    Commenter
+                                </a>
+                                <form method="post" action="{{ path('add_comment',{'idpub':p.id,'id':id}) }}">
+
+                                    <div class="panel-body no-padding">
+                                        <div id="commentdiv" style="margin-top: 15px;display: -webkit-box;">
+                                            <img src="{{ asset('Groupe/img/' ~ user) }}" width="35" height="35"
+                                                 style="margin-top: 0px">
+                                            <input type="text" name="txt" class="form-control"
+                                                   placeholder="Votre commentaire ..."
+                                                   style="background-color: white;height: 35px; width: 50%;">
+                                        </div>
+                                    </div>
+                                </form>
+                                <details>
+                                    <summary style="width: 50%;">Voir Les Commentaires</summary>
+                                    {% for c in comment %}
+                                        {% if p.id == c.idPub.id %}
+                                            <div>
+                                                <img src="{{ asset('Groupe/img/' ~ c.idUser.profilePic) }}" width="35"
+                                                     height="35" style="margin-top: 0px">
+                                                <span>{{ c.text }}</span>
+                                            </div>
+                                        {% endif %}
+
+                                    {% endfor %}
+                                </details>
+
+
+                                <!-- /.panel-body -->
+
+                                <div class="clearfix">
+
+                                </div>
+                            </div><!-- /.panel-heading -->
+                        </div>
+                    {% else %}
+                        <div class="panel panel-success rounded shadow">
+                            <div class="panel-heading no-border">
+                                <div class="pull-left half">
+                                    <div class="media" style="text-align: left;">
+                                        <div class="media-object pull-left" style="margin-top: 59px;">
+                                            <img src="{{ asset('Groupe/img/' ~ p.user.profilePic) }}" alt="..."
+                                                 class="img-circle img-post" style="border-radius: 0;">
+                                        </div>
+                                        <div class="media-body">
+                                            <a href="#" class="media-heading block mb-0 h4 text-white">{{ p.user }}</a>
+                                    <span class="text-white h6"
+                                          style="display: list-item; color: black;">{{ p.datepub|date('y-m-d H:i') }}</span>
+                                            <a href="{{ path('pub_delete',{'idpub':p.id,"id":id}) }}">
+                                                <i class="fa fa-remove fa-1x"
+                                                   style="color: brown;float: right;margin-top: -46px"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="media" style="text-align: left;margin-bottom: 10px;">
+
+                                        <div class="media-body" style="overflow: hidden;max-width: 200px;" id="pub">
+                                            <form action="{{ path('pub_update',{'idpub':p.id,'id':id}) }}">
+                                        <span style="color: black;margin-bottom: 10px;word-break: break-all;"
+                                              id="txtup">{{ p.description }}
+                                        </span>
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+
+                                </div><!-- /.pull-left -->
+                                <img src="{{ asset('Groupe/img/' ~ p.photo) }}" width="700" height="400"
+                                     style="margin-top: -5px;margin-left: -81px;">
+                                <hr style="border: 1px solid #B0BED9">
+                                <a href="" style="color: black;font-family: Times New Roman, Times, serif;float: left">
+                                    <i class="fa  fa-thumbs-up" style="color: green"></i>
+                                    J'aime
+                                </a>
+                                <a href=""
+                                   style="color: black;font-family: Times New Roman, Times, serif;margin-left: 10px;float: left">
+                                    <i class="fa  fa-comment" style="color: #1b6d85"></i>
+                                    Commenter
+                                </a>
+                                <form method="post" action="{{ path('add_comment',{'idpub':p.id,'id':id}) }}">
+
+                                    <div class="panel-body no-padding">
+                                        <div id="commentdiv" style="margin-top: 15px;display: -webkit-box;">
+                                            <img src="{{ asset('Groupe/img/' ~ user) }}" width="35" height="35"
+                                                 style="margin-top: 0px">
+                                            <input type="text" name="txt" class="form-control"
+                                                   placeholder="Votre commentaire ..."
+                                                   style="background-color: white;height: 35px; width: 50%;">
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <details>
+                                    <summary style="width: 50%;">Voir Les Commentaires</summary>
+                                    {% for c in comment %}
+                                        {% if p.id == c.idPub.id %}
+                                            <div>
+                                                <img src="{{ asset('Groupe/img/' ~ c.idUser.profilePic) }}" width="35"
+                                                     height="35" style="margin-top: 0px">
+                                                <span>{{ c.text }}</span>
+                                            </div>
+                                        {% endif %}
+
+                                    {% endfor %}
+                                </details>
+
+
+
+
+                                <!-- /.panel-body -->
+
+                                <div class="clearfix">
+
+                                </div>
+                            </div><!-- /.panel-heading -->
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+
+            {% endfor %}
+
+
+        </div>
+    </div>
+{% endblock %}
+{% block sidebar %}
+    <div class="col-lg-3 col-md-3 col-sm-4">
+        <div class="panel rounded shadow" id="sidebar_grp">
+
+            <div class="panel-body">
+                <div class="inner-all">
+                    <div>
+                        <h6 style="float: left;margin-top: 0px;">Suggestion des amis</h6>
+                    </div></br><br>
+
+                        <table style="margin-top: 1.5cm;">
+                            {% for u in li  %}
+                            <tr>
+                                <td>
+                             <a href="#"><img src="{{ asset('photoprofil/'~ u.profilepic) }}" width="50px" height="30px">
+
+                             </a>
+                                </td>
+                                <td>
+                                    <h3>
+                                        <div style="margin-top:-1.5cm;margin-left:0.5cm;  ">{{ u.username }}</div>
+                                    </h3>
+
+                                </td>
+                                <td>{idm}/{id}
+                                    <a href="{{path('addmember',{'idm':u.id,'id':id}) }}" class="btn btn-success" style="margin-top:-1.5cm;margin-left:0.5cm;" >ajouter</a>
+                                </td>
+
+                            </tr>
+                            {% endfor %}
+                        </table>
+
+
+                    {# for i in listuser
+
+                         <ul class="list-unstyled">
+
+                             <li style="padding-top: 58px;margin-bottom: -13px;">
+
+
+                                 <div style="float: left;margin-left: -15px;">
+                                     <div style="float: right; margin-top: -28px;display: inline-flex">
+                                         <span>{{ i.username }}</span>
+                                         <form method="post"
+                                               action="{{ path('group_add_member',{'id':id,'idm':i.id}) }}">
+                                             <button class="btn btn-success"
+                                                     style="position: absolute;font-size: x-small;margin-left: 103px;">
+                                                 Ajouter
+                                             </button>
+                                         </form>
+                                     </div>
+                                     <img src="{{ i.profile_pic }}"
+                                          style="width: 40px;height: 40px; margin-right: 21px;">
+
+                                 </div>
+
+
+                         </ul>
+                     {% endfor #}
+
+                </div>
+            </div>
+        </div><!-- /.panel -->
+
+        <div class="panel rounded shadow" id="sidebar_grp">
+
+            <div class="panel-body">
+                <div class="inner-all">
+                    <ul class="list-unstyled">
+                        <li>
+                            <div>
+                                <h6 style="float: left;">Membres</h6>
+                                <h6 style="float:right;">
+                                    <a href="{{ path('group_group_membres',{'id':id}) }}">{{ nbm }} Membres</a>
+                                </h6>
+                            </div>
+                        </li>
+                        <br><br>
+                        <li style="display: inline-block;">
+                            <div id="membre_panel">
+                                <table style="margin-top: 1.5cm;">
+                                    {% for o in listm  %}
+
+                                        <tr>
+                                            <td>
+                                                <a href="#"><img src="{{ asset('photoprofil/'~ o.profilepic) }}" width="50px" height="30px">
+
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <h3>
+                                                    <div style="margin-top:-1.5cm;margin-left:0.5cm;  ">{{ o.username }}</div>
+                                                </h3>
+
+                                            </td>
+
+
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+
+                            </div>
+
+                        </li>
+                        <li>
+                            <hr id="ligne">
+                        </li>
+                        <li>
+                            <h6 id="des_title">DESCRIPTION</h6>
+                            <div id="des_text">
+                                {{ desc }}
+                            </div>
+                            <br><br>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- /.panel -->
+
+        <div class="panel rounded shadow" id="sidebar_grp">
+            <div class="panel-body">
+                <div class="inner-all">
+                    <ul class="list-unstyled">
+                        <li>
+                            <h6 id="des_title">CREER DES GROUPES</h6>
+                            <div id="des_text">
+                                Grâce aux groupes, vous pouvez partager votre passion , votre experiences et vos
+                                randonnés plus facilement avec vos amis.
+                            </div>
+                        </li>
+                        <li style="display: inline-block;margin-top: 95px;">
+                            <div id="membre_panel">
+                                <div id="img_style_grp">
+                                    <img src="{{ asset('Admin/assets/img/logo.png') }}">
+                                </div>
+
+                                <div id="">
+                                    <button class="btn btn-primary" data-toggle="modal"
+                                            data-target="#groupeModal">Creer un groupe
+                                    </button>
+                                    <!-- modal start -->
+                                    <div class="modal fade" id="groupeModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="groupeModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header"
+                                                     style="text-align: left;background: #f6f7f9;border-bottom: 1px solid #999;">
+                                                    <h5 class="modal-title" id="exampleModalLabel"
+                                                        style="font-weight: bold;font-size: 18px;">CREER UN
+                                                        GROUPE</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close" style="margin-top: -22px;;">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="post">
+                                                        <div class="form-group">
+                                                            <label class="form-control-label"
+                                                                   style="font-family: inherit;float: left;margin-bottom: 10px;">Nom
+                                                                de votre groupe :</label>
+                                                            <input type="text" class="form-control"
+                                                                   id="groupnom"
+                                                                   style="border: 1px solid #cccccc;border-radius: 4px;"
+                                                                   required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="form-control-label"
+                                                                   style="margin-bottom: 10px;float: left;">Description
+                                                                de votre groupe :</label>
+                                                                    <textarea class="form-control" id="groupdes"
+                                                                              required></textarea>
+                                                        </div>
+                                                        <img src="{{ asset('Groupe/img/loadingimg.svg') }}"
+                                                             id="loadingimg">
+                                                        <div class="modal-footer">
+                                                            <button type="submit" id="btnCreate"
+                                                                    class="btn btn-primary"
+                                                                    style="margin-top: 20px;">Créer
+                                                            </button>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Fermer
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- modal end -->
+                                </div>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div><!-- /.panel -->
+
+        <div class="panel rounded shadow" id="sidebar_grp">
+            <div class="panel-body">
+                <div class="inner-all">
+                    <ul class="list-unstyled">
+                        <li>
+                            <div>
+                                <h6 id="des_title">PHOTO DE GROUPE</h6>
+                                <h6>
+                                    <a href="{{ path('group_group_photos',{'id':id}) }}"
+                                       style="float: right">{{ photonumber }} VOIR
+                                        TOUT</a>
+                                </h6>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="container-fluid" style="padding-top: 70px;display: block;">
+                                {% for i in groupimg |slice(0,4) %}
+                                    {% for j in i %}
+                                        <div id="membre_panel" style="display:inline-flex;">
+                                            <div id="img_style_grp" style="margin-right: 5px;">
+                                                <a href="#" class="pop">
+                                                    <img src="{{ asset('Groupe/img/'~ j) }}" id="1" data-toggle="modal"
+                                                         data-target="#myModal"
+                                                         style="width: 90px;height: 70px;">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                            <!-- Creates the bootstrap modal where the image will appear -->
+                            <div id="myModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <img class="showimage"
+                                                 style="width: 450px;height: 300px;margin-top: 20px;"/>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+                                $(document).ready(function () {
+                                    $('img').on('click', function () {
+                                        var image = $(this).attr('src');
+                                        $('#myModal').show('show.bs.modal', function () {
+                                            $(".showimage").attr('src', image);
+                                        });
+                                    });
+                                });
+                            </script>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div><!-- /.panel -->
+    </div>
+
+{% endblock %}

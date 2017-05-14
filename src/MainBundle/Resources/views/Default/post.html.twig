@@ -1,0 +1,288 @@
+{% extends 'MainBundle:Default:base.html.twig' %}
+{% block body %}
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
+
+    <!-- Optional theme -->
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js" ></script>
+    <link href="{{ asset('bundles/foscomment/css/comments.css') }}">
+    <script src="{{ asset('Groupe/js/comments.js') }}"></script>
+    <div class="row" style="background-color: #b2c7ca ;width:900px; "   >
+        <div class="span12">
+            <div class="row">
+                <div class="span8">
+
+                    <p style="margin-right:13cm; "><img  src="{{ asset('photoprofil/' ~ pub.user.profilepic) }}" width="100px" height="100px">
+
+   <br>
+                        <i class="icon-user"></i>publier par <a href="#">{{ pub.user.Username }}</a><br>
+                        <i class="icon-calendar"></i> {{ pub.datepub|date('y-m-d H:i:s') }}
+
+
+
+                    </p>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="span8">
+                    <h4><strong><a href="#"></a></strong></h4>
+                </div>
+            </div>
+            <div class="row">
+
+
+
+                    <img src="{{app.request.basepath}}/publication/{{ pub.image }}" style="margin-left:-8cm;margin-top:-4cm;  " width="500px" height="70px">
+
+                <h1>{{ pub.description }}</h1> <br>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+<div id="content">
+
+
+
+        {% for c in comment %}
+        <div class="row" >
+            <div class="col-sm-8">
+                <div class="panel panel-white post panel-shadow">
+                    <div class="post-heading">
+                        <div class="pull-left image">
+                            <img src="{{ asset('photoprofil/' ~ c.user.profilepic) }}" class="img-circle avatar" alt="user profile image">
+                        </div>
+                        <div class="pull-left meta">
+                            <div class="title h5">
+                                <a href="#"><b>{{ c.user.Username }}</b></a>
+
+                            </div>
+                            <h6 class="text-muted time">{{ c.datepub|date('y-m-d H:i:s') }}</h6>
+                        </div>
+                    </div>
+                    <div class="post-description">
+                        <p> {{ c.content }}</p>
+
+                    </div>
+                </div>
+            </div>
+         </div>
+        {% endfor %}
+
+
+</div>
+
+        <div class="col-md-6">
+            <div class="widget-area no-padding blank">
+                <div class="status-upload">
+                    <form >
+                        <input type="hidden" name="postid" id="postid" value="{{ pub.id }}">
+                        <input id="zone" type="text" placeholder="ecrire un commentaire ?" name="co" rows="7" cols="6" required="required">
+
+                        <button type="button" id="poster"  class="btn btn-success green" ><i class="fa fa-share"></i>poster votre commentaire </button>
+                    </form>
+                </div><!-- Status Upload  -->
+            </div><!-- Widget Area -->
+        </div>
+
+
+
+<script>
+   $("#poster").click(function(){
+       $(document).ready(function() {
+
+
+           var postid = $("#postid").val();
+           var zone =$("#zone").val();
+           $.ajax({
+               url: '{{ path('commenter') }}' ,
+               type: "POST",
+               data:{postid:postid,zone:zone},
+               success: function(data) {
+                   console.log();
+                   console.log(data);
+                   $('#content').html(data);
+                   console.log('ok');
+               }
+               //return false; //
+           });
+
+
+       });
+
+   });
+
+
+
+
+
+</script>
+
+<style>
+.panel-shadow {
+    box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
+}
+.panel-white {
+  border: 1px solid #dddddd;
+}
+.panel-white  .panel-heading {
+  color: #333;
+  background-color: #fff;
+  border-color: #ddd;
+}
+.panel-white  .panel-footer {
+  background-color: #fff;
+  border-color: #ddd;
+}
+
+.post .post-heading {
+  height: 95px;
+  padding: 20px 15px;
+}
+.post .post-heading .avatar {
+  width: 60px;
+  height: 60px;
+  display: block;
+  margin-right: 15px;
+}
+.post .post-heading .meta .title {
+  margin-bottom: 0;
+}
+.post .post-heading .meta .title a {
+  color: black;
+}
+.post .post-heading .meta .title a:hover {
+  color: #aaaaaa;
+}
+.post .post-heading .meta .time {
+  margin-top: 8px;
+  color: #999;
+}
+.post .post-image .image {
+  width: 100%;
+  height: auto;
+}
+.post .post-description {
+  padding: 15px;
+}
+.post .post-description p {
+  font-size: 14px;
+}
+.post .post-description .stats {
+  margin-top: 20px;
+}
+.post .post-description .stats .stat-item {
+  display: inline-block;
+  margin-right: 15px;
+}
+.post .post-description .stats .stat-item .icon {
+  margin-right: 8px;
+}
+.post .post-footer {
+  border-top: 1px solid #ddd;
+  padding: 15px;
+}
+.post .post-footer .input-group-addon a {
+  color: #454545;
+}
+.post .post-footer .comments-list {
+  padding: 0;
+  margin-top: 20px;
+  list-style-type: none;
+}
+.post .post-footer .comments-list .comment {
+  display: block;
+  width: 100%;
+  margin: 20px 0;
+}
+.post .post-footer .comments-list .comment .avatar {
+  width: 35px;
+  height: 35px;
+}
+.post .post-footer .comments-list .comment .comment-heading {
+  display: block;
+  width: 100%;
+}
+.post .post-footer .comments-list .comment .comment-heading .user {
+  font-size: 14px;
+  font-weight: bold;
+  display: inline;
+  margin-top: 0;
+  margin-right: 10px;
+}
+.post .post-footer .comments-list .comment .comment-heading .time {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 0;
+  display: inline;
+}
+.post .post-footer .comments-list .comment .comment-body {
+  margin-left: 50px;
+}
+.post .post-footer .comments-list .comment > .comments-list {
+  margin-left: 50px;
+}
+    .widget-area {
+        background-color: #fff;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+        -ms-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+        -o-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+        float: left;
+        margin-top: 30px;
+        padding: 25px 30px;
+        position: relative;
+        width: 220%;
+    }
+    .status-upload {
+        background: none repeat scroll 0 0 #f5f5f5;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+        border-radius: 4px;
+        float: left;
+        width: 70%;
+    }
+    .status-upload form {
+        float: left;
+        width: 100%;
+    }
+    #zone{
+        background: none repeat scroll 0 0 #fff;
+        border: medium none;
+        -webkit-border-radius: 4px 4px 0 0;
+        -moz-border-radius: 4px 4px 0 0;
+        -ms-border-radius: 4px 4px 0 0;
+        -o-border-radius: 4px 4px 0 0;
+        border-radius: 4px 4px 0 0;
+        color: #777777;
+        float: left;
+        font-family: Lato;
+        font-size: 14px;
+        height: 142px;
+        letter-spacing: 0.3px;
+        padding: 20px;
+        width: 100%;
+        resize:vertical;
+        outline:none;
+        border: 1px solid #F2F2F2;
+    }
+</style>
+
+{% endblock %}

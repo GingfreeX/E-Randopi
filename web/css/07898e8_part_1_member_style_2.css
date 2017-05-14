@@ -1,0 +1,46 @@
+
+.list-content{
+    min-height:300px;
+}
+.list-content .list-group .title{
+    background:#5bc0de;
+    border:2px solid #DDDDDD;
+    font-weight:bold;
+    color:#FFFFFF;
+}
+.list-group-item img {
+    height:80px;
+    width:80px;
+    margin: auto;
+}
+
+.jumbotron .btn {
+    padding: 5px 5px !important;
+    font-size: 12px !important;
+}
+.prj-name {
+    color:#5bc0de;
+}
+.break{
+    width:100%;
+    margin:20px;
+}
+
+
+#listmembre{
+    margin-top: 1px;
+    margin-bottom: 2px;
+    max-height: 118px;
+}
+
+#membername{
+    font-size: 14px;
+    padding-top: 20px;
+    padding-left: 5px;
+    margin-right: auto;
+    font-weight: bold;
+}
+#btnajout{
+    float: right;
+    margin-top: -22px;
+}

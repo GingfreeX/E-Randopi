@@ -12,10 +12,10 @@
                     <div class="box-hold group">
                         <article class="entry box format-standard">
                             <div class="entry-intro">
-                                <h1>{{ itemm.titre }}</h1><span class="entry-meta">Posted by <strong>{{ user.username }}</strong>, at <time>{{ itemm.date|date('Y-m-d H:i:s') }}</time></span> <a class="single-heart-this" href="#" title="Love this.">
+                                <h1>{{ itemm.titre }}</h1><span class="entry-meta">Posted by <strong>{{ user.username }}</strong>, at <time>{{ itemm.date|date('Y-m-d H:i:s') }}</time></span> <a class="single-heart-this" href="#" title="Love this." onclick="likeitem()">
                                     <span class="heart-icon"></span><span class="heart-no">{{ itemm.rating }}</span></a>
                             </div><!-- .entry-intro -->
-
+                            <input type="hidden" value="{{ itemm.id }}" id="itemid">
                             <figure class="entry-image"><a href="{{app.request.basepath}}/uploads/{{ itemm.imageName }}" data-lightbox="fancybox"><img src="{{app.request.basepath}}/uploads/{{ itemm.imageName }}" alt=""></a></figure>
 
                             <div class="entry-content">
@@ -30,34 +30,33 @@
                         <div class="box comment-form">
                             <div class="box-content">
                                 <h3>Post your comment</h3>
-
-                                <form id="commentform" class="group" action="/" style="position: relative;">
+                                {{ form(formComment) }}
                                     <fieldset>
-                                        <p>
-                                            <label id="spanLabel3" class="fLabel" style="font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; font-style: normal; font-weight: normal; text-shadow: none; line-height: 16.2px; position: absolute; top: 0px; left: 0px; color: rgb(115, 115, 115); -webkit-user-select: none; cursor: text; z-index: 999;">Your Comment</label><textarea cols="30" rows="4" title="Your Comment"></textarea></p>
+                                  {{ form_row(formComment.description) }}
                                     </fieldset>
-                                    <button type="submit">Submit</button>
-                                </form>
+                                {{ form_widget(formComment.Submit) }}
                             </div>
                         </div>
 
                         <div class="box post-comments">
                             <div class="box-content">
-                                <h3>42 Comments</h3>
-
+                                <h3>{{ comments|length }}</h3>
                                 <ol id="comment-list" class="group">
+                                    {%for c in comments%}
                                     <li class="comment">
-                                        <span class="comment-meta">Posted by <strong>vmasto</strong>, at <time datetime="2012-08-07">July 7th, 2012</time> &mdash; <a class="comment-reply-link" href="#commentform">Reply</a></span>
+                                        <span class="comment-meta">Posted by <strong>{{ c.userid }}</strong>, at <time datetime="2012-08-07">{{ c.date|date('Y-m-d H:i:s') }}</time> &mdash; </span>
 
                                         <div class="comment-text group">
                                             <img class="avatar" src="{{ asset('images/ging.jpg') }}" alt="">
 
                                             <div class="comment-copy">
-                                                <p>First, I believe that this nation should commit itself to achieving the goal, before this decade is out, of landing a man on the moon and returning him safely to the earth. No single space project in this period will be more impressive to mankind, or more important for the long-range exploration.</p>
+                                                <p>{{ c.description }}</p>
                                             </div>
                                         </div>
+                                        <a class="comment-reply-link" href="#commentform">Reply</a>
                                     </li>
-                                </ol><a class="load-more-comments" href="#">View 38 More Comments...</a>
+                                    {% endfor %}
+                                </ol><a class="load-more-comments" href="#">View All Comments...</a>
                             </div>
                         </div>
                     </div><!-- .box-hold -->
@@ -71,5 +70,21 @@
     <script src="{{ asset('Shop/item/jquery.flexslider-min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('Shop/item/jquery.formLabels1.0.js') }}" type="text/javascript"></script>
     <script defer src="{{ asset('Shop/item/scripts.js') }}" type="text/javascript"></script>
+    <script>
+        function likeitem() {
+            var id = document.getElementById("itemid").value;
+            console.log("ajax sending data (like item)..");
+            $.ajax({
+                url: "{{ path('likeitem') }}",
+                method: "post",
+                data: {
+                    id: id
+                }
+            })
+        }
+        $(document).ajaxStop(function(){
+            window.location.reload();
+        });
+    </script>
     </body>
 {% endblock %}

@@ -37,3 +37,9 @@ supprimer_guide:
 bannir_membre:
     path:     /cp/bannir/{id}
     defaults: { _controller: AdministrationAdminBundle:Default:bannirMembre}
+approuverguide:
+    path:     /cp/guide/{id}
+    defaults: { _controller: AdministrationAdminBundle:Default:ApprouverGuide}
+deletepro:
+    path:     /deletep/{id}
+    defaults: { _controller: AdministrationAdminBundle:Default:deletepub}

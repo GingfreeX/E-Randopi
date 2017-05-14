@@ -36,26 +36,7 @@ abstract class User implements UserInterface, GroupableInterface
      * @var string
      */
     protected $usernameCanonical;
-    /**
-     * @var string
-     */
-    protected $facebookID;
 
-    /**
-     * @return string
-     */
-    public function getFacebookID()
-    {
-        return $this->facebookID;
-    }
-
-    /**
-     * @param string $facebookID
-     */
-    public function setFacebookID($facebookID)
-    {
-        $this->facebookID = $facebookID;
-    }
     /**
      * @var string
      */

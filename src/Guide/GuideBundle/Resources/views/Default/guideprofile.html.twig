@@ -1,0 +1,1825 @@
+{% extends '@Main/Default/base.html.twig' %}
+{% block body %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+{% stylesheets
+'css/profile.css'
+
+filter='cssrewrite' %}
+<link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<link href="{{asset('Admin/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css')}}" rel="stylesheet" />
+<link href="{{asset('Admin/assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" />
+<link href="{{asset('Admin/assets/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" />
+<link href="{{ asset('gridlistcss/stylecss.css') }}">
+<link href="{{asset('css/style.css')}}" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
+    <link href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+
+
+
+<link href="{{ asset('bundles/font-awesome.css') }}">
+
+<script src="{{ asset('bundles/jquery.min.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('chatstyle/css/normalize.css') }}">
+<link rel="stylesheet" href="{{ asset('chatstyle/css/style.css') }}">
+<script src="{{ asset('bundles/jquery.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+
+    <!-- Modal -->
+
+
+
+    <div id="user-profile-2" class="user-profile">
+    <div class="tabbable">
+        <ul class="nav nav-tabs padding-18">
+            <li class="active">
+                <a data-toggle="tab" href="#home">
+                    <i class="green ace-icon fa fa-user bigger-120"></i>
+                    Profile
+                </a>
+            </li>
+
+
+
+            <li>
+                <a data-toggle="tab" href="#friends">
+                    <i class="blue ace-icon fa fa-users bigger-120"></i>
+                    amis
+                </a>
+            </li>
+
+            <li>
+                <a data-toggle="tab" href="#groupes">
+                    <i class="pink ace-icon fa fa-picture-o bigger-120"></i>
+                    Mes groupes
+                </a>
+            </li>
+
+            <li>
+                <a data-toggle="tab" href="#sugg">
+                    <i class="pink ace-icon fa fa-picture-o bigger-120"></i>
+                    Suggesstion d'amis
+                </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#invitation">
+                    <i class="pink ace-icon fa fa-picture-o bigger-120"></i>
+                    invitations
+                </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#boitemessage">
+                    <i class="pink ace-icon fa fa-picture-o bigger-120"></i>
+                    messagerie
+                </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#gstev">
+                    <i class="pink ace-icon fa fa-picture-o bigger-120"></i>
+                    Gestion de Rando
+                </a>
+
+
+
+            </li>
+
+            <li>
+
+
+                {{ mgilet_notification_render({ 'display': 'dropdown', 'seen': true }) }}
+
+            </li>
+
+
+
+        </ul>
+
+
+        <div class="tab-content no-border padding-24">
+            <div id="home" class="tab-pane in active">
+                <div class="row">
+                    <br>
+                    <div class="fb-timeline-img">
+                        <img src="{{ asset('images/cover.jpg') }}" alt="">
+                    </div>
+                    <div class="col-xs-12 col-sm-3 center">
+						<span class="profile-picture">
+								<img class="editable img-responsive" alt=" Avatar" id="avatar2" src="{{ asset('photoprofil/' ~ user.profilepic) }}">
+							</span>
+
+                        <div class="space space-4"></div>
+
+                        <a href="#" class="btn btn-sm btn-block btn-success" data-toggle="modal" data-target="#myModal" >
+                            <i class="ace-icon fa fa-plus-circle bigger-120"></i>
+                            <span class="bigger-110" >Publier un article </span>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-block btn-success" data-toggle="modal" data-target="#groupeModal" >
+                            <i class="ace-icon fa fa-plus-circle bigger-120"></i>
+                            <span class="bigger-110" >Creer un groupe </span>
+                        </a>
+
+                        <a href="#" class="btn btn-sm btn-block btn-primary"  data-toggle="modal" data-target="#myModal2">
+                            <i class="ace-icon fa fa-envelope-o bigger-110"></i>
+                            <span class="bigger-110">changer la photo de profil </span>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-block btn-primary">
+                            <i class="ace-icon fa fa-envelope-o bigger-110"></i>
+                            <span class="bigger-110" data-toggle="modal" data-target="#sale">Add Item for Sale</span>
+                        </a>
+                        <div class="widget-box transparent">
+                            <div class="widget-header widget-header-small">
+                                <h4 class="widget-title smaller">
+                                    <i class="ace-icon fa fa-check-square-o bigger-110"></i>
+                                    Little About Me
+                                </h4>
+                            </div>
+                            <form id="form" name="form">
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <input type="hidden" name="id" id="id" value="{{ user.id }}">
+                                        <textarea name="description" style="width:250px;height:150px;border: none" id="description" readonly>{{ user.description }}</textarea>
+                                    </div>
+                                </div>
+                        </div>
+                    </div><!-- /.col -->
+
+                    <div class="col-xs-12 col-sm-9">
+                        <h4 class="blue">
+                            <span class="label label-purple arrowed-in-right">
+									<i class="ace-icon fa fa-circle smaller-80 align-middle"></i>
+									online
+								</span>
+                        </h4>
+                        <div class="profile-user-info">
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> UserName </div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" value="{{ user.username }}" name="username" id="username" readonly>
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Nom </div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" value="{{ user.nom }}" name="nom" id="nom" readonly>
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Prenom </div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" value="{{ user.prenom }}" name="prenom" id="prenom" readonly>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Location </div>
+
+                                <div class="profile-info-value">
+                                    <i class="fa fa-map-marker light-orange bigger-110"></i>
+                                    <input type="text" value="{{ user.location }}" name="location" id="location" readonly>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Age </div>
+
+                                <div class="profile-info-value">
+                                    <input type="number" value="{{ user.age }}" name="age" id="age" readonly min="1">
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Joined </div>
+
+                                <div class="profile-info-value">
+                                    <input type="datetime" value="{{ user.joined }}" name="joined" id="joined" readonly>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Nombre d'amis </div>
+
+                                <div class="profile-info-value">
+                                    <input type="number" value="{{ user.nbr_amis }}" name="nbr_amis" id="nbr_amis" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hr hr-8 dotted"></div>
+
+                        <div class="profile-user-info">
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Email </div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" value="{{ user.email }}" name="email" id="email" readonly>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">
+                                    <i class="middle ace-icon fa fa-facebook-square bigger-150 blue"></i>
+                                </div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" value="{{ user.facebook }}" name="facebook" id="facebook" readonly>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">
+                                    <i class="middle ace-icon fa fa-twitter-square bigger-150 light-blue"></i>
+                                </div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" value="{{ user.twitter }}" name="twitter" id="twitter" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-danger" onclick="do_change(); return false ;">Modifier</button>
+                        <button type="button" class="btn-success" id="btn2" style="display: none;" onclick="senddate()">Done</button>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+                </form>
+
+                <div class="space-20"></div>
+
+            </div><!-- /#home -->
+
+
+
+            <div id="friends" class="tab-pane">
+                <div class="profile-users clearfix">
+
+                    {% for amis in listamis %}
+                        <div class="itemdiv memberdiv">
+                            <div class="inline pos-rel">
+                                <div class="user">
+                                    <a href="#">
+                                        <img src="{{ asset('photoprofil/' ~ amis.profilepic) }}" alt="Alexa Doe's avatar">
+                                    </a>
+                                </div>
+
+                                <div class="body">
+                                    <div class="name">
+                                        <a href="#">
+                                            <span class="user-status status-offline"></span>
+                                            {{ amis.username }}
+                                        </a>
+                                    </div>
+                                </div>
+                                <a class="btn btn-danger" href="{{ path('suppamisgui',{'id':amis.id}) }}">Supprimer &nbsp;&nbsp;   <i class="fa fa-trash"></i> </a>
+
+
+                                <div class="popover">
+                                    <div class="arrow"></div>
+
+                                    <div class="popover-content">
+                                        <div class="bolder">Accounting</div>
+
+                                        <div class="time">
+                                            <i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
+                                            <span class="grey"> 4 hours ago </span>
+                                        </div>
+
+                                        <div class="hr dotted hr-8"></div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="hr hr10 hr-double"></div>
+
+                <ul class="pager pull-right">
+                    <li class="previous disabled">
+                        <a href="#">← Prev</a>
+                    </li>
+
+                    <li class="next">
+                        <a href="#">Next →</a>
+                    </li>
+                </ul>
+            </div><!-- /#friends -->
+            <div id="invitation" class="tab-pane">
+
+                <div id="products" class="row list-group">
+                    {%  for k in listinvi  %}
+                        <div class="item  col-xs-3 col-lg-3">
+                            <div class="thumbnail">
+                                <img class="group list-group-image" src="{{ asset('photoprofil/' ~ k.profilepic) }}" alt="" />
+                                <div class="caption">
+                                    <h4 class="group inner list-group-item-heading">
+                                        {{ k.username }}</h4>
+                                    <p class="group inner list-group-item-text">
+
+                                        {{ k.email  }}
+                                    </p>
+                                    <div class="row">
+
+                                        <div class="col-xs-12 col-md-6" >
+                                            <a class="btn btn-success" href="{{ path('approuverguide',{'id':k.id}) }}">Approuver l'invitation</a>
+                                            <a class="btn btn-danger" href="{{ path('annulerinvigui',{'id':k.id}) }}">Anunler invitation</a>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="gstev" class="tab-pane">
+
+              <div style="margin-left: -28cm;">
+                  <a href="#"    id="but"  data-toggle="modal" >Creer un évenement</a>
+              </div></br></br>
+
+
+                            <div id="x" >
+                    <div class="top-content" style="margin-left:-6cm; width: 1600px;height: 600px;   " >
+
+                        <div class="inner-bg">
+                            <div class="container" style="margin-top:-3cm; ">
+                                <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBPIaLAjXOA1cghqtAR9b0jyH8mzNXH4Yg&libraries=geometry,places"></script>
+                                <script>
+                                    google.maps.event.addDomListener(window,'load', initialize);
+                                    google.maps.event.addDomListener(window,'load', initialize2);
+                                    function initialize (){
+                                        var autocomplete = new google.maps.places.Autocomplete(document.getElementById('randonnebundle_randonne_destination'));
+                                        google.maps.event.addListener(autocomplete,'place_changed',function(){
+
+                                            var places =autocomplete.getPlace();
+                                            var location= "<b>location</b>"+places.formatted_address +"</br>"
+                                                    ;
+
+
+
+                                        });
+                                    }
+                                    function initialize2 (){
+                                        var autocomplete = new google.maps.places.Autocomplete(document.getElementById('randonnebundle_randonne_pointDepart'));
+                                        google.maps.event.addListener(autocomplete,'place_changed',function(){
+
+                                            var places =autocomplete.getPlace();
+                                            var location= "<b>location</b>"+places.formatted_address +"</br>"
+                                                    ;
+
+
+
+                                        });
+                                    }
+
+
+                                </script>
+
+                                <div class="col-sm-6">
+
+                                    <div class="form-box">
+                                        <div class="form-top">
+                                            <div class="form-top-left">
+
+
+                                            </div>
+                                            <div class="form-top-right">
+
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-bottom">
+                                            {{ form_start(form2) }}
+                                            <div id="first">
+                                                <div class="form-group">
+                                                    {{ form_label(form2.titre) }}: </br>
+                                                    {{ form_widget(form2.titre,{'attr':{'class':'masterTooltip','title':'veuiller reseigner un titre significatif pour l evenement'}}) }}
+                                                </div></br>
+                                                <div class="form-group">
+                                                    {{ form_label(form2.description) }}: </br>
+                                                    {{ form_widget(form2.description,{'attr':{'class':'masterTooltip','title':'veuiller reseigner quelque information utiles pour l\'evenement'}}) }}
+                                                </div></br>
+
+
+                                                <div class="form-group">
+                                                    {{ form_label(form2.destination) }}: </br>
+                                                    {{ form_widget(form2.destination,{'attr':{'class':'masterTooltip','title':'veuiller reseigner la destination d arriver'}}) }}
+                                                </div></br>
+                                            </div><div id="second" style="display:none">
+                                                <div class="form-group">
+                                                    {{ form_label(form2.pointDepart) }}: </br>
+                                                    {{ form_widget(form2.pointDepart,{'attr':{'class':'masterTooltip','title':'veuiller reseigner le point de départ '}}) }}
+                                                </div></br>
+
+
+                                                <div class="form-group">
+                                                    {{ form_label(form2.date) }}: </br>
+                                                    {{ form_widget(form2.date,{'attr':{'class':'masterTooltip','title':'veuiller reseigner une date supérieur à celle d\'aujourd\'hui'}}) }}
+                                                </div></br>
+
+                                                <div class="form-group">
+                                                    {{ form_label(form2.prix) }}: </br>
+                                                    {{ form_widget(form2.prix,{'attr':{'class':'masterTooltip','title':'veuiller reseigner un prix en dinar tunisien supérieur à zéro','style':'background-color:#fff','min':'1'}}) }}
+                                                </div></br>
+
+                                                <div class="form-group">
+                                                    {{ form_label(form2.nbr_places) }}: </br>
+                                                    {{ form_widget(form2.nbr_places,{'attr':{'class':'masterTooltip1','title':'helllo world','style':'background-color:#fff;','min':'1'}}) }}
+                                                </div></br>
+                                            </div>
+                                            <div id="third" style="display:none">
+                                                <div class="form-group">
+                                                    {{ form_label(form2.type) }}: </br>
+                                                    {{ form_widget(form2.type) }}
+                                                </div></br>
+
+                                                <div class="form-group">
+                                                    {{ form_label(form2.niveau) }}: </br>
+                                                    {{ form_widget(form2.niveau,{'attr':{'class':'masterTooltip','title':'veuiller reseigner un niveau de difiiculté entre 0 et 10','style':'background-color:#fff;','min':'1','max':'10'}}) }}
+                                                </div></br>
+                                                <label id="controle1"></label>
+                                                <div class="form-group">
+                                                    {{ form_label(form2.ageMin) }}: </br>
+                                                    {{ form_widget(form2.ageMin,{'attr':{'class':'masterTooltip','title':'veuiller reseigner l age minimum de participation à l\'événement ','style':'background-color:#fff;','min':'1'}}) }}
+                                                </div></br>
+                                                <div class="form-group">
+                                                    {{ form_label(form2.moyenTransport) }}: </br>
+                                                    {{ form_widget(form2.moyenTransport,{'attr':{'class':'masterTooltip','title':'veuiller reseigner le moyen de transport de l\'événement'}}) }}
+                                                </div></br>
+                                                <div class="form-group">
+                                                    {{ form_label(form2.plan) }}: </br>
+                                                    {{ form_widget(form2.plan,{'attr':{'class':'masterTooltip','title':'veuiller reseigner le plan  de l\'événement'}}) }}
+                                                </div></br>
+
+                                                {{ form_widget(form2.ajouter) }}
+                                            </div>
+                                            <a id="shotab" >retourner a la liste des rando</a>
+                                            <div id="page_menus" align="center" >
+                                                <ul class="pagination" >
+
+                                                    <li><a id="get_first" style="cursor:pointer">1</a></li>
+                                                    <li><a id="get_second" style="cursor:pointer">2</a></li>
+                                                    <li><a id="get_third" style="cursor:pointer">3</a></li>
+
+                                                </ul>
+
+                                            </div>
+                                            {{ form_end(form2) }}
+
+                                        </div>
+                                    </div>
+
+                                </div></div>
+                        </div>
+
+                    </div></div>
+     <script>
+         $(document).ready(function () {
+             $("#x").hide();
+             var i=0;
+            $("#but").click(function(){
+                $("#tab").hide();
+    $("#x").slideDown();
+
+
+
+            }) ;
+
+             $("#shotab").click(function(){
+                 $("#tab").show();
+                 $("#x").slideUp();
+                 i=0;
+             });
+
+         });
+     </script>
+
+    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
+        <thead>
+        <tr>
+        <td>
+            Description
+        </td>
+        <td>
+            Destination
+        </td>
+         <td>
+           Date
+         </td>
+        <td>
+            Supprimer
+        </td>
+        <td>
+            Modifier
+        </td>
+        <td>
+            Voir plus
+        </td>
+        <td>
+            pdf
+        </td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ran in  randos %}
+
+        <tr>
+
+
+        <td>{{ ran.description }}</td>
+        <td>{{ ran.destination }}</td>
+            <td>{{ ran.date|date("m/d/y") }}</td>
+        <td><a href="{{ path('supprando',{'id':ran.id}) }}" class="btn btn-danger">supprimer</a></td>
+        <td><a href="{{ path('modifrando',{'id':ran.id}) }}" class="btn btn-success">modifier</a></td>
+        <td><a href="{{ path('seemore',{'id':ran.id}) }}" class="btn btn-success">voir plus</a></td>
+        <td><a href="{{ path('generatepdf',{'id':ran.id}) }}" class="btn btn-success">Extraire en pdf</a></td>
+
+
+    </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+
+            </div>
+            <div id="boitemessage" class="tab-pane">
+                {% if currentUser %}
+                    <div id="belousovChat" data-author="{{ currentUser.id }}" data-addressee="" data-action="{{ getMessageUrl }}" >
+                        <div id="belousovMessageZone">
+
+                        </div>
+                        <div id="belousovFormZone">
+                            {{ form_start(chatForm) }}
+
+                            {{ form_widget(chatForm.messageText) }}
+
+                            {{ form_errors(chatForm) }}
+
+                            {{ form_end(chatForm) }}
+                        </div>
+                    </div>
+
+                    <div id="selectUser" style="margin-left:21cm;overflow: scroll;width:20%;height:300px;margin-top:-8cm; ">
+
+                        <ul>
+                            {% for user in users %}
+                                {% if user.id != currentUser.id %}
+
+                                    <li>
+                                        <div class="profile-users clearfix"  >
+
+
+
+                                            <div class="itemdiv memberdiv">
+                                                <div class="inline pos-rel">
+                                                    <div class="user">
+
+                                                        <a href="" onclick="return false;" data-number="{{ user.id }}" class="changeUser" >
+                                                            <table>
+                                                                <tr>
+                                                                    <td> {{user.username }}</td>
+                                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                                    <td>
+                                                                        <img src="{{ asset('photoprofil/' ~ user.profilepic) }}" width="100px">
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+
+
+
+                                                        </a>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </li>
+
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+
+                {% else %}
+                    <p>Войдите на сайт, для доступа к чату</p>
+                {% endif %}
+                <style>
+
+                    #belousovChat {
+                        width:70%;
+                        height:300px;
+                        border:1px solid #ccc;
+                        padding:0;
+                    }
+                    #belousovMessageZone {
+                        height:200px;
+                        padding:0;
+                        margin:auto;
+                        width:100%;
+                        border-bottom:1px solid #ccc;
+                        overflow-y: auto;
+                    }
+                    #belousovMessageZone p {
+                        padding:5px;
+                        margin:auto;
+                        width:90%;
+                    }
+                    #belousovMessageZone .mainUser {
+                        text-align:left;
+                    }
+                    #belousovMessageZone .secondUser {
+                        text-align:right;
+                    }
+                    #belousovFormZone {
+                        height:95px;
+                        margin:auto;
+                        padding:0;
+                        width:100%;
+                    }
+                    #belousovFormZone form {
+                        margin:10px;
+                    }
+                    #belousovFormZone form textarea {
+                        width:90%;
+                    }</style>
+
+            </div><!-- /#chat -->
+            <div id="sugg" class="tab-pane in active">
+                <div id="products" class="row list-group">
+                    {% for mem in all %}
+                        <div class="item  col-xs-3 col-lg-3" style="margin-bottom:2cm;">
+                            <div class="thumbnail">
+                                <img class="group list-group-image" src="{{ asset('photoprofil/' ~ mem.profilepic) }}" alt="" />
+                                <div class="caption">
+                                    <h4 class="group inner list-group-item-heading">
+                                        {{ mem.username }}</h4>
+                                    <p class="group inner list-group-item-text">
+
+                                        {{ mem.email  }}
+                                    </p>
+                                    <div class="row">
+
+                                        <div class="col-xs-12 col-md-6" >
+                                            <a class="btn btn-success" href="{{ path('envoyerinvi',{'id':mem.id}) }}">Ajouter comme amis</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+
+
+            </div>
+
+            <div id="groupes"  class="tab-pane">
+                <div id="products" class="row list-group">
+                    {%  for k in groupes  %}
+                    <div class="item  col-xs-3 col-lg-3">
+                        <div class="thumbnail">
+                              <div class="caption">
+                                <h4 class="group inner list-group-item-heading">
+                                    {{ k.nom }}</h4>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6" >
+                                        <a class="btn btn-success" href="{{ path('group_new',{'id':k.id}) }}">Accéder au groupe</a></br>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+
+        </div><!-- /#sugg-->
+    </div>
+</div>
+    <div class="modal fade" id="myModal2" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">changer l aphoto de profil </h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form5) }}
+                    {{ form_widget(form5) }}
+                    {{ form_end(form5) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="groupeModal" tabindex="-1" role="dialog"
+         aria-labelledby="groupeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header"
+                     style="text-align: left;background: #f6f7f9;border-bottom: 1px solid #999;">
+                    <h5 class="modal-title" id="exampleModalLabel"
+                        style="font-weight: bold;font-size: 18px;">CREER UN
+                        GROUPE</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close" style="margin-top: -22px;;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               style="font-family: inherit;float: left;margin-bottom: 10px;">Nom
+                            de votre groupe :</label>
+                        <input type="text" class="form-control"
+                               id="groupnom"
+                               style="border: 1px solid #cccccc;border-radius: 4px;"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               style="margin-bottom: 10px;float: left;">Description
+                            de votre groupe :</label>
+                                                                    <textarea class="form-control" id="groupdes"
+                                                                              required></textarea>
+                    </div>
+                    <img src="{{ asset('Groupe/img/loadingimg.svg') }}"
+                         id="loadingimg">
+                    <div id="res"></div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnCreate"
+                                class="btn btn-primary"
+                                style="margin-top: 20px;">Créer
+                        </button>
+                        <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">Fermer
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Publier un article</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form3) }}
+
+                    <div style="margin-left:-13cm; ">{{ form_label(form3.description) }}</div> :</br>
+                    {{ form_widget(form3.description,{'attr':{'class':'form-control'}}) }}</br>
+                    <div style="margin-left:-13cm; ">{{ form_label(form3.imageFile) }}</div>  :</br>
+                    {{ form_widget(form3.imageFile) }}</br>
+                    <div style="margin-left:-13cm; ">{{ form_label(form3.Section) }}</div>  :</br>
+                    {{ form_widget(form3.Section,{'attr':{'class':'form-control'}}) }}</br></br>
+                    {{ form_widget(form3.Publier,{'attr':{'class':'btn btn-default'}}) }}
+                    {{ form_end(form3) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="sale" tabindex="-1" role="dialog"
+         aria-labelledby="groupeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header"
+                     style="text-align: left;background: #f6f7f9;border-bottom: 1px solid #999;">
+                    <h5 class="modal-title" id="exampleModalLabel"
+                        style="font-weight: bold;font-size: 18px;">Add Item</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close" style="margin-top: -22px;;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ form(formm) }}
+                    <div class="form-group">
+                        {{ form_row(formm.titre) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formm.prix) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formm.description) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formm.imageFile) }}
+                    </div>
+                    <div class="modal-footer">
+                        {{ form_widget(formm.Add) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    $(document).ready(function(){
+        setInterval(function() {
+            if (ajax) { ajax.abort(); }
+            getMessage();
+        },30000);
+        var ajax;
+        $('.belousovSendMessage').click(function () {
+            var message = $('.belousovMessageText');
+            var addressee = $('#belousovChat').attr('data-addressee');
+            var url = $('form[name=chat]').attr('action');
+            if (addressee == "" || message == "") {
+                alert('change dialog');
+            }
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {'messageText': message.val(), 'addressee' : addressee},
+                cache: "false",
+                dataType: "json",
+                success: function (response) {
+                    if (response.error === undefined){
+                        message.val('');
+                    }
+                }
+            });
+        });
+        function getMessage(){
+            var chat = $('#belousovChat');
+            var user_id = chat.attr('data-author');
+            var addressee = chat.attr('data-addressee');
+            var url = chat.attr('data-action');
+            ajax = $.ajax({
+                type:'POST',
+                url:url,
+                data:{'user_id' : user_id, 'addressee_id' : addressee},
+                dataType:'json',
+                success:function(resp){
+                    if (resp.error === undefined){
+                        var html;
+                        resp.forEach(function (item) {
+                            if (item.author.id == user_id){
+                                html = '<p class="mainUser">'+ item.messageText +'</p>';
+                                $('#belousovMessageZone').append(html);
+                            }
+                            if (item.addressee.id == user_id){
+                                html = '<p class="secondUser">'+ item.messageText +'</p>';
+                                $('#belousovMessageZone').append(html);
+                            }
+                        });
+                        $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: {'user_id': user_id, 'addressee_id': addressee, 'update' : true},
+                            dataType: 'json',
+                            success: function (resp) {
+                            }
+                        });
+                    }
+                    setTimeout(function(){
+                        getMessage()
+                    },1000)
+                }
+            });
+        }
+        $('.changeUser').click(function () {
+            var addressee = $(this).attr('data-number');
+            var chat = $('#belousovChat');
+            var url = chat.attr('data-action');
+            var user_id = chat.attr('data-author');
+            chat.attr('data-addressee', addressee);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {'changeUser' : true, 'user_id' : addressee},
+                cache: "false",
+                dataType: "json",
+                success: function (response) {
+                    var html;
+                    $('#belousovMessageZone').html('');
+                    if (ajax) { ajax.abort(); }
+                    getMessage();
+                    if (response) {
+                        response.forEach(function (item) {
+                             if (item.author.id == user_id){
+                                html = '<h4 class="mainUser" style="color: #f44336;" >'+ item.messageText +'</h4>';
+                                $('#belousovMessageZone').append(html);
+                            }
+                            if (item.addressee.id == user_id){
+                                html = '<h4 class="secondUser"  style="color:#449d44;">'+ item.messageText +'</h4>';
+                                $('#belousovMessageZone').append(html);
+                            }
+
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+    <script src="{{ asset('bundles/jquery.min.js') }}"></script>
+
+    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+    </script>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function do_change(){
+        document.getElementById("btn2").style.display = "";
+        $("#username").prop('readonly', false);
+        $("#nom").prop('readonly', false);
+        $("#prenom").prop('readonly', false);
+        $("#age").prop('readonly', false);
+        $("#location").prop('readonly', false);
+        $("#email").prop('readonly', false);
+        $("#facebook").prop('readonly', false);
+        $("#twitter").prop('readonly', false);
+        $("#description").prop('readonly', false);
+    }
+    function disableinputs() {
+        document.getElementById("btn2").style.display = "none";
+        $("#username").prop('readonly', true);
+        $("#nom").prop('readonly', true);
+        $("#prenom").prop('readonly', true);
+        $("#age").prop('readonly', true);
+        $("#location").prop('readonly', true);
+        $("#email").prop('readonly', true);
+        $("#facebook").prop('readonly', true);
+        $("#twitter").prop('readonly', true);
+        $("#description").prop('readonly', true);
+    }
+    function senddate() {
+        var username = document.getElementById("username").value;
+        var nom = document.getElementById("nom").value;
+        var prenom = document.getElementById("prenom").value;
+        var age = document.getElementById("age").value;
+        var location = document.getElementById("location").value;
+        var email = document.getElementById("email").value;
+        var facebook = document.getElementById("facebook").value;
+        var twitter = document.getElementById("twitter").value;
+        var description = document.getElementById("description").value;
+        var id = document.getElementById("id").value;
+        console.log("ajax sending data (edit form)..");
+        $.ajax({
+            url: "{{ path('fos_user_profile_x') }}",
+            method: "post",
+            data: {
+                id: id,
+                username: username,
+                nom: nom,
+                prenom: prenom,
+                age: age,
+                location: location,
+                email: email,
+                facebook: facebook,
+                twitter: twitter,
+                description: description
+            }
+        }).done(function () {
+            disableinputs();
+        });
+    }
+    $("#age").blur(function(){
+        if($(this).val() == ''){
+            $(this).css("border", "1px solid red");
+        }
+        else $(this).css("border", "");
+    });
+</script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.masterTooltip').mouseover(function(){
+                // Hover over code
+                var title = $(this).attr('title');
+                $(this).data('tipText', title).removeAttr('title');
+                $('<p class="tooltip"></p>')
+                        .text(title)
+                        .appendTo('body')
+                        .fadeIn('slow');
+            }, function() {
+                // Hover out code
+                $(this).attr('title', $(this).data('tipText'));
+
+                $('.tooltip').remove();
+            }).mousemove(function(e) {
+                var mousex = e.pageX + 20; //Get X coordinates
+                var mousey = e.pageY + 10; //Get Y coordinates
+                $('.tooltip')
+                        .css({ top: mousey, left: mousex })
+            });
+            $('.masterTooltip1').mouseover(function(){
+                // Hover over code
+                var title = $(this).attr('title');
+                $(this).data('tipText', title).removeAttr('title');
+                $('<p class="tooltip1"></p>')
+                        .text(title)
+                        .appendTo('body')
+                        .fadeIn('slow');
+            }, function() {
+                // Hover out code
+                $(this).attr('title', $(this).data('tipText'));
+
+                $('.tooltip1').remove();
+            }).mousemove(function(e) {
+                var mousex = e.pageX + 20; //Get X coordinates
+                var mousey = e.pageY + 10; //Get Y coordinates
+                $('.tooltip1')
+                        .css({ top: mousey, left: mousex })
+            });
+
+            $('#get_first').click(function(){
+                $('#first').show()
+                $('#second').hide()
+                $('#third').hide()
+            });
+            $('#get_second').click(function(){
+                $('#first').hide()
+                $('#second').show()
+                $('#third').hide()
+            });
+            $('#get_third').click(function(){
+                $('#first').hide()
+                $('#second').hide()
+                $('#third').show()
+            });
+
+
+
+
+
+
+        });
+
+    </script>
+    <style>
+        .tooltip {
+            display:none;
+            position:absolute;
+            border:1px solid #333;
+            background-color:#161616;
+            border-radius:5px;
+            padding:10px;
+            width: 10%;
+            color:#fff;
+            font-size:12px ;
+        }
+        .x {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            color: #888;
+            line-height: 30px;
+            text-align: center;
+            margin-top:-2cm ;
+            margin-left: -175px;
+
+
+
+
+        }
+
+        strong { font-weight: 500; }
+
+        a, a:hover, a:focus {
+            color: #19b9e7;
+            text-decoration: none;
+            -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+        }
+
+        h1, h2 {
+            margin-top: 10px;
+            font-size: 38px;
+            font-weight: 100;
+            color: #555;
+            line-height: 50px;
+        }
+
+        h3 {
+            font-size: 22px;
+            font-weight: 300;
+            color: #555;
+            line-height: 30px;
+        }
+
+        img { max-width: 100%; }
+
+        ::-moz-selection { background: #19b9e7; color: #fff; text-shadow: none; }
+        ::selection { background: #19b9e7; color: #fff; text-shadow: none; }
+
+
+        .btn-link-1 {
+            display: inline-block;
+            height: 50px;
+            margin: 5px;
+            padding: 16px 20px 0 20px;
+            background: #19b9e7;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 16px;
+            color: #fff;
+            -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+        }
+        .btn-link-1:hover, .btn-link-1:focus, .btn-link-1:active { outline: 0; opacity: 0.6; color: #fff; }
+
+        .btn-link-1.btn-link-1-facebook { background: #4862a3; }
+        .btn-link-1.btn-link-1-twitter { background: #55acee; }
+        .btn-link-1.btn-link-1-google-plus { background: #dd4b39; }
+
+        .btn-link-1 i {
+            padding-right: 5px;
+            vertical-align: middle;
+            font-size: 20px;
+            line-height: 20px;
+        }
+
+        .btn-link-2 {
+            display: inline-block;
+            height: 50px;
+            margin: 5px;
+            padding: 15px 20px 0 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #fff;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 16px;
+            color: #fff;
+            -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+        }
+        .btn-link-2:hover, .btn-link-2:focus,
+        .btn-link-2:active, .btn-link-2:active:focus { outline: 0; opacity: 0.6; background: rgba(0, 0, 0, 0.3); color: #fff; }
+
+
+        /***** Top content *****/
+
+        .inner-bg {
+            padding: 60px 0 80px 0;
+        }
+
+        .top-content .text {
+            color: #fff;
+        }
+
+        .top-content .text h1 { color: #fff; }
+
+        .top-content .description {
+            margin: 20px 0 10px 0;
+        }
+
+        .top-content .description p { opacity: 0.8; }
+
+        .top-content .description a {
+            color: #fff;
+        }
+        .top-content .description a:hover,
+        .top-content .description a:focus { border-bottom: 1px dotted #fff; }
+
+        .form-box {
+            margin-top: 70px;
+        }
+
+        .form-top {
+            overflow: hidden;
+            padding: 0 25px 15px 25px;
+            background: #fff;
+            -moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;
+            text-align: left;
+            opacity: 0.7;
+        }
+
+        .form-top-left {
+            float: left;
+            width: 75%;
+            padding-top: 25px;
+        }
+
+        .form-top-left h3 { margin-top: 0; }
+
+        .form-top-right {
+            float: left;
+            width: 25%;
+            padding-top: 5px;
+            font-size: 66px;
+            color: #ddd;
+            line-height: 100px;
+            text-align: right;
+        }
+
+        .form-bottom {
+            padding: 25px 25px 30px 25px;
+            background: #eee;
+            -moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
+            text-align: left;
+        }
+
+        .form-bottom form textarea {
+            height: 100px;
+        }
+
+        .form-bottom form button.btn {
+            width: 100%;
+        }
+
+        .form-bottom form .input-error {
+            border-color: #19b9e7;
+        }
+
+        .social-login {
+            margin-top: 35px;
+        }
+
+        .social-login h3 {
+            color: #fff;
+        }
+
+        .social-login-buttons {
+            margin-top: 25px;
+        }
+
+        .middle-border {
+            min-height: 300px;
+            margin-top: 170px;
+            border-right: 1px solid #fff;
+            border-right: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+
+        /***** Footer *****/
+
+        footer {
+            padding-bottom: 70px;
+            color: #fff;
+        }
+
+        footer .footer-border {
+            width: 200px;
+            margin: 0 auto;
+            padding-bottom: 30px;
+            border-top: 1px solid #fff;
+            border-top: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        footer p { opacity: 0.8; }
+
+        footer a {
+            color: #fff;
+        }
+        footer a:hover, footer a:focus { color: #fff; border-bottom: 1px dotted #fff; }
+
+
+        /***** Media queries *****/
+
+        @media (min-width: 992px) and (max-width: 1199px) {}
+
+        @media (min-width: 768px) and (max-width: 991px) {}
+
+        @media (max-width: 767px) {
+
+            .middle-border { min-height: auto; margin: 65px 30px 0 30px; border-right: 0;
+                border-top: 1px solid #fff; border-top: 1px solid rgba(255, 255, 255, 0.6); }
+
+        }
+
+        @media (max-width: 415px) {
+
+            h1, h2 { font-size: 32px; }
+
+        }
+
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        textarea,
+        textarea.form-control {
+
+            width: 100%;
+            height: 50px;
+            margin: 0;
+            padding: 0 20px;
+            vertical-align: middle;
+            background: #f8f8f8;
+            border: 3px solid #ddd;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 50px;
+            color: #888;
+            -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+            -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+            -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+        }
+
+        textarea,
+        textarea.form-control {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            line-height: 30px;
+        }
+        input[type="email"]:focus,
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        textarea:focus,
+        textarea.form-control:focus {
+            outline: 0;
+            background: #fff;
+            border: 3px solid #ccc;
+            -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+        }
+
+        input[type="text"]:-moz-placeholder, input[type="password"]:-moz-placeholder,
+        textarea:-moz-placeholder, textarea.form-control:-moz-placeholder { color: #888; }
+
+        input[type="text"]:-ms-input-placeholder, input[type="password"]:-ms-input-placeholder,
+        textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #888; }
+
+        input[type="text"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder,
+        textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #888; }
+
+
+
+        button.btn {
+            height: 50px;
+            margin: 0;
+            padding: 0 20px;
+            vertical-align: middle;
+            background: #19b9e7;
+            border: 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 50px;
+            color: #fff;
+            -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+            text-shadow: none;
+            -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+            -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+        }
+
+        button.btn:hover { opacity: 0.6; color: #fff; }
+
+        button.btn:active { outline: 0; opacity: 0.6; color: #fff; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
+
+        button.btn:focus { outline: 0; opacity: 0.6; background: #19b9e7; color: #fff; }
+
+        button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; background: #19b9e7; color: #fff; }
+
+
+
+    </style>
+    <script>
+        $(document).ready(function () {
+
+            $('.masterTooltip').mouseover(function(){
+                // Hover over code
+                var title = $(this).attr('title');
+                $(this).data('tipText', title).removeAttr('title');
+                $('<p class="tooltip"></p>')
+                        .text(title)
+                        .appendTo('body')
+                        .fadeIn('slow');
+            }, function() {
+                // Hover out code
+                $(this).attr('title', $(this).data('tipText'));
+
+                $('.tooltip').remove();
+            }).mousemove(function(e) {
+                var mousex = e.pageX + 20; //Get X coordinates
+                var mousey = e.pageY + 10; //Get Y coordinates
+                $('.tooltip')
+                        .css({ top: mousey, left: mousex })
+            });
+            $('.masterTooltip1').mouseover(function(){
+                // Hover over code
+                var title = $(this).attr('title');
+                $(this).data('tipText', title).removeAttr('title');
+                $('<p class="tooltip1"></p>')
+                        .text(title)
+                        .appendTo('body')
+                        .fadeIn('slow');
+            }, function() {
+                // Hover out code
+                $(this).attr('title', $(this).data('tipText'));
+
+                $('.tooltip1').remove();
+            }).mousemove(function(e) {
+                var mousex = e.pageX + 20; //Get X coordinates
+                var mousey = e.pageY + 10; //Get Y coordinates
+                $('.tooltip1')
+                        .css({ top: mousey, left: mousex })
+            });
+
+            $('#get_first').click(function(){
+                $('#first').show()
+                $('#second').hide()
+                $('#third').hide()
+            });
+            $('#get_second').click(function(){
+                $('#first').hide()
+                $('#second').show()
+                $('#third').hide()
+            });
+            $('#get_third').click(function(){
+                $('#first').hide()
+                $('#second').hide()
+                $('#third').show()
+            });
+
+
+
+
+
+
+        });
+
+    </script>
+    <style>
+        .tooltip {
+            display:none;
+            position:absolute;
+            border:1px solid #333;
+            background-color:#161616;
+            border-radius:5px;
+            padding:10px;
+            width: 10%;
+            color:#fff;
+            font-size:12px ;
+        }
+        .x {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            color: #888;
+            line-height: 30px;
+            text-align: center;
+            margin-top:-2cm ;
+            margin-left: -175px;
+
+
+
+
+        }
+
+        strong { font-weight: 500; }
+
+        a, a:hover, a:focus {
+            color: #19b9e7;
+            text-decoration: none;
+            -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+        }
+
+        h1, h2 {
+            margin-top: 10px;
+            font-size: 38px;
+            font-weight: 100;
+            color: #555;
+            line-height: 50px;
+        }
+
+        h3 {
+            font-size: 22px;
+            font-weight: 300;
+            color: #555;
+            line-height: 30px;
+        }
+
+        img { max-width: 100%; }
+
+        ::-moz-selection { background: #19b9e7; color: #fff; text-shadow: none; }
+        ::selection { background: #19b9e7; color: #fff; text-shadow: none; }
+
+
+        .btn-link-1 {
+            display: inline-block;
+            height: 50px;
+            margin: 5px;
+            padding: 16px 20px 0 20px;
+            background: #19b9e7;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 16px;
+            color: #fff;
+            -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+        }
+        .btn-link-1:hover, .btn-link-1:focus, .btn-link-1:active { outline: 0; opacity: 0.6; color: #fff; }
+
+        .btn-link-1.btn-link-1-facebook { background: #4862a3; }
+        .btn-link-1.btn-link-1-twitter { background: #55acee; }
+        .btn-link-1.btn-link-1-google-plus { background: #dd4b39; }
+
+        .btn-link-1 i {
+            padding-right: 5px;
+            vertical-align: middle;
+            font-size: 20px;
+            line-height: 20px;
+        }
+
+        .btn-link-2 {
+            display: inline-block;
+            height: 50px;
+            margin: 5px;
+            padding: 15px 20px 0 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #fff;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 16px;
+            color: #fff;
+            -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+        }
+        .btn-link-2:hover, .btn-link-2:focus,
+        .btn-link-2:active, .btn-link-2:active:focus { outline: 0; opacity: 0.6; background: rgba(0, 0, 0, 0.3); color: #fff; }
+
+
+        /***** Top content *****/
+
+        .inner-bg {
+            padding: 60px 0 80px 0;
+        }
+
+        .top-content .text {
+            color: #fff;
+        }
+
+        .top-content .text h1 { color: #fff; }
+
+        .top-content .description {
+            margin: 20px 0 10px 0;
+        }
+
+        .top-content .description p { opacity: 0.8; }
+
+        .top-content .description a {
+            color: #fff;
+        }
+        .top-content .description a:hover,
+        .top-content .description a:focus { border-bottom: 1px dotted #fff; }
+
+        .form-box {
+            margin-top: 70px;
+        }
+
+        .form-top {
+            overflow: hidden;
+            padding: 0 25px 15px 25px;
+            background: #fff;
+            -moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;
+            text-align: left;
+            opacity: 0.7;
+        }
+
+        .form-top-left {
+            float: left;
+            width: 75%;
+            padding-top: 25px;
+        }
+
+        .form-top-left h3 { margin-top: 0; }
+
+        .form-top-right {
+            float: left;
+            width: 25%;
+            padding-top: 5px;
+            font-size: 66px;
+            color: #ddd;
+            line-height: 100px;
+            text-align: right;
+        }
+
+        .form-bottom {
+            padding: 25px 25px 30px 25px;
+            background: #eee;
+            -moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
+            text-align: left;
+        }
+
+        .form-bottom form textarea {
+            height: 100px;
+        }
+
+        .form-bottom form button.btn {
+            width: 100%;
+        }
+
+        .form-bottom form .input-error {
+            border-color: #19b9e7;
+        }
+
+        .social-login {
+            margin-top: 35px;
+        }
+
+        .social-login h3 {
+            color: #fff;
+        }
+
+        .social-login-buttons {
+            margin-top: 25px;
+        }
+
+        .middle-border {
+            min-height: 300px;
+            margin-top: 170px;
+            border-right: 1px solid #fff;
+            border-right: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+
+        /***** Footer *****/
+
+        footer {
+            padding-bottom: 70px;
+            color: #fff;
+        }
+
+        footer .footer-border {
+            width: 200px;
+            margin: 0 auto;
+            padding-bottom: 30px;
+            border-top: 1px solid #fff;
+            border-top: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        footer p { opacity: 0.8; }
+
+        footer a {
+            color: #fff;
+        }
+        footer a:hover, footer a:focus { color: #fff; border-bottom: 1px dotted #fff; }
+
+
+        /***** Media queries *****/
+
+        @media (min-width: 992px) and (max-width: 1199px) {}
+
+        @media (min-width: 768px) and (max-width: 991px) {}
+
+        @media (max-width: 767px) {
+
+            .middle-border { min-height: auto; margin: 65px 30px 0 30px; border-right: 0;
+                border-top: 1px solid #fff; border-top: 1px solid rgba(255, 255, 255, 0.6); }
+
+        }
+
+        @media (max-width: 415px) {
+
+            h1, h2 { font-size: 32px; }
+
+        }
+
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        textarea,
+        textarea.form-control {
+
+            width: 100%;
+            height: 50px;
+            margin: 0;
+            padding: 0 20px;
+            vertical-align: middle;
+            background: #f8f8f8;
+            border: 3px solid #ddd;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 50px;
+            color: #888;
+            -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+            -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+            -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+        }
+
+        textarea,
+        textarea.form-control {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            line-height: 30px;
+        }
+        input[type="email"]:focus,
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        textarea:focus,
+        textarea.form-control:focus {
+            outline: 0;
+            background: #fff;
+            border: 3px solid #ccc;
+            -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+        }
+
+        input[type="text"]:-moz-placeholder, input[type="password"]:-moz-placeholder,
+        textarea:-moz-placeholder, textarea.form-control:-moz-placeholder { color: #888; }
+
+        input[type="text"]:-ms-input-placeholder, input[type="password"]:-ms-input-placeholder,
+        textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #888; }
+
+        input[type="text"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder,
+        textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #888; }
+
+
+
+        button.btn {
+            height: 50px;
+            margin: 0;
+            padding: 0 20px;
+            vertical-align: middle;
+            background: #19b9e7;
+            border: 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 50px;
+            color: #fff;
+            -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+            text-shadow: none;
+            -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+            -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+        }
+
+        button.btn:hover { opacity: 0.6; color: #fff; }
+
+        button.btn:active { outline: 0; opacity: 0.6; color: #fff; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
+
+        button.btn:focus { outline: 0; opacity: 0.6; background: #19b9e7; color: #fff; }
+
+        button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; background: #19b9e7; color: #fff; }
+
+
+
+    </style>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+    </script>
+{% endblock %}

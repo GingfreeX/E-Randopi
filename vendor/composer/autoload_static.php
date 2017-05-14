@@ -19,6 +19,10 @@ class ComposerStaticInita9ebf4cd6ac51e24c79678c175ac20c4
     );
 
     public static $prefixLengthsPsr4 = array (
+        'b' => 
+        array (
+            'belousovr\\belousovChatBundle\\' => 29,
+        ),
         'Z' => 
         array (
             'Zend\\Json\\' => 10,
@@ -63,9 +67,18 @@ class ComposerStaticInita9ebf4cd6ac51e24c79678c175ac20c4
         array (
             'Ob\\HighchartsBundle\\' => 20,
         ),
+        'N' => 
+        array (
+            'Negotiation\\' => 12,
+        ),
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Mgilet\\NotificationBundle\\' => 26,
+        ),
+        'K' => 
+        array (
+            'Knp\\Bundle\\PaginatorBundle\\' => 27,
         ),
         'I' => 
         array (
@@ -78,6 +91,11 @@ class ComposerStaticInita9ebf4cd6ac51e24c79678c175ac20c4
         'F' => 
         array (
             'FOS\\UserBundle\\' => 15,
+            'FOS\\RestBundle\\' => 15,
+        ),
+        'E' => 
+        array (
+            'EWZ\\Bundle\\RecaptchaBundle\\' => 27,
         ),
         'D' => 
         array (
@@ -90,6 +108,10 @@ class ComposerStaticInita9ebf4cd6ac51e24c79678c175ac20c4
     );
 
     public static $prefixDirsPsr4 = array (
+        'belousovr\\belousovChatBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/belousovr/belousovchatbundle',
+        ),
         'Zend\\Json\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-json/src',
@@ -194,9 +216,21 @@ class ComposerStaticInita9ebf4cd6ac51e24c79678c175ac20c4
         array (
             0 => __DIR__ . '/..' . '/ob/highcharts-bundle',
         ),
+        'Negotiation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/willdurand/negotiation/src/Negotiation',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Mgilet\\NotificationBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mgilet/notification-bundle',
+        ),
+        'Knp\\Bundle\\PaginatorBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-paginator-bundle',
         ),
         'Incenteev\\ParameterHandler\\' => 
         array (
@@ -209,6 +243,14 @@ class ComposerStaticInita9ebf4cd6ac51e24c79678c175ac20c4
         'FOS\\UserBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/friendsofsymfony/user-bundle',
+        ),
+        'FOS\\RestBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/friendsofsymfony/rest-bundle',
+        ),
+        'EWZ\\Bundle\\RecaptchaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/excelwebzone/recaptcha-bundle',
         ),
         'Doctrine\\Instantiator\\' => 
         array (
@@ -257,12 +299,67 @@ class ComposerStaticInita9ebf4cd6ac51e24c79678c175ac20c4
             array (
                 0 => __DIR__ . '/..' . '/ocramius/proxy-manager/src',
             ),
+            'PhpOption\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpoption/phpoption/src',
+            ),
+            'PhpCollection' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpcollection/phpcollection/src',
+            ),
         ),
         'M' => 
         array (
             'Metadata\\' => 
             array (
                 0 => __DIR__ . '/..' . '/jms/metadata/src',
+            ),
+        ),
+        'K' => 
+        array (
+            'Knp\\Component' => 
+            array (
+                0 => __DIR__ . '/..' . '/knplabs/knp-components/src',
+            ),
+        ),
+        'J' => 
+        array (
+            'JsonpCallbackValidator' => 
+            array (
+                0 => __DIR__ . '/..' . '/willdurand/jsonp-callback-validator/src',
+            ),
+            'JMS\\SerializerBundle' => 
+            array (
+                0 => __DIR__ . '/..' . '/jms/serializer-bundle',
+            ),
+            'JMS\\Serializer' => 
+            array (
+                0 => __DIR__ . '/..' . '/jms/serializer/src',
+            ),
+            'JMS\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/jms/parser-lib/src',
+            ),
+        ),
+        'H' => 
+        array (
+            'HTML2PDF' => 
+            array (
+                0 => __DIR__ . '/..' . '/ensepar/html2pdf',
+            ),
+        ),
+        'F' => 
+        array (
+            'FOS\\CommentBundle' => 
+            array (
+                0 => __DIR__ . '/..' . '/friendsofsymfony/comment-bundle',
+            ),
+        ),
+        'E' => 
+        array (
+            'Ensepar\\Html2pdfBundle' => 
+            array (
+                0 => __DIR__ . '/..' . '/ensepar/html2pdf-bundle',
             ),
         ),
         'D' => 
@@ -320,7 +417,11 @@ class ComposerStaticInita9ebf4cd6ac51e24c79678c175ac20c4
         'Locale' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/Locale.php',
         'NumberFormatter' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/NumberFormatter.php',
         'ParseError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ParseError.php',
+        'QRcode' => __DIR__ . '/..' . '/ensepar/tcpdf/qrcode.php',
         'SqlFormatter' => __DIR__ . '/..' . '/jdorn/sql-formatter/lib/SqlFormatter.php',
+        'TCPDF' => __DIR__ . '/..' . '/ensepar/tcpdf/tcpdf.php',
+        'TCPDF2DBarcode' => __DIR__ . '/..' . '/ensepar/tcpdf/2dbarcodes.php',
+        'TCPDFBarcode' => __DIR__ . '/..' . '/ensepar/tcpdf/barcodes.php',
         'TypeError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/TypeError.php',
     );
 

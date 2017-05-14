@@ -32,6 +32,15 @@
                                             {{ form_label(form.email) }} :</br>
                                             {{ form_widget(form.email) }}
                                         </div></br>
+                                    <div class="form-group">
+                                        S'inscrire en tant que  :</br>
+                                        {{ form_widget(form.roles,{'attr':{'onchange':'select()'}}) }}
+                                    </div></br>
+                                    <div class="form-group" id="divfile">
+                                        ajouter un cv (pour guide)
+                                        {{ form_widget(form.Filecv) }}
+
+                                    </div>
                                         <div class="form-group">
                                             {{ form_label(form.plainPassword.first) }} :</br>
                                             {{ form_widget(form.plainPassword.first) }}
@@ -357,3 +366,26 @@
 
 
 </style>
+<script src="{{ asset('bundles/jquery.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+       $("#divfile").hide();
+    });
+$("#divfile")
+function select() {
+    var item = document.getElementById('fos_user_registration_form_roles').value ;
+
+    if(item==="ROLE_GUIDE"){
+        $(document).ready(function () {
+            $("#divfile").show();
+        });
+    }else {
+
+        $(document).ready(function () {
+            $("#divfile").hide();
+        });
+
+
+    }
+}
+</script>

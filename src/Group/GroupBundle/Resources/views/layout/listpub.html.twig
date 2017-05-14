@@ -1,0 +1,35 @@
+{% for i in pub %}
+
+    <div class="col-md-12" id="publication">
+    <div class="panel panel-success rounded shadow" >
+        <div class="panel-heading no-border">
+            <div class="pull-left half">
+                <div class="media" style="text-align: left;">
+                    <div class="media-object pull-left" style="margin-top: 35px;">
+                        <img src="http://bootdey.com/img/Content/avatar/avatar2.png" alt="..."
+                             class="img-circle img-post">
+                    </div>
+                    <div class="media-body">
+                        <a href="#" class="media-heading block mb-0 h4 text-white">John Doe</a>
+                        <span class="text-white h6" style="display: list-item; color: black;">on 8th June, 2014</span>
+                    </div>
+                </div>
+                <div class="media" style="text-align: left;margin-bottom: 10px;">
+                    <div class="media-body" style="overflow: hidden;">
+                        <span style="color: black;margin-bottom: 10px;word-break: break-all  ">#wonderful place man congratulationhh </span>
+                    </div>
+                </div>
+            </div><!-- /.pull-left -->
+            <div class="panel-body no-padding">
+                <img src="http://lorempixel.com/340/210/nature/4/" alt="..."
+                     class="img-responsive full-width"
+                     style="width:100%;display: block;margin-bottom: 5px;">
+
+            </div>
+            {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': 'foo'} %}
+
+            <div class="clearfix"></div>
+        </div><!-- /.panel-heading -->
+    </div><!-- /.panel -->
+</div>
+{% endfor %}

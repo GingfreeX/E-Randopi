@@ -32,7 +32,7 @@
                                     <thead>
                                     <tr>
                                         <th>Nom</th>
-                                        <th>Prenom</th>
+
                                         <th>Email</th>
                                         <th>Cv</th>
                                         <th>Statut</th>
@@ -41,17 +41,22 @@
                                     </thead>
                                     {% for i in guides %}
                                         <tr class="odd gradeX">
-                                    <td>{{ i.nom }}</td>
-                                    <td>{{ i.prenom }}</td>
+                                    <td>{{ i.username }}</td>
+
                                     <td>{{ i.email }}</td>
-                                    <td>{{ i.Cv }}</td>
+
+                                    <td><a href="{{app.request.basepath}}/cv/{{ i.fileName }}">voir cv </a></td>
                                     <td>
-                                        <span class="label label-success">Actif</span>
+                                        {% if i.enabled==0 %}
+                                        <span class="label label-danger">Inactif</span>
+                                            {% else %}
+                                                <span class="label label-success">Actif</span>
+                                        {% endif %}
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <button class="btn btn-xs btn-success"><i class="fa fa-envelope"></i> </button>
-                                            <button class="btn btn-xs btn-danger"><a href="{{ path('supprimer_guide',{'idguide':i.idguide}) }}"><i class="fa fa-times"></i> </a></button>
+                                            <button class="btn btn-xs btn-succe"><a href="{{ path('approuverguide',{'id':i.id}) }}" ><i class="fa fa-enveloppe">Approuver le guide</i></a> </button><br>
+                                            <button class="btn btn-xs btn-danger"><a href="{{ path('supprimer_guide',{'idguide':i.id}) }}"><i class="fa fa-times">Annuler la demande  </i> </a></button>
                                         </div>
                                     </td>
                                 </tr>

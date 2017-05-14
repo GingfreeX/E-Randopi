@@ -10,6 +10,10 @@ imports:
 parameters:
     locale: fr
     images_directory: '%kernel.root_dir%/../web/uploads'
+    groupe_images: '%kernel.root_dir%/../web/Groupe/img'
+    profile_images: '%kernel.root_dir%/../web/photoprofil'
+
+
 framework:
     #esi:             ~
     translator:      ~
@@ -79,20 +83,12 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: MainBundle\Entity\Member
-    registration:
-        confirmation:
-            enabled:    true
+    from_email:
+        address:        erandopi14@gmail.com
+        sender_name:    Password Resetting
 
-            from_email:
-                address:        erandopi14@gmail.com
-                sender_name:    Welcome E-Rando
-    resetting:
-        email:
-            from_email:
-                address:        erandopi14@gmail.com
-                sender_name:    Password Resetting
-    service:
-        mailer: fos_user.mailer.twig_swift
+
+
 hwi_oauth:
     connect:
         confirmation: true
@@ -113,12 +109,54 @@ vich_uploader:
     db_driver: orm
     mappings:
         product_image:
-            uri_prefix:         /uploads
-            upload_destination: '%kernel.root_dir%/../web/uploads'
-            inject_on_load:     false
-            delete_on_remove:   true
+                    uri_prefix:         /uploads
+                    upload_destination: '%kernel.root_dir%/../web/uploads'
+                    inject_on_load:     false
+                    delete_on_remove:   true
+        product_cv:
+             uri_prefix:         /cv
+             upload_destination: '%kernel.root_dir%/../web/cv'
+        publication_cv:
+             uri_prefix:         /publication
+             upload_destination: '%kernel.root_dir%/../web/publication'
+        photo_profil:
+              uri_prefix:         /photoprofil
+              upload_destination: '%kernel.root_dir%/../web/photoprofil'
+        groupecouverture:
+                    uri_prefix:         /group
+                    upload_destination: '%kernel.root_dir%/../web/group'
+                    inject_on_load:     true
+                    delete_on_remove:   true
 ewz_recaptcha:
     public_key:  here_is_your_public_key
     private_key: here_is_your_private_key
     # Not needed as "%kernel.default_locale%" is the default value for the locale key
     locale_key:  %kernel.default_locale%
+mgilet_notification:
+    notification_class: MainBundle\Entity\Notification
+#Knp paginator
+knp_paginator:
+    page_range: 5                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: KnpPaginatorBundle:Pagination:foundation_v5_pagination.html.twig # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment: Group\GroupBundle\Entity\Comment
+            thread: Group\GroupBundle\Entity\Thread
+    service:
+          sorting:
+            default: date_asc
+
+assetic:
+    bundles: [ "FOSCommentBundle" ]
+
+

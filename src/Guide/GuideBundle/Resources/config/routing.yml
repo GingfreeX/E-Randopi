@@ -1,0 +1,29 @@
+
+guide_homepage:
+    path:     /guide
+    defaults: { _controller: GuideGuideBundle:Default:show }
+supprando:
+    path:     /supp/{id}
+    defaults: { _controller: GuideGuideBundle:Randonne:Supprimer }
+modifrando:
+    path:     /modif/{id}
+    defaults: { _controller: GuideGuideBundle:Randonne:Modifier }
+showallevents:
+    path:     /events/{type}
+    defaults: { _controller: GuideGuideBundle:Randonne:showallevents }
+seemore:
+    path:     /seemore/{id}
+    defaults: { _controller: GuideGuideBundle:Randonne:showmoreDetail }
+sendmailtopar:
+    path:     /send/{id}/{idr}
+    defaults: { _controller: GuideGuideBundle:Randonne:envoyerMail }
+generatepdf:
+    path:     /pdf/{id}/
+    defaults: { _controller: GuideGuideBundle:Randonne:pdf }
+
+annulerinvigui:
+    path:    /annulerivigui/{id}
+    defaults: { _controller: GuideGuideBundle:Default:supprimerinvi }
+suppamisgui:
+    path:     /suppamisgui/{id}
+    defaults: { _controller: GuideGuideBundle:Default:supprimerAmis }

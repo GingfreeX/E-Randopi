@@ -32,7 +32,17 @@
         "zendframework/zend-eventmanager": "^3.0.1",
         "jms/metadata": "^1.6.0",
         "kriswallsmith/buzz": "^0.15",
-        "excelwebzone/recaptcha-bundle": "^1.4"
+        "excelwebzone/recaptcha-bundle": "^1.4",
+        "mgilet/notification-bundle": "dev-master",
+        "belousovr/belousovchatbundle": "dev-master",
+        "knplabs/knp-paginator-bundle": "^2.5",
+        "friendsofsymfony/comment-bundle": "^2.0",
+        "ensepar/html2pdf-bundle" : "~2.0"
+
+
+
+
+
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
