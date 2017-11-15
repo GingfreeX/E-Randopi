@@ -8,5 +8,5 @@ parameters:
     mailer_transport: gmail
     mailer_host: null
     mailer_user: erandopi14@gmail.com
-    mailer_password: 95845380hunter
+    mailer_password: ******************
     secret: ThisTokenIsNotSoSecretChangeIt
